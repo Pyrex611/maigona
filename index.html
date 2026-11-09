@@ -1,0 +1,2265 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DD MAIGONA | Fresh Strawberries, Herbs, Spices & Natural Oils — Abuja</title>
+  
+  <!-- Google Fonts: Fraunces & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Fraunces"', 'Georgia', 'serif'],
+          },
+          colors: {
+            brand: {
+              orange: '#E13D16',
+              'orange-dark': '#C2300D',
+              'orange-light': '#FFF3ED',
+              green: '#2D8636',
+              'green-dark': '#195523',
+              'green-light': '#EBF5EE',
+              amber: '#F59E0B',
+              soil: '#1C1917',
+              parchment: '#FAF7F2',
+            }
+          },
+          animation: {
+            'marquee': 'marquee 28s linear infinite',
+          },
+          keyframes: {
+            marquee: {
+              '0%': { transform: 'translateX(0%)' },
+              '100%': { transform: 'translateX(-50%)' },
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #FAF7F2;
+      color: #1C1917;
+    }
+    .glass-header {
+      background: rgba(250, 247, 242, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(225, 61, 22, 0.08);
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAF7F2;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D6D3D1;
+      border-radius: 3px;
+    }
+    .ticker-slide {
+      transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+    }
+    .hero-slide {
+      transition: opacity 0.5s ease-in-out;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased selection:bg-brand-orange selection:text-white overflow-x-hidden">
+
+  <!-- ================= TOP TICKER / CAROUSEL NOTICE BAR ================= -->
+  <aside class="bg-brand-green-dark text-stone-100 text-[11px] sm:text-xs relative z-50 border-b border-white/10" aria-label="Notices">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+      
+      <!-- Desktop Single-Line Bar -->
+      <div class="hidden md:flex items-center justify-between h-8 text-stone-200">
+        <div class="flex items-center gap-2">
+          <span class="bg-brand-orange text-white font-extrabold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider">Abuja Farm</span>
+          <span><strong>30% Deposit</strong> confirms harvest • Minimal stock for pure freshness</span>
+        </div>
+        <div class="flex items-center gap-4 text-stone-300">
+          <span>Perishables: <strong class="text-white">Abuja &amp; Kaduna</strong></span>
+          <span class="text-stone-600">•</span>
+          <span>Spices &amp; Oils: <strong class="text-white">Nationwide Shipping</strong></span>
+          <span class="text-stone-600">•</span>
+          <a href="https://wa.me/2348170951100" target="_blank" class="text-emerald-400 hover:text-white font-bold transition-colors">08170951100</a>
+        </div>
+      </div>
+
+      <!-- Mobile Single-Line Carousel / Ticker (h-8 strict fixed height) -->
+      <div class="md:hidden relative h-8 overflow-hidden flex items-center justify-center text-center">
+        <div id="mobileTickerSlot" class="w-full h-full flex items-center justify-center font-medium truncate px-2">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+    </div>
+  </aside>
+
+  <!-- ================= STICKY HEADER ================= -->
+  <header id="mainHeader" class="sticky top-0 w-full z-40 transition-all duration-300 glass-header py-2.5 sm:py-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 flex justify-between items-center">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-2.5 group focus:outline-none">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white shadow-sm border border-stone-200 flex items-center justify-center p-1 group-hover:scale-105 transition-transform duration-300 shrink-0">
+          <svg viewBox="0 0 120 120" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="DD MAIGONA Logo">
+            <defs>
+              <linearGradient id="brandArcTop" x1="15" y1="60" x2="95" y2="20" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#E13D16"/>
+                <stop offset="60%" stop-color="#F59E0B"/>
+                <stop offset="100%" stop-color="#F97316"/>
+              </linearGradient>
+              <linearGradient id="brandArcBottom" x1="105" y1="55" x2="35" y2="105" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#F97316"/>
+                <stop offset="50%" stop-color="#E13D16"/>
+                <stop offset="100%" stop-color="#C2300D"/>
+              </linearGradient>
+            </defs>
+            <path d="M 22 82 A 44 44 0 0 1 82 22" stroke="url(#brandArcTop)" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M 79 20 C 83 22, 87 28, 86 35 C 81 31, 77 27, 79 20 Z" fill="#F97316"/>
+            <path d="M 99 52 A 44 44 0 0 1 40 99" stroke="url(#brandArcBottom)" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M 43 101 C 38 99, 34 93, 35 86 C 40 90, 44 94, 43 101 Z" fill="#E13D16"/>
+            <text x="27" y="61" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="24" fill="#E13D16" letter-spacing="-0.5">DD</text>
+            <path d="M 65 60 C 65 49, 73 43, 81 42 C 80 51, 74 58, 65 60 Z" fill="#195523"/>
+            <path d="M 67 61 C 74 55, 84 55, 90 60 C 83 65, 73 65, 67 61 Z" fill="#2D8636"/>
+            <text x="27" y="76" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="13" fill="#2D8636" letter-spacing="0.8">MAIGONA</text>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-1 leading-none">
+            <span class="text-lg font-extrabold tracking-tight text-brand-orange">DD</span>
+            <span class="text-lg font-extrabold tracking-tight text-brand-green">MAIGONA</span>
+          </div>
+          <span class="block text-[10px] text-stone-500 font-medium tracking-wide">Abuja Fresh Farm</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-7 text-xs sm:text-sm font-semibold text-stone-700">
+        <a href="#heroBillboard" class="hover:text-brand-orange transition-colors">Highlights</a>
+        <a href="#harvestPillars" class="hover:text-brand-orange transition-colors">Categories</a>
+        <a href="#catalogSection" class="hover:text-brand-orange transition-colors">Catalog (53)</a>
+        <a href="#orderPolicies" class="hover:text-brand-orange transition-colors">Ordering Rules</a>
+      </nav>
+
+      <!-- Right Header Actions -->
+      <div class="flex items-center gap-2">
+        <a href="https://wa.me/2348170951100" target="_blank" rel="noopener"
+           class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-brand-green bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-3 py-1.5 rounded-full transition-colors">
+          <i data-lucide="message-circle" class="w-3.5 h-3.5 text-emerald-600"></i>
+          <span>08170951100</span>
+        </a>
+
+        <button 
+          onclick="toggleCart(true)" 
+          class="relative flex items-center gap-2 bg-brand-soil hover:bg-brand-orange text-white px-3.5 py-2 rounded-full text-xs font-bold shadow transition-all duration-200"
+          aria-label="View Harvest Basket"
+        >
+          <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Bag</span>
+          <span id="navCartBadge" class="bg-brand-amber text-stone-950 text-[10px] font-extrabold px-1.5 py-0.2 rounded-full min-w-[18px] text-center">
+            0
+          </span>
+        </button>
+
+        <button onclick="toggleMobileMenu()" class="lg:hidden p-1.5 text-stone-700 hover:text-stone-900" aria-label="Menu">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Dropdown Navigation -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-stone-200 px-5 py-4 mt-2 shadow-lg">
+      <div class="flex flex-col gap-3 text-xs font-semibold text-stone-800">
+        <a href="#heroBillboard" onclick="toggleMobileMenu()" class="hover:text-brand-orange">Featured Specials</a>
+        <a href="#harvestPillars" onclick="toggleMobileMenu()" class="hover:text-brand-orange">What We Harvest</a>
+        <a href="#catalogSection" onclick="toggleMobileMenu()" class="hover:text-brand-orange">All 53 Products</a>
+        <a href="#orderPolicies" onclick="toggleMobileMenu()" class="hover:text-brand-orange">Pre-Order &amp; Deposit Guidelines</a>
+        <div class="pt-2 border-t border-stone-100 flex items-center justify-between text-[11px] text-stone-500">
+          <span>WhatsApp: 08170951100</span>
+          <span class="text-brand-green font-bold">@ddmaigona.ng</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= OPTIMIZED HERO BILLBOARD (SPATIAL EDITORIAL LAYOUT) ================= -->
+  <!-- Top-Left Badge | Centralized Name | Bottom-Left Description & Buttons -->
+  <section id="heroBillboard" class="relative pt-3 pb-4 sm:pt-4 sm:pb-6 px-4 sm:px-6 md:px-12 max-w-7xl mx-auto overflow-hidden">
+    <div class="relative w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-xl bg-stone-950 h-[300px] sm:h-[330px] md:h-[350px] lg:h-[370px]">
+      
+      <!-- Slide Track -->
+      <div id="heroTrack" class="relative w-full h-full">
+
+        <!-- SLIDE 1: Strawberries -->
+        <div class="hero-slide absolute inset-0 opacity-100 z-10">
+          <img 
+            src="https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=1400&q=80" 
+            alt="Organic Strawberries" 
+            class="absolute inset-0 w-full h-full object-cover object-center opacity-70"
+          />
+          <!-- Gentle Vignette: Dark top & bottom for high text contrast; luminous visual center -->
+          <div class="absolute inset-0 bg-gradient-to-t from-stone-950/95 via-stone-950/20 to-stone-950/50"></div>
+
+          <div class="relative z-10 w-full h-full flex flex-col justify-between p-4 sm:p-6 md:p-8">
+            <!-- 1. TOP-LEFT BADGE -->
+            <div class="self-start">
+              <span class="inline-flex items-center gap-1.5 bg-brand-orange text-white text-[10px] font-extrabold uppercase px-2.5 py-1 rounded shadow">
+                <span>🍓 FRESH &amp; FROZEN HARVEST</span>
+                <span>•</span>
+                <span>ABUJA &amp; KADUNA</span>
+              </span>
+            </div>
+            
+            <!-- 2. CENTRALIZED ITEM NAME -->
+            <div class="w-full text-center px-4 sm:px-8 my-auto">
+              <h1 class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+                Sweet Organic Strawberries
+              </h1>
+            </div>
+
+            <!-- 3. BOTTOM-LEFT DESCRIPTIONS & BUTTONS -->
+            <div class="w-full max-w-lg text-left pr-14 sm:pr-16">
+              <p class="text-[11px] sm:text-xs text-stone-200 line-clamp-1 sm:line-clamp-2 mb-2 font-normal drop-shadow">
+                Picked on order in Abuja. Sweet, ripe berries for smoothies, desserts, and healthy tables.
+              </p>
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="text-sm sm:text-base font-serif font-extrabold text-white bg-white/15 backdrop-blur px-2.5 py-1 rounded-lg border border-white/20">
+                  ₦7,000<small class="text-[10px] font-sans font-normal text-stone-300">/kg</small>
+                </span>
+                <button onclick="addToCart('prod-strawberry-fresh')" class="px-3.5 py-1.5 bg-brand-orange hover:bg-brand-orange-dark text-white font-bold text-xs rounded-full shadow transition-all">
+                  Add Regular (₦7k)
+                </button>
+                <button onclick="addToCart('prod-strawberry-organic')" class="px-3.5 py-1.5 bg-white hover:bg-stone-100 text-stone-900 font-bold text-xs rounded-full shadow transition-all">
+                  Add Organic
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 2: 72hr Herbs -->
+        <div class="hero-slide absolute inset-0 opacity-0 pointer-events-none z-10">
+          <img 
+            src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1400&q=80" 
+            alt="Culinary Herbs" 
+            class="absolute inset-0 w-full h-full object-cover object-center opacity-70"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-stone-950/95 via-stone-950/20 to-stone-950/50"></div>
+
+          <div class="relative z-10 w-full h-full flex flex-col justify-between p-4 sm:p-6 md:p-8">
+            <!-- 1. TOP-LEFT BADGE -->
+            <div class="self-start">
+              <span class="inline-flex items-center gap-1.5 bg-brand-green text-white text-[10px] font-extrabold uppercase px-2.5 py-1 rounded shadow">
+                <span>🌿 72-HOUR CUT-TO-ORDER</span>
+                <span>•</span>
+                <span>MIN. ₦5,000</span>
+              </span>
+            </div>
+
+            <!-- 2. CENTRALIZED ITEM NAME -->
+            <div class="w-full text-center px-4 sm:px-8 my-auto">
+              <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+                11 Garden-Fresh Culinary Herbs
+              </h2>
+            </div>
+
+            <!-- 3. BOTTOM-LEFT DESCRIPTIONS & BUTTONS -->
+            <div class="w-full max-w-lg text-left pr-14 sm:pr-16">
+              <p class="text-[11px] sm:text-xs text-stone-200 line-clamp-1 sm:line-clamp-2 mb-2 font-normal drop-shadow">
+                Mint, Rosemary, Basil, Thyme, Chives &amp; Lemongrass. Zero wilting, maximum aroma.
+              </p>
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="text-sm sm:text-base font-serif font-extrabold text-white bg-white/15 backdrop-blur px-2.5 py-1 rounded-lg border border-white/20">
+                  ₦700 – ₦800<small class="text-[10px] font-sans font-normal text-stone-300">/bunch</small>
+                </span>
+                <a href="#catalogSection" onclick="filterByCategory('fresh-herbs')" class="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-full shadow transition-all">
+                  Shop Fresh Herbs
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 3: 35+ Spices -->
+        <div class="hero-slide absolute inset-0 opacity-0 pointer-events-none z-10">
+          <img 
+            src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1400&q=80" 
+            alt="Spices and Botanicals" 
+            class="absolute inset-0 w-full h-full object-cover object-center opacity-70"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-stone-950/95 via-stone-950/20 to-stone-950/50"></div>
+
+          <div class="relative z-10 w-full h-full flex flex-col justify-between p-4 sm:p-6 md:p-8">
+            <!-- 1. TOP-LEFT BADGE -->
+            <div class="self-start">
+              <span class="inline-flex items-center gap-1.5 bg-brand-amber text-stone-950 text-[10px] font-extrabold uppercase px-2.5 py-1 rounded shadow">
+                <span>📦 NATIONWIDE COURIER</span>
+                <span>•</span>
+                <span>100G &amp; 200G</span>
+              </span>
+            </div>
+
+            <!-- 2. CENTRALIZED ITEM NAME -->
+            <div class="w-full text-center px-4 sm:px-8 my-auto">
+              <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+                35+ Pure Botanicals &amp; Oils
+              </h2>
+            </div>
+
+            <!-- 3. BOTTOM-LEFT DESCRIPTIONS & BUTTONS -->
+            <div class="w-full max-w-lg text-left pr-14 sm:pr-16">
+              <p class="text-[11px] sm:text-xs text-stone-200 line-clamp-1 sm:line-clamp-2 mb-2 font-normal drop-shadow">
+                Cardamom, Maca, Moringa, Chebe, Baobab &amp; 1-Liter cold-pressed natural oils.
+              </p>
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="text-sm sm:text-base font-serif font-extrabold text-white bg-white/15 backdrop-blur px-2.5 py-1 rounded-lg border border-white/20">
+                  From ₦1,000<small class="text-[10px] font-sans font-normal text-stone-300">/100g</small>
+                </span>
+                <a href="#catalogSection" onclick="filterByCategory('dried-spices')" class="px-4 py-1.5 bg-brand-amber hover:bg-amber-400 text-stone-950 font-bold text-xs rounded-full shadow transition-all">
+                  Browse 35 Spices
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 4: Bulk Sacks & Staples -->
+        <div class="hero-slide absolute inset-0 opacity-0 pointer-events-none z-10">
+          <img 
+            src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=1400&q=80" 
+            alt="Irish Potatoes" 
+            class="absolute inset-0 w-full h-full object-cover object-center opacity-70"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-stone-950/95 via-stone-950/20 to-stone-950/50"></div>
+
+          <div class="relative z-10 w-full h-full flex flex-col justify-between p-4 sm:p-6 md:p-8">
+            <!-- 1. TOP-LEFT BADGE -->
+            <div class="self-start">
+              <span class="inline-flex items-center gap-1.5 bg-rose-600 text-white text-[10px] font-extrabold uppercase px-2.5 py-1 rounded shadow">
+                <span>🥔 FARM STAPLES</span>
+                <span>•</span>
+                <span>1/4, 1/2, FULL BAGS</span>
+              </span>
+            </div>
+
+            <!-- 2. CENTRALIZED ITEM NAME -->
+            <div class="w-full text-center px-4 sm:px-8 my-auto">
+              <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+                Plateau Irish Potatoes
+              </h2>
+            </div>
+
+            <!-- 3. BOTTOM-LEFT DESCRIPTIONS & BUTTONS -->
+            <div class="w-full max-w-lg text-left pr-14 sm:pr-16">
+              <p class="text-[11px] sm:text-xs text-stone-200 line-clamp-1 sm:line-clamp-2 mb-2 font-normal drop-shadow">
+                Direct from Jos/Abuja farm belts. Full 100kg sacks from ₦150,000 &amp; fresh veg boxes.
+              </p>
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="text-sm sm:text-base font-serif font-extrabold text-white bg-white/15 backdrop-blur px-2.5 py-1 rounded-lg border border-white/20">
+                  From ₦150k<small class="text-[10px] font-sans font-normal text-stone-300">/sack</small>
+                </span>
+                <button onclick="openProductModal('prod-potatoes')" class="px-4 py-1.5 bg-white hover:bg-stone-100 text-stone-900 font-bold text-xs rounded-full shadow transition-all">
+                  Select Bag Size
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Compact Nav Controls -->
+      <button onclick="prevHeroSlide()" class="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-stone-900/60 hover:bg-stone-900 text-white flex items-center justify-center border border-white/20 transition-all" aria-label="Previous">
+        <i data-lucide="chevron-left" class="w-4 h-4"></i>
+      </button>
+      <button onclick="nextHeroSlide()" class="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-stone-900/60 hover:bg-stone-900 text-white flex items-center justify-center border border-white/20 transition-all" aria-label="Next">
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      </button>
+
+      <!-- Minimal Pagination Dots (Bottom-Right) -->
+      <div class="absolute bottom-3 right-3 sm:bottom-4 sm:right-5 z-20 flex gap-1.5" id="heroDots">
+        <button onclick="setHeroSlide(0)" class="w-5 h-1.5 rounded-full bg-white transition-all"></button>
+        <button onclick="setHeroSlide(1)" class="w-1.5 h-1.5 rounded-full bg-white/50 transition-all"></button>
+        <button onclick="setHeroSlide(2)" class="w-1.5 h-1.5 rounded-full bg-white/50 transition-all"></button>
+        <button onclick="setHeroSlide(3)" class="w-1.5 h-1.5 rounded-full bg-white/50 transition-all"></button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= COMPACT TRUST MARQUEE ================= -->
+  <section class="py-2.5 bg-white border-y border-stone-200/80 overflow-hidden relative">
+    <div class="flex w-max animate-marquee hover:[animation-play-state:paused] gap-4" id="marqueeTrack">
+      <!-- Populated via JS -->
+    </div>
+  </section>
+
+  <!-- ================= FOUR HARVEST PILLARS ================= -->
+  <section id="harvestPillars" class="py-6 sm:py-8 max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+      
+      <div onclick="filterByCategory('fresh-produce')" class="p-3.5 sm:p-4 rounded-2xl bg-white border border-stone-200 hover:border-brand-orange hover:shadow-md transition-all cursor-pointer flex flex-col justify-between">
+        <div class="flex items-center gap-2.5 mb-2">
+          <div class="w-8 h-8 bg-orange-50 text-brand-orange rounded-xl flex items-center justify-center shrink-0">
+            <i data-lucide="cherry" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-xs sm:text-sm text-stone-900 leading-tight">Berries &amp; Tubers</h3>
+            <span class="text-[10px] text-brand-orange font-bold">Abuja &amp; Kaduna</span>
+          </div>
+        </div>
+        <p class="text-[11px] text-stone-500 line-clamp-2">Regular &amp; organic strawberries and bulk plateau Irish potato sacks.</p>
+      </div>
+
+      <div onclick="filterByCategory('fresh-herbs')" class="p-3.5 sm:p-4 rounded-2xl bg-white border border-stone-200 hover:border-brand-green hover:shadow-md transition-all cursor-pointer flex flex-col justify-between">
+        <div class="flex items-center gap-2.5 mb-2">
+          <div class="w-8 h-8 bg-emerald-50 text-brand-green rounded-xl flex items-center justify-center shrink-0">
+            <i data-lucide="leaf" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-xs sm:text-sm text-stone-900 leading-tight">Fresh Herbs (72h)</h3>
+            <span class="text-[10px] text-brand-green font-bold">Cut-to-Order</span>
+          </div>
+        </div>
+        <p class="text-[11px] text-stone-500 line-clamp-2">11 culinary herbs harvested on request. Min order ₦5,000.</p>
+      </div>
+
+      <div onclick="filterByCategory('dried-spices')" class="p-3.5 sm:p-4 rounded-2xl bg-white border border-stone-200 hover:border-brand-amber hover:shadow-md transition-all cursor-pointer flex flex-col justify-between">
+        <div class="flex items-center gap-2.5 mb-2">
+          <div class="w-8 h-8 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center shrink-0">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-xs sm:text-sm text-stone-900 leading-tight">35 Dried Spices</h3>
+            <span class="text-[10px] text-amber-700 font-bold">Nationwide</span>
+          </div>
+        </div>
+        <p class="text-[11px] text-stone-500 line-clamp-2">Cardamom, Maca, Chebe, Cloves, Ginger &amp; seeds sold per 100g.</p>
+      </div>
+
+      <div onclick="filterByCategory('oils')" class="p-3.5 sm:p-4 rounded-2xl bg-white border border-stone-200 hover:border-emerald-600 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between">
+        <div class="flex items-center gap-2.5 mb-2">
+          <div class="w-8 h-8 bg-emerald-50 text-emerald-700 rounded-xl flex items-center justify-center shrink-0">
+            <i data-lucide="droplet" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-xs sm:text-sm text-stone-900 leading-tight">Natural Oils (1L)</h3>
+            <span class="text-[10px] text-emerald-700 font-bold">Nationwide</span>
+          </div>
+        </div>
+        <p class="text-[11px] text-stone-500 line-clamp-2">Cold-pressed 1-Liter Virgin Coconut, Raw Neem, and Black Seed oils.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= CATALOG STOREFRONT ================= -->
+  <main id="catalogSection" class="py-6 max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+    
+    <!-- Filter Pills & Search Bar -->
+    <div class="sticky top-[58px] z-30 bg-[#FAF7F2]/95 backdrop-blur-md py-2.5 mb-4 border-b border-stone-200">
+      <div class="flex flex-col lg:flex-row justify-between items-stretch lg:items-center gap-2.5">
+        
+        <!-- Category Filter Pills -->
+        <div class="flex overflow-x-auto hide-scrollbar gap-1.5 pb-0.5" id="categoryTabs">
+          <button onclick="filterByCategory('All')" data-cat="All" class="cat-pill whitespace-nowrap px-3.5 py-1.5 rounded-full text-xs font-bold transition-all bg-brand-soil text-white shadow-sm">
+            All Items (53)
+          </button>
+          <button onclick="filterByCategory('fresh-produce')" data-cat="fresh-produce" class="cat-pill whitespace-nowrap px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-600 border border-stone-200 hover:border-stone-300">
+            🍓 Strawberries &amp; Staples (3)
+          </button>
+          <button onclick="filterByCategory('fresh-herbs')" data-cat="fresh-herbs" class="cat-pill whitespace-nowrap px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-600 border border-stone-200 hover:border-stone-300">
+            🌿 Fresh Herbs (11)
+          </button>
+          <button onclick="filterByCategory('dried-spices')" data-cat="dried-spices" class="cat-pill whitespace-nowrap px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-600 border border-stone-200 hover:border-stone-300">
+            🫚 Dried Spices (35)
+          </button>
+          <button onclick="filterByCategory('oils')" data-cat="oils" class="cat-pill whitespace-nowrap px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-600 border border-stone-200 hover:border-stone-300">
+            🫙 Pure Oils (4)
+          </button>
+        </div>
+
+        <!-- Search & Sort Controls -->
+        <div class="flex items-center gap-2">
+          <div class="relative flex-1 lg:w-60">
+            <i data-lucide="search" class="w-3.5 h-3.5 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+            <input 
+              id="catalogSearchInput" 
+              type="text" 
+              placeholder="Search rosemary, chia, neem..."
+              oninput="handleSearch(this.value)"
+              class="w-full pl-8 pr-7 py-1.5 bg-white border border-stone-200 rounded-full text-xs text-stone-800 placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-brand-green"
+            />
+            <button id="clearSearchBtn" onclick="handleSearch('')" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700">
+              <i data-lucide="x" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+
+          <div class="relative shrink-0">
+            <select id="sortDropdown" onchange="handleSort(this.value)" class="appearance-none pl-3 pr-7 py-1.5 bg-white border border-stone-200 rounded-full text-xs font-bold text-stone-700 outline-none cursor-pointer">
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="name-asc">Name: A to Z</option>
+            </select>
+            <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 text-stone-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Category Rule Notice Banner -->
+      <div id="categoryNoticeBanner" class="hidden mt-2 px-3 py-2 rounded-xl text-xs flex items-center justify-between gap-2">
+        <span id="categoryNoticeText" class="font-medium text-[11px] sm:text-xs"></span>
+        <span id="categoryNoticeBadge" class="font-extrabold uppercase text-[9px] px-2 py-0.5 rounded-full shrink-0"></span>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div id="productGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
+      <!-- Populated via JS -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="catalogEmptyState" class="hidden flex-col items-center justify-center py-12 text-center bg-white rounded-2xl border border-stone-200 my-4">
+      <div class="w-12 h-12 rounded-full bg-stone-100 flex items-center justify-center text-stone-400 mb-2">
+        <i data-lucide="package-x" class="w-6 h-6"></i>
+      </div>
+      <h3 class="font-serif font-bold text-base text-stone-900 mb-1">No items found</h3>
+      <p class="text-xs text-stone-500 max-w-xs mb-3">Try checking your spelling or clear your search query.</p>
+      <button onclick="resetFilters()" class="px-4 py-2 bg-brand-soil text-white rounded-full text-xs font-bold hover:bg-brand-orange transition-colors">
+        Reset Filters
+      </button>
+    </div>
+
+  </main>
+
+  <!-- ================= COMPACT PRE-ORDER & DEPOSIT RULES ================= -->
+  <section id="orderPolicies" class="py-10 bg-brand-soil text-stone-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        
+        <div class="lg:col-span-5 space-y-2.5">
+          <span class="text-brand-amber font-extrabold text-[10px] uppercase tracking-widest block">Quality You Can Trust</span>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-white leading-tight">
+            Picked on Order. <br class="hidden sm:inline"/>Zero Stale Storage.
+          </h2>
+          <p class="text-stone-300 text-xs leading-relaxed">
+            We hold minimal stock intentionally so herbs, berries, and spices reach your kitchen at maximum potency and aroma.
+          </p>
+          <div class="pt-1">
+            <a href="https://wa.me/2348170951100" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20be5a] text-stone-950 font-bold px-5 py-2.5 rounded-full text-xs transition-all shadow">
+              <i data-lucide="message-circle" class="w-4 h-4"></i> Speak with Farm Coordinator
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="bg-stone-800/80 border border-stone-700/80 p-4 rounded-xl">
+            <h3 class="font-bold text-xs text-brand-orange mb-1 flex items-center gap-1.5">
+              <i data-lucide="shield-check" class="w-4 h-4"></i> 30% Advance Deposit
+            </h3>
+            <p class="text-stone-300 text-[11px] leading-relaxed">
+              Locks your custom harvest batch. Balance is payable upon dispatch or delivery.
+            </p>
+          </div>
+
+          <div class="bg-stone-800/80 border border-stone-700/80 p-4 rounded-xl">
+            <h3 class="font-bold text-xs text-emerald-400 mb-1 flex items-center gap-1.5">
+              <i data-lucide="clock" class="w-4 h-4"></i> 72hr &amp; 2–7 Day Fulfillment
+            </h3>
+            <p class="text-stone-300 text-[11px] leading-relaxed">
+              Herbs cut within 72hrs (min ₦5,000). Farm vegetables harvested within 2–7 days (min ₦10,000).
+            </p>
+          </div>
+
+          <div class="bg-stone-800/80 border border-stone-700/80 p-4 rounded-xl">
+            <h3 class="font-bold text-xs text-brand-amber mb-1 flex items-center gap-1.5">
+              <i data-lucide="map-pin" class="w-4 h-4"></i> Regional Fresh Delivery
+            </h3>
+            <p class="text-stone-300 text-[11px] leading-relaxed">
+              Fresh berries &amp; herbs restricted to Abuja &amp; Kaduna. All dried spices &amp; oils ship nationwide.
+            </p>
+          </div>
+
+          <div class="bg-stone-800/80 border border-stone-700/80 p-4 rounded-xl">
+            <h3 class="font-bold text-xs text-stone-200 mb-1 flex items-center gap-1.5">
+              <i data-lucide="trending-up" class="w-4 h-4"></i> Seasonal Market Pricing
+            </h3>
+            <p class="text-stone-300 text-[11px] leading-relaxed">
+              Rates reflect Nigerian seasonal scarcity. Advance deposits lock in your quoted price.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= COMPACT FOOTER ================= -->
+  <footer class="bg-white border-t border-stone-200 pt-8 pb-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+      <div class="flex flex-col lg:flex-row gap-6 lg:gap-12 mb-8">
+        
+        <div class="w-full lg:w-1/3 space-y-2">
+          <div class="flex items-center gap-1.5 leading-none">
+            <span class="font-serif font-extrabold text-xl text-brand-orange">DD</span>
+            <span class="font-serif font-bold text-xl text-brand-green">MAIGONA</span>
+          </div>
+          <p class="text-xs text-stone-500 leading-relaxed max-w-sm">
+            Abuja organic strawberries, 72-hour fresh culinary herbs, certified spices, and pure cold-pressed oils.
+          </p>
+          <div class="text-xs text-stone-600 space-y-1 pt-1">
+            <p class="flex items-center gap-1.5"><i data-lucide="phone" class="w-3.5 h-3.5 text-brand-green"></i> 08170951100 (WhatsApp / Call)</p>
+            <p class="flex items-center gap-1.5"><i data-lucide="mail" class="w-3.5 h-3.5 text-brand-orange"></i> ddmaigona@gmail.com</p>
+          </div>
+        </div>
+
+        <div class="w-full lg:w-2/3 grid grid-cols-3 gap-3 sm:gap-6 text-xs text-stone-500">
+          <div>
+            <h4 class="font-bold text-stone-900 mb-2 uppercase text-[10px] tracking-wider">Quick Shop</h4>
+            <ul class="space-y-1.5">
+              <li><button onclick="filterByCategory('fresh-produce')" class="hover:text-brand-orange text-left">Strawberries</button></li>
+              <li><button onclick="filterByCategory('fresh-herbs')" class="hover:text-brand-green text-left">Fresh Herbs (72h)</button></li>
+              <li><button onclick="filterByCategory('dried-spices')" class="hover:text-brand-orange text-left">Dried Spices (100g)</button></li>
+              <li><button onclick="filterByCategory('oils')" class="hover:text-brand-green text-left">Cold-Pressed Oils</button></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-bold text-stone-900 mb-2 uppercase text-[10px] tracking-wider">Coverage</h4>
+            <ul class="space-y-1.5">
+              <li>Abuja &amp; Kaduna (Fresh)</li>
+              <li>Nationwide (Spices &amp; Oils)</li>
+              <li>30% Harvest Deposit</li>
+              <li>Pre-Order Lead Times</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-bold text-stone-900 mb-2 uppercase text-[10px] tracking-wider">Follow Us</h4>
+            <ul class="space-y-1.5">
+              <li><a href="https://instagram.com/ddmaigona.ng" target="_blank" class="hover:text-brand-orange flex items-center gap-1"><i data-lucide="instagram" class="w-3 h-3"></i> @ddmaigona.ng</a></li>
+              <li><a href="https://twitter.com/ddmaigona.ng" target="_blank" class="hover:text-brand-orange flex items-center gap-1"><i data-lucide="twitter" class="w-3 h-3"></i> @ddmaigona.ng</a></li>
+              <li><a href="https://wa.me/2348170951100" target="_blank" class="hover:text-brand-green flex items-center gap-1"><i data-lucide="message-circle" class="w-3 h-3"></i> WhatsApp Order</a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-t border-stone-100 pt-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-stone-400">
+        <p>© <span id="yearEl"></span> DD MAIGONA. Abuja, Nigeria.</p>
+        <p>Have a great day 🧑🏾‍🌾🙏🏾</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= FLOATING MOBILE BASKET BAR ================= -->
+  <div id="floatingBasketBar" class="fixed bottom-3 left-3 right-3 z-30 md:hidden hidden">
+    <button onclick="toggleCart(true)" class="w-full bg-brand-soil text-white p-3.5 rounded-2xl shadow-xl border border-stone-700 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <span id="floatingCountBadge" class="bg-brand-orange text-white text-xs font-extrabold w-6 h-6 rounded-full flex items-center justify-center">0</span>
+        <div class="text-left">
+          <span class="text-xs font-bold block">Open Harvest Bag</span>
+          <span id="floatingDepositSub" class="text-[10px] text-brand-amber block leading-tight">30% Deposit Calculated</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <span id="floatingSubtotal" class="text-xs sm:text-sm font-extrabold">₦0</span>
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      </div>
+    </button>
+  </div>
+
+  <!-- ================= PRODUCT QUICK-VIEW MODAL ================= -->
+  <div id="productDetailModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+    <div onclick="closeProductModal()" class="absolute inset-0 bg-stone-950/60 backdrop-blur-sm"></div>
+    <div id="productDetailContent" class="relative bg-white rounded-3xl shadow-2xl max-w-2xl w-full overflow-hidden border border-stone-100 z-10 max-h-[90vh] flex flex-col md:flex-row">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+
+  <!-- ================= SLIDE-OVER HARVEST BASKET DRAWER ================= -->
+  <div id="cartDrawerBackdrop" class="fixed inset-0 z-50 hidden">
+    <div onclick="toggleCart(false)" class="absolute inset-0 bg-stone-950/50 backdrop-blur-sm transition-opacity"></div>
+    
+    <aside class="fixed top-0 right-0 h-[100dvh] w-full max-w-md bg-white shadow-2xl z-10 flex flex-col">
+      <!-- Header -->
+      <div class="px-5 py-3.5 border-b border-stone-100 flex items-center justify-between bg-stone-50/70 shrink-0">
+        <div>
+          <h2 class="text-sm sm:text-base font-extrabold text-stone-900 flex items-center gap-1.5">
+            <i data-lucide="shopping-bag" class="w-4 h-4 text-brand-orange"></i> Your Harvest Bag
+          </h2>
+          <p class="text-[10px] text-stone-500">30% advance deposit locks your order</p>
+        </div>
+        <button onclick="toggleCart(false)" class="p-1.5 text-stone-400 hover:text-stone-900 rounded-full hover:bg-stone-100">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Fresh Herbs Minimum Progress Bar -->
+      <div id="herbThresholdBanner" class="hidden px-5 py-2 bg-emerald-50 border-b border-emerald-200 text-xs shrink-0">
+        <div class="flex justify-between items-center mb-1">
+          <span class="font-bold text-emerald-900 text-[11px] flex items-center gap-1">
+            🌿 Herbs Minimum (₦5,000)
+          </span>
+          <span id="herbProgressValue" class="font-extrabold text-emerald-700 text-[11px]">₦0 / ₦5,000</span>
+        </div>
+        <div class="w-full bg-emerald-200 h-1.5 rounded-full overflow-hidden">
+          <div id="herbProgressBar" class="bg-brand-green h-full rounded-full transition-all duration-300" style="width: 0%"></div>
+        </div>
+        <p id="herbProgressHelp" class="text-[10px] text-emerald-800 mt-0.5"></p>
+      </div>
+
+      <!-- Items List -->
+      <div id="cartItemsList" class="flex-1 overflow-y-auto p-4 space-y-3 bg-white">
+        <!-- Injected by JS -->
+      </div>
+
+      <!-- Drawer Footer -->
+      <div id="cartDrawerFooter" class="border-t border-stone-200 p-4 bg-[#FAF7F2] shrink-0 space-y-3 shadow-inner hidden">
+        
+        <div>
+          <label class="block text-[10px] font-extrabold uppercase text-stone-500 mb-1">Delivery Destination</label>
+          <select id="cartDeliveryZone" onchange="updateCartUI()" class="w-full px-3 py-1.5 bg-white border border-stone-200 rounded-xl text-xs font-semibold text-stone-800 outline-none focus:ring-1 focus:ring-brand-green">
+            <option value="Abuja">Abuja (All Items Eligible)</option>
+            <option value="Kaduna">Kaduna (All Items Eligible)</option>
+            <option value="Nationwide">Other States (Non-Perishables Only)</option>
+          </select>
+        </div>
+
+        <div id="perishableWarningBox" class="hidden p-2 rounded-xl bg-rose-50 border border-rose-200 text-[11px] text-rose-800 leading-tight">
+          <strong>⚠️ Regional Notice:</strong> Fresh berries and fresh herbs can only be delivered to <strong>Abuja &amp; Kaduna</strong>. Remove them for nationwide shipping.
+        </div>
+
+        <!-- 30% vs 100% Payment Toggle -->
+        <div class="bg-white p-2.5 rounded-xl border border-stone-200 space-y-1.5">
+          <div class="flex justify-between items-center text-xs text-stone-500">
+            <span>Order Subtotal:</span>
+            <span id="cartGrossTotalText" class="font-bold text-stone-900">₦0</span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <button 
+              type="button" 
+              onclick="setPaymentMode('deposit')"
+              id="payModeDepositBtn"
+              class="p-2 rounded-xl border-2 border-brand-orange bg-brand-orange-light text-left transition-all"
+            >
+              <span class="text-[9px] font-extrabold uppercase text-brand-orange block">30% Deposit</span>
+              <span id="depositSumText" class="text-xs sm:text-sm font-extrabold text-stone-900">₦0</span>
+            </button>
+
+            <button 
+              type="button" 
+              onclick="setPaymentMode('full')"
+              id="payModeFullBtn"
+              class="p-2 rounded-xl border border-stone-200 bg-white text-left transition-all opacity-70"
+            >
+              <span class="text-[9px] font-bold uppercase text-stone-500 block">100% Full Pay</span>
+              <span id="fullSumText" class="text-xs sm:text-sm font-extrabold text-stone-900">₦0</span>
+            </button>
+          </div>
+          <p id="balanceNoteText" class="text-[10px] text-stone-400">
+            Balance due upon harvest dispatch.
+          </p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="space-y-2">
+          <button 
+            id="whatsappSubmitBtn"
+            onclick="handleWhatsAppCheckout()" 
+            class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-stone-950 py-3 rounded-xl font-extrabold text-xs sm:text-sm shadow flex items-center justify-center gap-2 transition-all cursor-pointer"
+          >
+            <i data-lucide="message-circle" class="w-4 h-4"></i>
+            <span>Confirm on WhatsApp (08170951100)</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ================= TOAST CONTAINER ================= -->
+  <div id="toastStack" class="fixed top-14 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- ================= APPLICATION & 53-PRODUCT DATA ENGINE ================= -->
+  <script>
+    function handleImgError(img, title) {
+      img.onerror = null;
+      const safe = encodeURIComponent(title || 'DD Maigona');
+      img.src = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23FAF7F2'/><circle cx='200' cy='140' r='45' fill='%23EBF5EE'/><path d='M190 155 C190 125 215 115 225 115 C225 135 210 155 190 155 Z' fill='%232D8636'/><text x='200' y='215' font-family='sans-serif' font-size='13' font-weight='bold' fill='%231C1917' text-anchor='middle'>${safe}</text><text x='200' y='235' font-family='sans-serif' font-size='10' fill='%2378716C' text-anchor='middle'>DD MAIGONA ABUJA</text></svg>`;
+    }
+
+    // Single-line rotating messages for mobile
+    const MOBILE_NOTICES = [
+      "🌿 30% Deposit Locks Order • Farm Fresh Harvest",
+      "🍓 Perishables: Abuja & Kaduna Express Delivery",
+      "📦 Dried Spices & Oils: Nationwide Shipping",
+      "📞 WhatsApp Direct Concierge: 08170951100"
+    ];
+
+    // Consolidated 53-Product Catalog
+    const PRODUCTS = [
+      // Fresh Produce & Bulk (3)
+      {
+        id: "prod-strawberry-fresh",
+        name: "Fresh / Frozen Strawberries (Regular)",
+        category: "fresh-produce",
+        categoryLabel: "Berries",
+        price: 7000,
+        unit: "per kg",
+        stock: 40,
+        isPerishable: true,
+        leadTime: "On Request",
+        variants: ["Regular Strawberries (₦7,000/kg)", "Blast-Frozen Regular (₦7,000/kg)"],
+        description: "Juicy, ruby-red regular strawberries picked in Abuja/Plateau. Sweet, fragrant, and packed for smoothies or desserts.",
+        image: "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "prod-strawberry-organic",
+        name: "Fresh / Frozen Strawberries (Organic)",
+        category: "fresh-produce",
+        categoryLabel: "Berries",
+        price: 7000,
+        unit: "per kg",
+        stock: 35,
+        isPerishable: true,
+        leadTime: "On Request",
+        variants: ["Organic Fresh (₦7,000/kg)", "Organic Frozen (₦7,000/kg)"],
+        description: "Organically grown without chemical sprays. Maximum natural sweetness, intense berry aroma, available fresh or blast-frozen.",
+        image: "https://images.unsplash.com/photo-1518635017498-87f514b751ba?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "prod-potatoes",
+        name: "Farm Irish Potatoes (Bag Sacks)",
+        category: "fresh-produce",
+        categoryLabel: "Bulk Produce",
+        price: 150000,
+        unit: "from full bag",
+        stock: 15,
+        isPerishable: true,
+        leadTime: "Pre-Order",
+        variants: ["Full Bag (₦150,000)", "Half Bag (₦75,000)", "Quarter Bag (₦38,000)"],
+        variantPrices: {
+          "Full Bag (₦150,000)": 150000,
+          "Half Bag (₦75,000)": 75000,
+          "Quarter Bag (₦38,000)": 38000
+        },
+        description: "Firm, clean Jos/Plateau Irish potatoes starting from ₦150,000 full bag. Quarter and Half bag splits also available.",
+        image: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=600&q=80"
+      },
+
+      // Fresh Herbs (11) - Min order ₦5,000 across category, 72hrs
+      {
+        id: "herb-mint",
+        name: "Fresh Mint",
+        category: "fresh-herbs",
+        categoryLabel: "Fresh Herbs",
+        price: 700,
+        unit: "per bunch",
+        stock: 45,
+        isPerishable: true,
+        leadTime: "72hrs",
+        description: "Cool, fragrant spearmint bunches cut to order for teas, Chapman, salads, and lamb dishes.",
+        image: "https://images.unsplash.com/photo-1628556270448-4d4e4148e1b1?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "herb-curry",
+        name: "Fresh Curry Leaves",
+        category: "fresh-herbs",
+        categoryLabel: "Fresh Herbs",
+        price: 700,
+        unit: "per bunch",
+        stock: 40,
+        isPerishable: true,
+        leadTime: "72hrs",
+        description: "Aromatic Nigerian garden curry leaf bunches packed with natural essential oils for jollof and stews.",
+        image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "herb-rosemary",
+        name: "Fresh Rosemary",
+        category: "fresh-herbs",
+        categoryLabel: "Fresh Herbs",
+        price: 700,
+        unit: "per bunch",
+        stock: 40,
+        isPerishable: true,
+        leadTime: "72hrs",
+        description: "Woody, resinous fresh rosemary sprigs for roast potatoes, chicken, focaccia bread, and hair rinses.",
+        image: "https://images.unsplash.com/photo-1515586000433-45406d8e6662?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "herb-basil",
+        name: "Fresh Sweet Basil",
+        category: "fresh-herbs",
+        categoryLabel: "Fresh Herbs",
+        price: 700,
+        unit: "per bunch",
+        stock: 40,
+        isPerishable: true,
+        leadTime: "72hrs",
+        description: "Sweet-peppery basil bunches harvested fresh for homemade pesto, pasta sauces, and caprese salads.",
+        image: "https://images.unsplash.com/photo-1618375569909-3c8616cf7733?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "herb-parsley",
+        name: "Fresh Parsley",
+        category: "fresh-herbs",
+        categoryLabel: "Fresh Herbs",
+        price: 700,
+        unit: "per bunch",
+        stock: 40,
+        isPerishable: true,
+        leadTime: "72hrs",
+        description: "Vibrant flat/curly parsley bunches providing bright flavor and vitamin C for chimichurri and juices.",
+        image: "https://images.unsplash.com/photo-1588879460618-9249e7d947d1?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "herb-celery",
+        name: "Fresh Celery",
+        category: "fresh-herbs",
+        categoryLabel: "Fresh Herbs",
+        price: 700,
+        unit: "per bunch",
+        stock: 35,
+        isPerishable: true,
+        leadTime: "72hrs",
+        description: "Crisp stalks and leaves for morning detox green juices, mirepoix, and healthy broths.",
+        image: "https://images.unsplash.com/photo-1580391564590-aeca65c5e2d3?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "herb-chives",
+        name: "Fresh Chives",
+        category: "fresh-herbs",
+        categoryLabel: "Fresh Herbs",
+        price: 800,
+        unit: "per bunch",
+        stock: 30,
+        isPerishable: true,
+        leadTime: "72hrs",
+        description: "Delicate green chive blades with subtle onion-garlic notes for gourmet omelettes and garnish.",
+        image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "herb-thyme",
+        name: "Fresh Thyme",
+        category: "fresh-herbs",
+        categoryLabel: "Fresh Herbs",
+        price: 800,
+        unit: "per bunch",
+        stock: 35,
+        isPerishable: true,
+        leadTime: "72hrs",
+        description: "Classic aromatic garden thyme sprigs essential for Nigerian party rice, marinades, and stocks.",
+        image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "herb-leek",
+        name: "Fresh Leek",
+        category: "fresh-herbs",
+        categoryLabel: "Fresh Herbs",
+        price: 800,
+        unit: "per bunch",
+        stock: 30,
+        isPerishable: true,
+        leadTime: "72hrs",
+        description: "Sweet, layered allium leeks harvested fresh for potato-leek soups, braises, and pies.",
+        image: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "herb-lemongrass",
+        name: "Fresh Lemongrass",
+        category: "fresh-herbs",
+        categoryLabel: "Fresh Herbs",
+        price: 800,
+        unit: "per bunch",
+        stock: 35,
+        isPerishable: true,
+        leadTime: "72hrs",
+        description: "Fragrant, citrus-spiced lemongrass stalks harvested for immunity teas and Thai curries.",
+        image: "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "herb-cilantro",
+        name: "Fresh Cilantro (Coriander)",
+        category: "fresh-herbs",
+        categoryLabel: "Fresh Herbs",
+        price: 700,
+        unit: "per bunch",
+        stock: 35,
+        isPerishable: true,
+        leadTime: "72hrs",
+        description: "Zesty green coriander leaves hand-cut for guacamole, fresh salsas, curries, and dressings.",
+        image: "https://images.unsplash.com/photo-1588879460618-9249e7d947d1?auto=format&fit=crop&w=600&q=80"
+      },
+
+      // Dried Spices (35) - Sold per 100g (Baobab 200g)
+      {
+        id: "spice-figs",
+        name: "Dried Figs",
+        category: "dried-spices",
+        categoryLabel: "Dried Spices",
+        price: 3000,
+        unit: "per 100g",
+        stock: 0,
+        isPerishable: false,
+        leadTime: "Restocking Soon",
+        description: "Sweet, fiber-dense dried figs. Currently SOLD OUT.",
+        image: "https://images.unsplash.com/photo-1601379760883-1bb497c558f0?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-cumin",
+        name: "Cumin Seeds",
+        category: "dried-spices",
+        categoryLabel: "Dried Spices",
+        price: 2000,
+        unit: "per 100g",
+        stock: 60,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Warm whole cumin seeds for suya rubs, curries, chili, and authentic rice pilafs.",
+        image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-garlic",
+        name: "Dried Garlic",
+        category: "dried-spices",
+        categoryLabel: "Dried Spices",
+        price: 2000,
+        unit: "per 100g",
+        stock: 55,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Pure dehydrated garlic granules and flakes with concentrated savory punch.",
+        image: "https://images.unsplash.com/photo-1540148426945-6cf22a6b2383?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-ginger",
+        name: "Dried Ginger",
+        category: "dried-spices",
+        categoryLabel: "Dried Spices",
+        price: 2000,
+        unit: "per 100g",
+        stock: 55,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Aromatic split/ground Kaduna dried ginger for zobo, ginger shots, and baking.",
+        image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-ginseng",
+        name: "Pure Ginseng",
+        category: "dried-spices",
+        categoryLabel: "Botanicals",
+        price: 4000,
+        unit: "per 100g",
+        stock: 30,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Potent adaptogenic ginseng root for mental clarity, stamina, and herbal tonics.",
+        image: "https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-coriander",
+        name: "Coriander Seeds",
+        category: "dried-spices",
+        categoryLabel: "Dried Spices",
+        price: 2000,
+        unit: "per 100g",
+        stock: 50,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Nutty, floral whole coriander seeds ready for garam masala and marinades.",
+        image: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-turmeric",
+        name: "Powdered Turmeric",
+        category: "dried-spices",
+        categoryLabel: "Dried Spices",
+        price: 2500,
+        unit: "per 100g",
+        stock: 0,
+        isPerishable: false,
+        leadTime: "Restocking Soon",
+        description: "Golden curcumin-rich powdered turmeric. Currently SOLD OUT.",
+        image: "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-cinnamon-pwd",
+        name: "Ground Cinnamon",
+        category: "dried-spices",
+        categoryLabel: "Dried Spices",
+        price: 3500,
+        unit: "per 100g",
+        stock: 45,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Finely ground sweet-warm cinnamon powder for oats, coffee, and baking.",
+        image: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-cinnamon-sticks",
+        name: "Cinnamon Sticks",
+        category: "dried-spices",
+        categoryLabel: "Dried Spices",
+        price: 3000,
+        unit: "per 100g",
+        stock: 45,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Fragrant whole rolled cinnamon bark quills for spiced tea, zobo, and biryani.",
+        image: "https://images.unsplash.com/photo-1556761223-4c4282c73f77?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-black-pepper",
+        name: "Black Pepper",
+        category: "dried-spices",
+        categoryLabel: "Dried Spices",
+        price: 3000,
+        unit: "per 100g",
+        stock: 50,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Whole and cracked black peppercorns delivering bold piperine heat.",
+        image: "https://images.unsplash.com/photo-1506806732259-39c2d0268443?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-black-seeds",
+        name: "Black Seeds (Nigella Sativa)",
+        category: "dried-spices",
+        categoryLabel: "Seeds",
+        price: 1500,
+        unit: "per 100g",
+        stock: 60,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Habbatul Barakah seeds revered for immune vitality and honey tonics.",
+        image: "https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-baobab",
+        name: "Baobab Powder (200g Pack)",
+        category: "dried-spices",
+        categoryLabel: "Superfoods",
+        price: 2000,
+        unit: "per 200g",
+        stock: 40,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Tangy, prebiotic and vitamin-C dense African Baobab fruit pulp (200g pack).",
+        image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-fenugreek",
+        name: "Fenugreek Seeds",
+        category: "dried-spices",
+        categoryLabel: "Seeds",
+        price: 1500,
+        unit: "per 100g",
+        stock: 50,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Golden maple-noted fenugreek seeds for curry blends and hair rinses.",
+        image: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-cardamom",
+        name: "Green Cardamom",
+        category: "dried-spices",
+        categoryLabel: "Dried Spices",
+        price: 6000,
+        unit: "per 100g",
+        stock: 30,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Perfumed whole green cardamom pods for coffee, spiced chai, and baking.",
+        image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-cayenne",
+        name: "Cayenne Powder",
+        category: "dried-spices",
+        categoryLabel: "Dried Spices",
+        price: 2000,
+        unit: "per 100g",
+        stock: 55,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Ground cayenne red pepper for clean, metabolism-boosting heat.",
+        image: "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-chamomile",
+        name: "Dried Chamomile",
+        category: "dried-spices",
+        categoryLabel: "Teas",
+        price: 2000,
+        unit: "per 100g",
+        stock: 35,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Whole dried chamomile blossoms with gentle apple-honey notes for sleep tea.",
+        image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-chia",
+        name: "Chia Seeds",
+        category: "dried-spices",
+        categoryLabel: "Superseeds",
+        price: 2000,
+        unit: "per 100g",
+        stock: 50,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Clean, omega-3 rich chia seeds for chia puddings, oatmeal bowls, and smoothies.",
+        image: "https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-chebe",
+        name: "Authentic Chebe Powder",
+        category: "dried-spices",
+        categoryLabel: "Care",
+        price: 2000,
+        unit: "per 100g",
+        stock: 40,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Traditional roasted herbal Chebe blend for moisture retention and hair strength.",
+        image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-dill",
+        name: "Dill Seeds",
+        category: "dried-spices",
+        categoryLabel: "Dried Spices",
+        price: 2000,
+        unit: "per 100g",
+        stock: 40,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Aromatic dill seeds for pickling, seafood rubs, and digestive teas.",
+        image: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-flax",
+        name: "Flax Seeds",
+        category: "dried-spices",
+        categoryLabel: "Superseeds",
+        price: 2000,
+        unit: "per 100g",
+        stock: 50,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Nutrient-dense flaxseeds for smoothies, baking, and DIY hair flax gel.",
+        image: "https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-licorice",
+        name: "Licorice Root",
+        category: "dried-spices",
+        categoryLabel: "Roots",
+        price: 2000,
+        unit: "per 100g",
+        stock: 35,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Naturally sweet dried licorice root for soothing herbal teas and tonics.",
+        image: "https://images.unsplash.com/photo-1556761223-4c4282c73f77?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-maca",
+        name: "Maca Root",
+        category: "dried-spices",
+        categoryLabel: "Superfoods",
+        price: 4500,
+        unit: "per 100g",
+        stock: 30,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Malty adaptogenic Maca root powder prized for energy and hormonal balance.",
+        image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-minanas",
+        name: "Minanas",
+        category: "dried-spices",
+        categoryLabel: "Teas",
+        price: 3000,
+        unit: "per 100g",
+        stock: 30,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Aromatic Minanas botanical blend prized in Northern Nigeria for royal spiced teas.",
+        image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-dried-mint",
+        name: "Dried Mint Leaves",
+        category: "dried-spices",
+        categoryLabel: "Teas",
+        price: 1000,
+        unit: "per 100g",
+        stock: 55,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Crushed dried mint leaves with long shelf stability for teas, dips, and lamb.",
+        image: "https://images.unsplash.com/photo-1628556270448-4d4e4148e1b1?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-miracle-seeds",
+        name: "Miracle Seeds",
+        category: "dried-spices",
+        categoryLabel: "Seeds",
+        price: 3000,
+        unit: "per 100g",
+        stock: 30,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Traditional Miracle Seeds carefully packed for holistic wellness preparations.",
+        image: "https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-moringa-powder",
+        name: "Moringa Powder",
+        category: "dried-spices",
+        categoryLabel: "Superfoods",
+        price: 2000,
+        unit: "per 100g",
+        stock: 50,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Shade-dried pure green Moringa oleifera leaf powder loaded with bioavailable iron.",
+        image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-moringa-seeds",
+        name: "Moringa Seeds",
+        category: "dried-spices",
+        categoryLabel: "Seeds",
+        price: 2000,
+        unit: "per 100g",
+        stock: 45,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Mature whole dried Moringa oleifera seeds used for daily wellness routines.",
+        image: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-neem-powder",
+        name: "Neem Powder",
+        category: "dried-spices",
+        categoryLabel: "Care",
+        price: 1000,
+        unit: "per 100g",
+        stock: 50,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Finely milled pure Neem (Dogonyaro) leaf powder for facial masks and scalp care.",
+        image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-oregano",
+        name: "Dried Oregano",
+        category: "dried-spices",
+        categoryLabel: "Dried Spices",
+        price: 2500,
+        unit: "per 100g",
+        stock: 45,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Mediterranean oregano leaves for pizza sauces, grilled fish, and dressings.",
+        image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-sage",
+        name: "Dried Sage",
+        category: "dried-spices",
+        categoryLabel: "Dried Spices",
+        price: 2500,
+        unit: "per 100g",
+        stock: 40,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Savory rubbed sage leaves for poultry seasoning, sausages, and brown butter.",
+        image: "https://images.unsplash.com/photo-1515586000433-45406d8e6662?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-sesame",
+        name: "Sesame Seeds",
+        category: "dried-spices",
+        categoryLabel: "Seeds",
+        price: 2000,
+        unit: "per 100g",
+        stock: 55,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Clean, nutty sesame seeds (ridi) for tahini, baking, stir-fries, and snacks.",
+        image: "https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-star-anise",
+        name: "Whole Star Anise",
+        category: "dried-spices",
+        categoryLabel: "Dried Spices",
+        price: 3000,
+        unit: "per 100g",
+        stock: 40,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Star-shaped pods with rich licorice aroma for biryanis, pho broths, and chai.",
+        image: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-cloves",
+        name: "Whole Cloves",
+        category: "dried-spices",
+        categoryLabel: "Dried Spices",
+        price: 4500,
+        unit: "per 100g",
+        stock: 45,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Hand-selected whole cloves (kanafuru) for zobo drinks, kunu, and baking.",
+        image: "https://images.unsplash.com/photo-1506806732259-39c2d0268443?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-fennel",
+        name: "Fennel Seeds",
+        category: "dried-spices",
+        categoryLabel: "Dried Spices",
+        price: 2000,
+        unit: "per 100g",
+        stock: 45,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Sweet anise-scented green fennel seeds for after-meal digestive teas.",
+        image: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "spice-date-powder",
+        name: "Date Powder (Debino)",
+        category: "dried-spices",
+        categoryLabel: "Sweeteners",
+        price: 1500,
+        unit: "per 100g",
+        stock: 60,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Pure dried date powder—wholesome natural sweetener for baby food and pap.",
+        image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=600&q=80"
+      },
+
+      // Pure Oils (4)
+      {
+        id: "oil-coconut",
+        name: "Virgin Coconut Oil",
+        category: "oils",
+        categoryLabel: "Pure Oils",
+        price: 15000,
+        unit: "per liter",
+        stock: 25,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Cold-pressed extra virgin coconut oil (1 Liter) for cooking, skin, and hair.",
+        image: "https://images.unsplash.com/photo-1526947425960-945c6e72858f?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "oil-neem",
+        name: "Raw Neem Oil",
+        category: "oils",
+        categoryLabel: "Pure Oils",
+        price: 10000,
+        unit: "per liter",
+        stock: 25,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Unrefined therapeutic Neem seed oil (1 Liter) for scalp care and plant protection.",
+        image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "oil-black-seed",
+        name: "Pure Black Seed Oil",
+        category: "oils",
+        categoryLabel: "Pure Oils",
+        price: 20000,
+        unit: "per liter",
+        stock: 20,
+        isPerishable: false,
+        leadTime: "Nationwide",
+        description: "Cold-pressed Nigella Sativa oil (1 Liter) rich in thymoquinone for daily vitality.",
+        image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "oil-fenugreek",
+        name: "Fenugreek Botanical Oil",
+        category: "oils",
+        categoryLabel: "Pure Oils",
+        price: 0,
+        isTbc: true,
+        unit: "Price TBC",
+        stock: 20,
+        isPerishable: false,
+        leadTime: "Ask Quote",
+        description: "Small-batch Fenugreek oil for hair density. Price confirmed on harvest batch.",
+        image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=600&q=80"
+      }
+    ];
+
+    const TRUST_CARDS = [
+      { icon: "map-pin", title: "Abuja & Kaduna Fresh", desc: "Strawberries, potatoes & herbs cut on order." },
+      { icon: "globe", title: "Nationwide Courier", desc: "35+ dried spices & pure oils shipped across Nigeria." },
+      { icon: "shield-check", title: "30% Advance Deposit", desc: "Locks in harvest schedule & farm pricing." },
+      { icon: "sprout", title: "Zero Stale Storage", desc: "Harvested and bottled strictly on customer request." },
+      { icon: "check-circle", title: "53 Pure Botanicals", desc: "Unadulterated Nigerian agro harvests." }
+    ];
+
+    // Reactive State
+    const state = {
+      cart: [],
+      activeCategory: 'All',
+      searchQuery: '',
+      sortBy: 'featured',
+      heroIdx: 0,
+      mobileTickerIdx: 0,
+      paymentMode: 'deposit',
+      heroTimer: null,
+      tickerTimer: null
+    };
+
+    function loadSavedCart() {
+      try {
+        const data = localStorage.getItem('ddmaigona_cart');
+        state.cart = data ? JSON.parse(data) : [];
+      } catch (e) {
+        state.cart = [];
+      }
+    }
+
+    function saveCart() {
+      try {
+        localStorage.setItem('ddmaigona_cart', JSON.stringify(state.cart));
+      } catch (e) {}
+    }
+
+    const formatNaira = (val) => '₦' + Math.ceil(val).toLocaleString('en-NG');
+
+    // Mobile Single-Line Ticker Rotator
+    function initMobileTicker() {
+      const slot = document.getElementById('mobileTickerSlot');
+      if (!slot) return;
+      slot.innerHTML = `<span class="ticker-slide text-stone-200">${MOBILE_NOTICES[state.mobileTickerIdx]}</span>`;
+      
+      state.tickerTimer = setInterval(() => {
+        state.mobileTickerIdx = (state.mobileTickerIdx + 1) % MOBILE_NOTICES.length;
+        slot.style.opacity = '0';
+        setTimeout(() => {
+          slot.innerHTML = `<span class="ticker-slide text-stone-200">${MOBILE_NOTICES[state.mobileTickerIdx]}</span>`;
+          slot.style.opacity = '1';
+        }, 250);
+      }, 3500);
+    }
+
+    // Hero Carousel Controls
+    function setHeroSlide(idx) {
+      state.heroIdx = idx;
+      const slides = document.querySelectorAll('.hero-slide');
+      const dots = document.querySelectorAll('#heroDots button');
+
+      slides.forEach((slide, i) => {
+        if (i === idx) {
+          slide.classList.remove('opacity-0', 'pointer-events-none');
+          slide.classList.add('opacity-100');
+        } else {
+          slide.classList.add('opacity-0', 'pointer-events-none');
+          slide.classList.remove('opacity-100');
+        }
+      });
+
+      dots.forEach((dot, i) => {
+        if (i === idx) {
+          dot.className = "w-5 h-1.5 rounded-full bg-white transition-all";
+        } else {
+          dot.className = "w-1.5 h-1.5 rounded-full bg-white/50 transition-all";
+        }
+      });
+      resetHeroTimer();
+    }
+
+    function nextHeroSlide() {
+      const next = (state.heroIdx + 1) % 4;
+      setHeroSlide(next);
+    }
+
+    function prevHeroSlide() {
+      const prev = (state.heroIdx - 1 + 4) % 4;
+      setHeroSlide(prev);
+    }
+
+    function resetHeroTimer() {
+      if (state.heroTimer) clearInterval(state.heroTimer);
+      state.heroTimer = setInterval(() => {
+        nextHeroSlide();
+      }, 6000);
+    }
+
+    // Infinite Marquee
+    function initMarquee() {
+      const track = document.getElementById('marqueeTrack');
+      const doubled = [...TRUST_CARDS, ...TRUST_CARDS, ...TRUST_CARDS];
+      track.innerHTML = doubled.map(c => `
+        <div class="w-[260px] sm:w-[300px] bg-white p-2.5 sm:p-3 rounded-xl border border-stone-200/80 flex items-center gap-2.5 shadow-sm shrink-0">
+          <div class="w-8 h-8 bg-brand-green-light text-brand-green rounded-lg flex items-center justify-center shrink-0">
+            <i data-lucide="${c.icon}" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-stone-900">${c.title}</h4>
+            <p class="text-stone-500 text-[10px] leading-tight">${c.desc}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Filter & Search Engine
+    function filterByCategory(cat) {
+      state.activeCategory = cat;
+
+      document.querySelectorAll('.cat-pill').forEach(btn => {
+        if (btn.dataset.cat === cat) {
+          btn.className = "cat-pill whitespace-nowrap px-3.5 py-1.5 rounded-full text-xs font-bold transition-all bg-brand-soil text-white shadow-sm";
+        } else {
+          btn.className = "cat-pill whitespace-nowrap px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-600 border border-stone-200 hover:border-stone-300";
+        }
+      });
+
+      const banner = document.getElementById('categoryNoticeBanner');
+      const text = document.getElementById('categoryNoticeText');
+      const badge = document.getElementById('categoryNoticeBadge');
+
+      if (cat === 'fresh-herbs') {
+        banner.className = "mt-2 px-3 py-2 rounded-xl text-xs flex items-center justify-between gap-2 bg-emerald-50 border border-emerald-200 text-emerald-950";
+        text.innerHTML = "🌿 <strong>Fresh Herbs Batch:</strong> ₦5,000 category minimum. Cut within 72 hours.";
+        badge.className = "font-extrabold uppercase text-[9px] px-2 py-0.5 rounded-full shrink-0 bg-brand-green text-white";
+        badge.textContent = "Abuja & Kaduna";
+        banner.classList.remove('hidden');
+      } else if (cat === 'fresh-produce') {
+        banner.className = "mt-2 px-3 py-2 rounded-xl text-xs flex items-center justify-between gap-2 bg-orange-50 border border-orange-200 text-orange-950";
+        text.innerHTML = "🍓 <strong>Perishables:</strong> Fresh berries and vegetables deliver to Abuja and Kaduna.";
+        badge.className = "font-extrabold uppercase text-[9px] px-2 py-0.5 rounded-full shrink-0 bg-brand-orange text-white";
+        badge.textContent = "Cold Chain";
+        banner.classList.remove('hidden');
+      } else if (cat === 'dried-spices' || cat === 'oils') {
+        banner.className = "mt-2 px-3 py-2 rounded-xl text-xs flex items-center justify-between gap-2 bg-amber-50 border border-amber-200 text-amber-950";
+        text.innerHTML = "🚚 <strong>Nationwide Shipping:</strong> All dried spices (100g) and oils (1L) ship across Nigeria.";
+        badge.className = "font-extrabold uppercase text-[9px] px-2 py-0.5 rounded-full shrink-0 bg-brand-amber text-stone-950";
+        badge.textContent = "All Nigeria";
+        banner.classList.remove('hidden');
+      } else {
+        banner.classList.add('hidden');
+      }
+
+      renderCatalog();
+    }
+
+    function handleSearch(val) {
+      state.searchQuery = val.trim().toLowerCase();
+      const input = document.getElementById('catalogSearchInput');
+      if (input && input.value !== val && val === '') input.value = '';
+      document.getElementById('clearSearchBtn').classList.toggle('hidden', !state.searchQuery);
+      renderCatalog();
+    }
+
+    function handleSort(val) {
+      state.sortBy = val;
+      renderCatalog();
+    }
+
+    function resetFilters() {
+      handleSearch('');
+      filterByCategory('All');
+    }
+
+    function getProductCartQty(productId) {
+      return state.cart
+        .filter(i => i.id === productId)
+        .reduce((sum, i) => sum + i.quantity, 0);
+    }
+
+    // Catalog Rendering
+    function renderCatalog() {
+      const grid = document.getElementById('productGrid');
+      const empty = document.getElementById('catalogEmptyState');
+
+      let filtered = PRODUCTS.filter(p => {
+        const matchCat = state.activeCategory === 'All' || p.category === state.activeCategory;
+        const matchQuery = !state.searchQuery || 
+          p.name.toLowerCase().includes(state.searchQuery) || 
+          p.description.toLowerCase().includes(state.searchQuery) ||
+          p.categoryLabel.toLowerCase().includes(state.searchQuery);
+        return matchCat && matchQuery;
+      });
+
+      if (state.sortBy === 'price-asc') {
+        filtered.sort((a, b) => (a.isTbc ? 999999 : a.price) - (b.isTbc ? 999999 : b.price));
+      } else if (state.sortBy === 'price-desc') {
+        filtered.sort((a, b) => (b.isTbc ? 0 : b.price) - (a.isTbc ? 0 : a.price));
+      } else if (state.sortBy === 'name-asc') {
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+      }
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        empty.classList.remove('hidden');
+        empty.classList.add('flex');
+        return;
+      }
+
+      empty.classList.add('hidden');
+      empty.classList.remove('flex');
+
+      grid.innerHTML = filtered.map(product => {
+        const isSoldOut = product.stock <= 0;
+        const qtyInCart = getProductCartQty(product.id);
+        const safeTitle = product.name.replace(/'/g, "\\'");
+
+        return `
+          <div class="group bg-white rounded-2xl overflow-hidden border border-stone-200 hover:border-brand-orange hover:shadow-md transition-all flex flex-col relative ${isSoldOut ? 'opacity-70 grayscale-[0.35]' : ''}">
+            
+            <div class="absolute top-2 left-2 right-2 z-10 flex items-center justify-between gap-1 pointer-events-none">
+              <span class="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded shadow-sm ${
+                isSoldOut ? 'bg-stone-900 text-white' : product.isPerishable ? 'bg-brand-green text-white' : 'bg-brand-soil text-white'
+              }">
+                ${isSoldOut ? 'SOLD OUT' : product.isPerishable ? 'Abj / Kad' : 'Nationwide'}
+              </span>
+
+              <span class="text-[9px] font-bold bg-stone-900/80 backdrop-blur text-white px-1.5 py-0.5 rounded">
+                ${product.unit}
+              </span>
+            </div>
+
+            <div onclick="openProductModal('${product.id}')" class="relative h-32 sm:h-40 w-full overflow-hidden bg-stone-100 shrink-0 cursor-pointer">
+              <img 
+                src="${product.image}" 
+                alt="${product.name}" 
+                onerror="handleImgError(this, '${safeTitle}')"
+                loading="lazy"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+              />
+            </div>
+
+            <div class="p-3 sm:p-4 flex flex-col flex-grow">
+              <div class="flex items-center justify-between gap-1 mb-1">
+                <span class="text-[9px] font-bold uppercase tracking-wider text-stone-400">${product.categoryLabel}</span>
+                <span class="text-[9px] font-semibold text-brand-green">${product.leadTime}</span>
+              </div>
+
+              <h3 onclick="openProductModal('${product.id}')" class="font-bold text-stone-900 text-xs sm:text-sm leading-snug line-clamp-2 hover:text-brand-orange transition-colors cursor-pointer mb-1">
+                ${product.name}
+              </h3>
+
+              <div class="mt-auto pt-2 border-t border-stone-100 flex items-center justify-between gap-1" id="action-slot-${product.id}">
+                ${renderProductCardAction(product, qtyInCart)}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function renderProductCardAction(product, qtyInCart) {
+      const isSoldOut = product.stock <= 0;
+      const priceText = product.isTbc 
+        ? `<span class="font-extrabold text-amber-600 text-xs">Price TBC</span>`
+        : `<span class="font-extrabold text-stone-900 text-xs sm:text-sm">${formatNaira(product.price)}</span>`;
+
+      if (isSoldOut) {
+        return `
+          <div>${priceText}</div>
+          <button disabled class="px-2 py-1 rounded bg-stone-200 text-stone-500 text-[10px] font-bold cursor-not-allowed">
+            Sold Out
+          </button>
+        `;
+      }
+
+      if (qtyInCart > 0) {
+        return `
+          <div>${priceText}</div>
+          <div class="flex items-center bg-[#FAF7F2] rounded-lg border border-stone-300 p-0.5">
+            <button onclick="adjustCardQty('${product.id}', -1)" class="w-5 h-5 flex items-center justify-center text-stone-600 hover:text-stone-950 font-bold text-xs">−</button>
+            <span class="w-5 text-center text-xs font-extrabold text-stone-900">${qtyInCart}</span>
+            <button onclick="adjustCardQty('${product.id}', 1)" class="w-5 h-5 flex items-center justify-center text-stone-600 hover:text-stone-950 font-bold text-xs">+</button>
+          </div>
+        `;
+      }
+
+      return `
+        <div>${priceText}</div>
+        <button 
+          onclick="addToCart('${product.id}')" 
+          class="px-2.5 sm:px-3 py-1.5 rounded-lg bg-brand-soil hover:bg-brand-orange text-white text-[11px] font-bold transition-all flex items-center gap-1 shadow-sm"
+        >
+          <i data-lucide="plus" class="w-3 h-3"></i>
+          <span>${product.isTbc ? 'Enquire' : 'Add'}</span>
+        </button>
+      `;
+    }
+
+    function updateCardActionSlot(productId) {
+      const p = PRODUCTS.find(x => x.id === productId);
+      const slot = document.getElementById(`action-slot-${productId}`);
+      if (p && slot) {
+        const qty = getProductCartQty(productId);
+        slot.innerHTML = renderProductCardAction(p, qty);
+        lucide.createIcons();
+      }
+    }
+
+    // Cart Operations
+    function addToCart(productId, customVariant = null) {
+      const p = PRODUCTS.find(x => x.id === productId);
+      if (!p || p.stock <= 0) return;
+
+      const variant = customVariant || (p.variants ? p.variants[0] : 'Standard');
+      const cartItemId = `${p.id}__${variant}`;
+      const unitPrice = (p.variantPrices && p.variantPrices[variant] !== undefined)
+        ? p.variantPrices[variant]
+        : p.price;
+
+      const existing = state.cart.find(item => item.cartItemId === cartItemId);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        state.cart.push({
+          ...p,
+          price: unitPrice,
+          cartItemId,
+          selectedVariant: variant,
+          quantity: 1
+        });
+      }
+
+      saveCart();
+      updateCardActionSlot(productId);
+      updateCartUI();
+      showToast(`Added ${p.name} to bag`);
+    }
+
+    function adjustCardQty(productId, delta) {
+      const items = state.cart.filter(i => i.id === productId);
+      if (items.length === 0 && delta > 0) {
+        addToCart(productId);
+        return;
+      }
+      if (items.length > 0) {
+        const target = items[items.length - 1];
+        updateCartItemQty(target.cartItemId, delta);
+      }
+    }
+
+    function updateCartItemQty(cartItemId, delta) {
+      const idx = state.cart.findIndex(i => i.cartItemId === cartItemId);
+      if (idx === -1) return;
+
+      const productId = state.cart[idx].id;
+      state.cart[idx].quantity += delta;
+
+      if (state.cart[idx].quantity <= 0) {
+        state.cart.splice(idx, 1);
+      }
+
+      saveCart();
+      updateCardActionSlot(productId);
+      updateCartUI();
+    }
+
+    function removeCartItem(cartItemId) {
+      const item = state.cart.find(i => i.cartItemId === cartItemId);
+      state.cart = state.cart.filter(i => i.cartItemId !== cartItemId);
+      saveCart();
+      if (item) updateCardActionSlot(item.id);
+      updateCartUI();
+    }
+
+    function setPaymentMode(mode) {
+      state.paymentMode = mode;
+      updateCartUI();
+    }
+
+    function calculateCartTotals() {
+      let subtotal = 0;
+      let herbsTotal = 0;
+      let totalQty = 0;
+      let hasPerishables = false;
+      let hasTbc = false;
+
+      state.cart.forEach(item => {
+        totalQty += item.quantity;
+        if (item.isTbc) {
+          hasTbc = true;
+        } else {
+          subtotal += (item.price * item.quantity);
+        }
+
+        if (item.category === 'fresh-herbs') {
+          herbsTotal += (item.price * item.quantity);
+        }
+        if (item.isPerishable) {
+          hasPerishables = true;
+        }
+      });
+
+      const deposit30 = Math.ceil(subtotal * 0.30);
+      const balance = subtotal - deposit30;
+      const zone = document.getElementById('cartDeliveryZone')?.value || 'Abuja';
+      const violatesPerishable = hasPerishables && zone === 'Nationwide';
+      const violatesHerbMin = herbsTotal > 0 && herbsTotal < 5000;
+
+      return {
+        subtotal,
+        deposit30,
+        balance,
+        totalQty,
+        herbsTotal,
+        hasPerishables,
+        hasTbc,
+        violatesPerishable,
+        violatesHerbMin,
+        zone
+      };
+    }
+
+    function updateCartUI() {
+      const metrics = calculateCartTotals();
+
+      document.getElementById('navCartBadge').textContent = metrics.totalQty;
+      document.getElementById('floatingCountBadge').textContent = metrics.totalQty;
+      document.getElementById('floatingSubtotal').textContent = `${formatNaira(metrics.subtotal)}${metrics.hasTbc ? ' + TBC' : ''}`;
+      document.getElementById('floatingDepositSub').textContent = `30% Deposit: ${formatNaira(metrics.deposit30)}`;
+
+      const mobileBar = document.getElementById('floatingBasketBar');
+      mobileBar.classList.toggle('hidden', metrics.totalQty === 0);
+
+      // Herbs Progress Bar
+      const herbBanner = document.getElementById('herbThresholdBanner');
+      if (metrics.herbsTotal > 0) {
+        herbBanner.classList.remove('hidden');
+        const pct = Math.min(100, Math.round((metrics.herbsTotal / 5000) * 100));
+        document.getElementById('herbProgressValue').textContent = `${formatNaira(metrics.herbsTotal)} / ₦5k`;
+        document.getElementById('herbProgressBar').style.width = `${pct}%`;
+        const help = document.getElementById('herbProgressHelp');
+        if (metrics.herbsTotal < 5000) {
+          help.innerHTML = `Add <strong>${formatNaira(5000 - metrics.herbsTotal)}</strong> more in fresh herbs to meet the batch threshold.`;
+        } else {
+          help.innerHTML = `✅ <strong>₦5,000 Herb Minimum Met!</strong> Ready for harvest.`;
+        }
+      } else {
+        herbBanner.classList.add('hidden');
+      }
+
+      // Perishable Zone Alert
+      const warnBox = document.getElementById('perishableWarningBox');
+      warnBox.classList.toggle('hidden', !metrics.violatesPerishable);
+
+      // Items in Drawer
+      const container = document.getElementById('cartItemsList');
+      const footer = document.getElementById('cartDrawerFooter');
+
+      if (state.cart.length === 0) {
+        container.innerHTML = `
+          <div class="h-full flex flex-col items-center justify-center text-center text-stone-400 py-12">
+            <div class="w-12 h-12 rounded-full bg-stone-100 flex items-center justify-center mb-2">
+              <i data-lucide="shopping-bag" class="w-6 h-6 text-stone-300"></i>
+            </div>
+            <p class="font-bold text-stone-700 text-xs mb-1">Your harvest bag is empty</p>
+            <p class="text-[11px] text-stone-400 max-w-xs mb-3">Add strawberries, herbs, or spices to begin.</p>
+            <button onclick="toggleCart(false)" class="px-4 py-1.5 rounded-full bg-brand-soil text-white text-xs font-bold hover:bg-brand-orange">
+              Explore Products
+            </button>
+          </div>
+        `;
+        footer.classList.add('hidden');
+      } else {
+        footer.classList.remove('hidden');
+        container.innerHTML = state.cart.map(item => `
+          <div class="flex gap-2.5 pb-2.5 border-b border-stone-100 last:border-none">
+            <img 
+              src="${item.image}" 
+              alt="${item.name}" 
+              onerror="handleImgError(this, 'DD Maigona')"
+              class="w-14 h-14 rounded-xl object-cover bg-stone-100 border border-stone-200 shrink-0"
+            />
+            <div class="flex-1 min-w-0">
+              <div class="flex justify-between items-start gap-1">
+                <h4 class="text-xs font-bold text-stone-900 truncate">${item.name}</h4>
+                <button onclick="removeCartItem('${item.cartItemId}')" class="text-stone-400 hover:text-rose-600 p-0.5">
+                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+              <p class="text-[10px] text-stone-500">
+                ${item.selectedVariant !== 'Standard' ? `<span class="font-semibold text-stone-700">${item.selectedVariant}</span> • ` : ''}
+                ${item.isTbc ? 'Price TBC' : `${formatNaira(item.price)} ${item.unit}`}
+              </p>
+              <div class="flex items-center justify-between mt-1.5">
+                <div class="flex items-center bg-[#FAF7F2] rounded border border-stone-200">
+                  <button onclick="updateCartItemQty('${item.cartItemId}', -1)" class="px-1.5 py-0.5 text-stone-600 hover:text-stone-950 font-bold text-xs">−</button>
+                  <span class="px-1.5 text-xs font-extrabold text-stone-900">${item.quantity}</span>
+                  <button onclick="updateCartItemQty('${item.cartItemId}', 1)" class="px-1.5 py-0.5 text-stone-600 hover:text-stone-950 font-bold text-xs">+</button>
+                </div>
+                <span class="text-xs font-extrabold text-brand-orange">
+                  ${item.isTbc ? 'TBC' : formatNaira(item.price * item.quantity)}
+                </span>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Drawer Financials
+      document.getElementById('cartGrossTotalText').textContent = `${formatNaira(metrics.subtotal)}${metrics.hasTbc ? ' + TBC' : ''}`;
+      document.getElementById('depositSumText').textContent = formatNaira(metrics.deposit30);
+      document.getElementById('fullSumText').textContent = formatNaira(metrics.subtotal);
+
+      const depBtn = document.getElementById('payModeDepositBtn');
+      const fullBtn = document.getElementById('payModeFullBtn');
+      const balNote = document.getElementById('balanceNoteText');
+
+      if (state.paymentMode === 'deposit') {
+        depBtn.className = "p-2 rounded-xl border-2 border-brand-orange bg-brand-orange-light text-left transition-all cursor-pointer";
+        fullBtn.className = "p-2 rounded-xl border border-stone-200 bg-white text-left transition-all cursor-pointer opacity-70";
+        balNote.textContent = `Balance of ${formatNaira(metrics.balance)} due upon harvest dispatch.`;
+      } else {
+        fullBtn.className = "p-2 rounded-xl border-2 border-brand-green bg-emerald-50 text-left transition-all cursor-pointer";
+        depBtn.className = "p-2 rounded-xl border border-stone-200 bg-white text-left transition-all cursor-pointer opacity-70";
+        balNote.textContent = `Full payment selected. Zero balance due on delivery.`;
+      }
+
+      const waBtn = document.getElementById('whatsappSubmitBtn');
+      waBtn.classList.toggle('opacity-50', metrics.violatesPerishable);
+
+      lucide.createIcons();
+    }
+
+    // Modal & Drawer Controls
+    function toggleCart(open) {
+      const drawer = document.getElementById('cartDrawerBackdrop');
+      if (open) {
+        drawer.classList.remove('hidden');
+        updateCartUI();
+      } else {
+        drawer.classList.add('hidden');
+      }
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    }
+
+    function openProductModal(productId) {
+      const p = PRODUCTS.find(x => x.id === productId);
+      if (!p) return;
+
+      const modal = document.getElementById('productDetailModal');
+      const content = document.getElementById('productDetailContent');
+      const isSoldOut = p.stock <= 0;
+      const variants = p.variants || ["Standard Selection"];
+
+      content.innerHTML = `
+        <div class="w-full md:w-1/2 bg-stone-100 relative min-h-[180px] md:min-h-[320px]">
+          <img 
+            src="${p.image}" 
+            alt="${p.name}" 
+            onerror="handleImgError(this, 'DD Maigona')"
+            class="w-full h-full object-cover"
+          />
+          <span class="absolute top-3 left-3 text-[9px] font-extrabold uppercase px-2 py-0.5 rounded shadow ${
+            p.isPerishable ? 'bg-brand-green text-white' : 'bg-brand-soil text-white'
+          }">
+            ${p.isPerishable ? 'Abuja & Kaduna Only' : 'Nationwide Shipping'}
+          </span>
+        </div>
+
+        <div class="w-full md:w-1/2 p-5 sm:p-6 flex flex-col justify-between overflow-y-auto">
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-brand-orange">${p.categoryLabel}</span>
+              <button onclick="closeProductModal()" class="p-1 text-stone-400 hover:text-stone-900">
+                <i data-lucide="x" class="w-4 h-4"></i>
+              </button>
+            </div>
+
+            <h2 class="font-serif text-xl sm:text-2xl font-bold text-stone-900 mb-1 leading-tight">${p.name}</h2>
+            
+            <div class="flex items-baseline gap-1.5 mb-2.5">
+              <span id="modalPriceLabel" class="text-xl font-extrabold text-stone-900">
+                ${p.isTbc ? 'Price TBC' : formatNaira(p.price)}
+              </span>
+              <span class="text-[11px] text-stone-500 font-semibold">${p.unit}</span>
+            </div>
+
+            <p class="text-xs text-stone-600 leading-relaxed mb-3">${p.description}</p>
+
+            <div class="mb-3">
+              <label class="block text-[9px] font-extrabold uppercase text-stone-500 mb-1">Option / Size</label>
+              <select id="modalOptionSelect" onchange="updateModalVariantPrice('${p.id}', this.value)" class="w-full px-2.5 py-1.5 bg-stone-50 border border-stone-200 rounded-lg text-xs font-semibold text-stone-800 outline-none">
+                ${variants.map(v => `<option value="${v}">${v}</option>`).join('')}
+              </select>
+            </div>
+
+            <div class="bg-stone-50 p-2.5 rounded-lg border border-stone-200 space-y-1 text-[11px] text-stone-600 mb-4">
+              <p class="flex items-center gap-1.5"><i data-lucide="clock" class="w-3.5 h-3.5 text-brand-green"></i> <strong>Harvest:</strong> ${p.leadTime}</p>
+              <p class="flex items-center gap-1.5"><i data-lucide="shield-check" class="w-3.5 h-3.5 text-brand-orange"></i> <strong>Deposit:</strong> 30% advance confirms order</p>
+            </div>
+          </div>
+
+          <div>
+            ${isSoldOut ? `
+              <button disabled class="w-full py-2.5 bg-stone-200 text-stone-500 rounded-xl font-bold text-xs cursor-not-allowed">
+                Sold Out (Restocking Soon)
+              </button>
+            ` : `
+              <button onclick="addModalItemToCart('${p.id}')" class="w-full py-2.5 bg-brand-orange hover:bg-brand-orange-dark text-white rounded-xl font-bold text-xs shadow flex items-center justify-center gap-1.5 transition-all">
+                <i data-lucide="plus" class="w-4 h-4"></i> Add to Harvest Bag
+              </button>
+            `}
+          </div>
+        </div>
+      `;
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      lucide.createIcons();
+    }
+
+    function updateModalVariantPrice(productId, variant) {
+      const p = PRODUCTS.find(x => x.id === productId);
+      if (p && p.variantPrices && p.variantPrices[variant]) {
+        document.getElementById('modalPriceLabel').textContent = formatNaira(p.variantPrices[variant]);
+      }
+    }
+
+    function addModalItemToCart(productId) {
+      const select = document.getElementById('modalOptionSelect');
+      const variant = select ? select.value : null;
+      addToCart(productId, variant);
+      closeProductModal();
+    }
+
+    function closeProductModal() {
+      const modal = document.getElementById('productDetailModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // WhatsApp Checkout Manifest
+    function handleWhatsAppCheckout() {
+      if (state.cart.length === 0) return;
+      const metrics = calculateCartTotals();
+
+      if (metrics.violatesPerishable) {
+        showToast('Please remove fresh perishables or choose Abuja/Kaduna delivery.', 'warn');
+        return;
+      }
+
+      let msg = `*NEW HARVEST ORDER — DD MAIGONA* 🧑🏾‍🌾🙏🏾\n`;
+      msg += `---------------------------------------\n`;
+      msg += `*Delivery Destination:* ${metrics.zone}\n`;
+      msg += `*Payment:* ${state.paymentMode === 'deposit' ? '30% Advance Deposit' : '100% Full Payment'}\n`;
+      msg += `---------------------------------------\n\n`;
+      msg += `*ORDER ITEMS:*\n`;
+
+      state.cart.forEach(item => {
+        const variantText = item.selectedVariant !== 'Standard' ? ` [${item.selectedVariant}]` : '';
+        const lineVal = item.isTbc ? 'Price TBC' : formatNaira(item.price * item.quantity);
+        msg += `• ${item.quantity}x ${item.name}${variantText} — ${lineVal}\n`;
+      });
+
+      msg += `\n---------------------------------------\n`;
+      msg += `*Subtotal:* ${formatNaira(metrics.subtotal)}${metrics.hasTbc ? ' (+ TBC items)' : ''}\n`;
+      if (state.paymentMode === 'deposit') {
+        msg += `*30% Confirmation Deposit:* ${formatNaira(metrics.deposit30)}\n`;
+        msg += `*Balance on Dispatch:* ${formatNaira(metrics.balance)}\n`;
+      } else {
+        msg += `*Full Amount Payable:* ${formatNaira(metrics.subtotal)}\n`;
+      }
+      msg += `---------------------------------------\n`;
+
+      if (metrics.herbsTotal > 0 && metrics.herbsTotal < 5000) {
+        msg += `\n*(Note: Fresh herbs total ${formatNaira(metrics.herbsTotal)}; below ₦5,000 harvest threshold. Please confirm batch availability.)*\n`;
+      }
+
+      msg += `\n_Please share official bank account details to confirm deposit._`;
+
+      const url = `https://wa.me/2348170951100?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    }
+
+    // Toast Feedback
+    function showToast(message, type = 'success') {
+      const stack = document.getElementById('toastStack');
+      const toast = document.createElement('div');
+      const bg = type === 'warn' ? 'bg-brand-orange' : 'bg-brand-soil';
+      toast.className = `${bg} text-white px-3.5 py-2.5 rounded-xl shadow-lg text-xs font-bold flex items-center gap-2 pointer-events-auto transition-all`;
+      toast.innerHTML = `
+        <span class="w-1.5 h-1.5 rounded-full ${type === 'warn' ? 'bg-amber-300' : 'bg-emerald-400'}"></span>
+        <span>${message}</span>
+      `;
+      stack.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(-6px)';
+        setTimeout(() => toast.remove(), 250);
+      }, 2500);
+    }
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('yearEl').textContent = new Date().getFullYear();
+      loadSavedCart();
+      initMobileTicker();
+      initMarquee();
+      renderCatalog();
+      updateCartUI();
+      resetHeroTimer();
+      lucide.createIcons();
+
+      const heroBox = document.getElementById('heroBillboard');
+      heroBox.addEventListener('mouseenter', () => {
+        if (state.heroTimer) clearInterval(state.heroTimer);
+      });
+      heroBox.addEventListener('mouseleave', () => {
+        resetHeroTimer();
+      });
+    });
+  </script>
+</body>
+</html>

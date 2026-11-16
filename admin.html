@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DD MAIGONA | Merchant Console & Harvest IMS</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Fraunces"', 'Georgia', 'serif'],
+          },
+          colors: {
+            brand: {
+              orange: '#E13D16',
+              'orange-dark': '#C2300D',
+              'orange-light': '#FFF3ED',
+              green: '#2D8636',
+              'green-dark': '#195523',
+              'green-light': '#EBF5EE',
+              amber: '#F59E0B',
+              soil: '#1C1917',
+              parchment: '#FAF7F2',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body { background-color: #F6F4EE; color: #1C1917; }
+    .kanban-col { min-height: 520px; }
+  </style>
+</head>
+<body class="font-sans antialiased text-stone-900 selection:bg-brand-orange selection:text-white">
+
+  <!-- ================= TOP ADMIN NAVIGATION ================= -->
+  <header class="bg-brand-soil text-white px-4 sm:px-8 py-3.5 border-b border-stone-800 sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-2 group">
+          <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center p-0.5">
+            <span class="text-brand-orange font-extrabold text-xs">DD</span>
+          </div>
+          <div>
+            <span class="font-serif font-bold text-base tracking-tight text-white">DD <span class="text-emerald-400">MAIGONA</span></span>
+            <span class="block text-[9px] uppercase tracking-widest text-brand-amber -mt-0.5 font-bold">Merchant IMS &amp; Harvest Portal</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Quick Operational Indicators -->
+      <div class="flex items-center gap-3 text-xs">
+        <span class="hidden sm:inline-flex items-center gap-1.5 bg-stone-800 px-3 py-1 rounded-full text-stone-300 border border-stone-700">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Abuja Hub Online
+        </span>
+        <button onclick="openHarvestPickingSheetModal()" class="bg-brand-green hover:bg-emerald-600 text-white font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 text-xs shadow transition-all">
+          <i data-lucide="clipboard-list" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Harvest Picking Sheet</span>
+        </button>
+        <a href="index.html" class="text-stone-300 hover:text-white underline text-xs">Storefront ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= SUB-NAV BAR (TABS) ================= -->
+  <div class="bg-white border-b border-stone-200 px-4 sm:px-8 py-2 sticky top-[57px] z-30">
+    <div class="max-w-7xl mx-auto flex items-center justify-between overflow-x-auto gap-4">
+      <div class="flex items-center gap-1.5">
+        <button onclick="switchTab('pipeline')" id="tabBtn-pipeline" class="tab-btn px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-brand-soil text-white flex items-center gap-1.5">
+          <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> Harvest Pipeline (Jays Bistro)
+        </button>
+        <button onclick="switchTab('inventory')" id="tabBtn-inventory" class="tab-btn px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-stone-600 hover:bg-stone-100 flex items-center gap-1.5">
+          <i data-lucide="package" class="w-3.5 h-3.5"></i> Catalog IMS (Spotlex)
+        </button>
+        <button onclick="switchTab('orders')" id="tabBtn-orders" class="tab-btn px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-stone-600 hover:bg-stone-100 flex items-center gap-1.5">
+          <i data-lucide="receipt" class="w-3.5 h-3.5"></i> Orders &amp; Deposits
+        </button>
+      </div>
+
+      <!-- Quick Bulk Repricing Tool (Spotlex Inflation Multiplier) -->
+      <div class="flex items-center gap-2 shrink-0">
+        <button onclick="openInflationModal()" class="text-[11px] font-bold text-brand-orange bg-orange-50 border border-orange-200 hover:bg-orange-100 px-3 py-1 rounded-lg flex items-center gap-1 transition-all">
+          <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> Market Price Adjuster
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-8 py-6 space-y-6">
+
+    <!-- ================= METRIC KPI CARDS ================= -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-4">
+      <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm">
+        <span class="text-[10px] font-bold uppercase tracking-wider text-stone-400">Total Harvest Queue</span>
+        <div class="flex items-baseline justify-between mt-1">
+          <span class="font-serif text-2xl font-bold text-stone-900" id="kpi-active-orders">6</span>
+          <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Active</span>
+        </div>
+        <p class="text-[11px] text-stone-500 mt-1">4 awaiting Abuja cut</p>
+      </div>
+
+      <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm">
+        <span class="text-[10px] font-bold uppercase tracking-wider text-stone-400">30% Deposit Escrow</span>
+        <div class="flex items-baseline justify-between mt-1">
+          <span class="font-serif text-2xl font-bold text-brand-orange" id="kpi-deposit-escrow">₦64,800</span>
+          <span class="text-[10px] font-bold text-stone-600 bg-stone-100 px-1.5 py-0.5 rounded">Secured</span>
+        </div>
+        <p class="text-[11px] text-stone-500 mt-1">₦151,200 due on dispatch</p>
+      </div>
+
+      <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm">
+        <span class="text-[10px] font-bold uppercase tracking-wider text-stone-400">Herbs Needed Today</span>
+        <div class="flex items-baseline justify-between mt-1">
+          <span class="font-serif text-2xl font-bold text-brand-green" id="kpi-herbs-today">26</span>
+          <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">Bunches</span>
+        </div>
+        <p class="text-[11px] text-stone-500 mt-1">Mint (14), Rosemary (8), Basil (4)</p>
+      </div>
+
+      <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm">
+        <span class="text-[10px] font-bold uppercase tracking-wider text-stone-400">Catalog Health</span>
+        <div class="flex items-baseline justify-between mt-1">
+          <span class="font-serif text-2xl font-bold text-stone-900" id="kpi-catalog-count">53</span>
+          <span class="text-[10px] font-bold text-rose-600 bg-rose-50 px-1.5 py-0.5 rounded" id="kpi-sold-out-count">2 Sold Out</span>
+        </div>
+        <p class="text-[11px] text-stone-500 mt-1">Figs &amp; Turmeric need restocking</p>
+      </div>
+    </div>
+
+    <!-- ================= TAB 1: JAYS BISTRO HARVEST PIPELINE (KANBAN) ================= -->
+    <div id="view-pipeline" class="tab-view space-y-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="font-serif text-xl font-bold text-stone-900">Harvest &amp; Fulfillment Kanban</h2>
+          <p class="text-xs text-stone-500">Orders flow strictly through 30% verification before farm harvesting starts.</p>
+        </div>
+        <button onclick="createNewSimulatedOrder()" class="text-xs font-bold bg-stone-900 hover:bg-brand-orange text-white px-3 py-1.5 rounded-xl transition-colors">
+          + New Mock Order
+        </button>
+      </div>
+
+      <!-- 5-Stage Kanban Board -->
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-3.5 overflow-x-auto pb-4">
+        
+        <!-- STAGE 1: Deposit Pending -->
+        <div class="kanban-col bg-stone-100/90 rounded-2xl p-3 border border-stone-200 flex flex-col">
+          <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-stone-200">
+            <span class="text-xs font-bold text-stone-700 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-amber-500"></span> 1. Deposit Pending
+            </span>
+            <span id="badge-stage-deposit_pending" class="text-[10px] font-bold bg-white px-2 py-0.5 rounded-full text-stone-600 shadow-sm">0</span>
+          </div>
+          <div id="cards-stage-deposit_pending" class="space-y-2.5 flex-1 overflow-y-auto"></div>
+        </div>
+
+        <!-- STAGE 2: Harvest Queued -->
+        <div class="kanban-col bg-stone-100/90 rounded-2xl p-3 border border-stone-200 flex flex-col">
+          <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-stone-200">
+            <span class="text-xs font-bold text-emerald-800 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-600"></span> 2. Harvest Queued
+            </span>
+            <span id="badge-stage-harvest_queued" class="text-[10px] font-bold bg-white px-2 py-0.5 rounded-full text-stone-600 shadow-sm">0</span>
+          </div>
+          <div id="cards-stage-harvest_queued" class="space-y-2.5 flex-1 overflow-y-auto"></div>
+        </div>
+
+        <!-- STAGE 3: Harvested & Packed -->
+        <div class="kanban-col bg-stone-100/90 rounded-2xl p-3 border border-stone-200 flex flex-col">
+          <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-stone-200">
+            <span class="text-xs font-bold text-blue-800 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-blue-600"></span> 3. Packed / Cold Chain
+            </span>
+            <span id="badge-stage-harvested_packed" class="text-[10px] font-bold bg-white px-2 py-0.5 rounded-full text-stone-600 shadow-sm">0</span>
+          </div>
+          <div id="cards-stage-harvested_packed" class="space-y-2.5 flex-1 overflow-y-auto"></div>
+        </div>
+
+        <!-- STAGE 4: Out for Delivery -->
+        <div class="kanban-col bg-stone-100/90 rounded-2xl p-3 border border-stone-200 flex flex-col">
+          <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-stone-200">
+            <span class="text-xs font-bold text-purple-800 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-purple-600"></span> 4. In Transit
+            </span>
+            <span id="badge-stage-out_for_delivery" class="text-[10px] font-bold bg-white px-2 py-0.5 rounded-full text-stone-600 shadow-sm">0</span>
+          </div>
+          <div id="cards-stage-out_for_delivery" class="space-y-2.5 flex-1 overflow-y-auto"></div>
+        </div>
+
+        <!-- STAGE 5: Completed -->
+        <div class="kanban-col bg-stone-100/90 rounded-2xl p-3 border border-stone-200 flex flex-col">
+          <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-stone-200">
+            <span class="text-xs font-bold text-stone-700 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-stone-500"></span> 5. Settled &amp; Done
+            </span>
+            <span id="badge-stage-completed" class="text-[10px] font-bold bg-white px-2 py-0.5 rounded-full text-stone-600 shadow-sm">0</span>
+          </div>
+          <div id="cards-stage-completed" class="space-y-2.5 flex-1 overflow-y-auto"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ================= TAB 2: SPOTLEX CATALOG IMS ================= -->
+    <div id="view-inventory" class="tab-view hidden space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-stone-200">
+        <div>
+          <h2 class="font-serif text-xl font-bold text-stone-900">Inventory &amp; Market Price Management</h2>
+          <p class="text-xs text-stone-500">Live pricing and stock toggles for all 53 DD MAIGONA items.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <input id="imsSearchInput" type="text" placeholder="Search catalog..." oninput="renderImsTable()" class="px-3 py-1.5 bg-stone-50 border border-stone-200 rounded-lg text-xs outline-none focus:ring-1 focus:ring-brand-green w-48"/>
+          <select id="imsCategoryFilter" onchange="renderImsTable()" class="px-3 py-1.5 bg-stone-50 border border-stone-200 rounded-lg text-xs font-semibold outline-none cursor-pointer">
+            <option value="All">All Categories</option>
+            <option value="fresh-produce">Fresh Produce</option>
+            <option value="fresh-herbs">Fresh Herbs</option>
+            <option value="dried-spices">Dried Spices</option>
+            <option value="oils">Pure Oils</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Inventory Table -->
+      <div class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-stone-50 text-stone-500 uppercase font-bold text-[10px] border-b border-stone-200 tracking-wider">
+              <tr>
+                <th class="px-4 py-3">Product Name</th>
+                <th class="px-3 py-3">Category</th>
+                <th class="px-3 py-3">Current Price (₦)</th>
+                <th class="px-3 py-3">Unit</th>
+                <th class="px-3 py-3">Logistics</th>
+                <th class="px-3 py-3">Stock State</th>
+                <th class="px-4 py-3 text-right">Instant Action</th>
+              </tr>
+            </thead>
+            <tbody id="imsTableBody" class="divide-y divide-stone-100"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= TAB 3: ORDERS & DEPOSITS ================= -->
+    <div id="view-orders" class="tab-view hidden space-y-4">
+      <div class="bg-white p-4 rounded-2xl border border-stone-200">
+        <h2 class="font-serif text-xl font-bold text-stone-900">All Orders &amp; 30% Escrow Auditor</h2>
+        <p class="text-xs text-stone-500">Track balance payments upon dispatch and verify transfer references.</p>
+      </div>
+      <div class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-stone-50 text-stone-500 uppercase font-bold text-[10px] border-b border-stone-200 tracking-wider">
+              <tr>
+                <th class="px-4 py-3">Order ID</th>
+                <th class="px-3 py-3">Customer</th>
+                <th class="px-3 py-3">Zone</th>
+                <th class="px-3 py-3">Items</th>
+                <th class="px-3 py-3">Gross Total</th>
+                <th class="px-3 py-3">30% Deposit Status</th>
+                <th class="px-3 py-3">70% Balance Due</th>
+                <th class="px-4 py-3 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTableBody" class="divide-y divide-stone-100"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ================= JAYS BISTRO HARVEST PICKING SHEET MODAL ================= -->
+  <div id="harvestSheetModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+    <div onclick="closeHarvestPickingSheetModal()" class="absolute inset-0 bg-stone-950/60 backdrop-blur-sm"></div>
+    <div class="relative bg-white rounded-3xl shadow-2xl max-w-lg w-full p-6 z-10 border border-stone-200 max-h-[85vh] overflow-y-auto">
+      <div class="flex items-center justify-between mb-3 border-b border-stone-100 pb-3">
+        <div>
+          <span class="text-[10px] font-extrabold uppercase tracking-widest text-brand-green">Jays Bistro Kitchen / Harvest Manifest</span>
+          <h3 class="font-serif text-xl font-bold text-stone-900">Today's Harvest Picking Sheet</h3>
+        </div>
+        <button onclick="closeHarvestPickingSheetModal()" class="p-1 text-stone-400 hover:text-stone-900"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-xs text-emerald-950 mb-4">
+        🌿 <strong>Harvest Security:</strong> Only orders with <strong>Verified 30% Advance Deposits</strong> are included in this batch picking tally.
+      </div>
+
+      <div id="harvestPickingTally" class="space-y-2 mb-6"></div>
+
+      <div class="flex gap-2">
+        <button onclick="window.print()" class="w-1/2 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-800 font-bold rounded-xl text-xs flex items-center justify-center gap-1.5">
+          <i data-lucide="printer" class="w-4 h-4"></i> Print Manifest
+        </button>
+        <button onclick="closeHarvestPickingSheetModal()" class="w-1/2 py-2.5 bg-brand-soil hover:bg-brand-orange text-white font-bold rounded-xl text-xs transition-colors">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SPOTLEX INFLATION / VOLATILITY MODAL ================= -->
+  <div id="inflationModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+    <div onclick="closeInflationModal()" class="absolute inset-0 bg-stone-950/60 backdrop-blur-sm"></div>
+    <div class="relative bg-white rounded-3xl shadow-2xl max-w-sm w-full p-6 z-10 border border-stone-200 text-center">
+      <div class="w-10 h-10 rounded-xl bg-orange-100 text-brand-orange flex items-center justify-center mx-auto mb-2.5">
+        <i data-lucide="trending-up" class="w-5 h-5"></i>
+      </div>
+      <h3 class="font-serif text-lg font-bold text-stone-900">Batch Price Adjustment</h3>
+      <p class="text-xs text-stone-500 mb-4">Quickly adjust prices across categories to reflect market scarcity.</p>
+
+      <div class="space-y-3 text-left mb-5">
+        <div>
+          <label class="block text-[10px] font-bold uppercase text-stone-500 mb-1">Target Category</label>
+          <select id="markupCategorySelect" class="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-xl text-xs font-semibold">
+            <option value="all">All 53 Items</option>
+            <option value="fresh-produce">Fresh Produce (Strawberries &amp; Veg)</option>
+            <option value="fresh-herbs">Fresh Herbs (72h)</option>
+            <option value="dried-spices">Dried Spices (100g)</option>
+            <option value="oils">Pure Oils (1L)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[10px] font-bold uppercase text-stone-500 mb-1">Percentage Markup</label>
+          <div class="grid grid-cols-4 gap-1.5">
+            <button onclick="applyBatchMarkup(5)" class="py-1.5 bg-stone-100 hover:bg-brand-orange hover:text-white font-bold rounded-lg text-xs">+5%</button>
+            <button onclick="applyBatchMarkup(10)" class="py-1.5 bg-stone-100 hover:bg-brand-orange hover:text-white font-bold rounded-lg text-xs">+10%</button>
+            <button onclick="applyBatchMarkup(15)" class="py-1.5 bg-stone-100 hover:bg-brand-orange hover:text-white font-bold rounded-lg text-xs">+15%</button>
+            <button onclick="applyBatchMarkup(20)" class="py-1.5 bg-stone-100 hover:bg-brand-orange hover:text-white font-bold rounded-lg text-xs">+20%</button>
+          </div>
+        </div>
+      </div>
+
+      <button onclick="closeInflationModal()" class="text-xs text-stone-400 hover:text-stone-700 font-semibold">Cancel</button>
+    </div>
+  </div>
+
+  <!-- APPLICATION LOGIC -->
+  <script>
+    const DEFAULT_PRODUCTS = [
+      { id: "prod-strawberry-fresh", name: "Fresh Strawberries (Regular)", category: "fresh-produce", price: 7000, unit: "per kg", stock: 40, isPerishable: true, isSoldOut: false },
+      { id: "prod-strawberry-organic", name: "Fresh Strawberries (Organic)", category: "fresh-produce", price: 7000, unit: "per kg", stock: 35, isPerishable: true, isSoldOut: false },
+      { id: "prod-potatoes", name: "Farm Irish Potatoes (Full Bag)", category: "fresh-produce", price: 150000, unit: "full bag", stock: 15, isPerishable: true, isSoldOut: false },
+      { id: "herb-mint", name: "Fresh Mint", category: "fresh-herbs", price: 700, unit: "per bunch", stock: 45, isPerishable: true, isSoldOut: false },
+      { id: "herb-curry", name: "Fresh Curry Leaves", category: "fresh-herbs", price: 700, unit: "per bunch", stock: 40, isPerishable: true, isSoldOut: false },
+      { id: "herb-rosemary", name: "Fresh Rosemary", category: "fresh-herbs", price: 700, unit: "per bunch", stock: 40, isPerishable: true, isSoldOut: false },
+      { id: "herb-basil", name: "Fresh Sweet Basil", category: "fresh-herbs", price: 700, unit: "per bunch", stock: 40, isPerishable: true, isSoldOut: false },
+      { id: "herb-parsley", name: "Fresh Parsley", category: "fresh-herbs", price: 700, unit: "per bunch", stock: 40, isPerishable: true, isSoldOut: false },
+      { id: "herb-celery", name: "Fresh Celery", category: "fresh-herbs", price: 700, unit: "per bunch", stock: 35, isPerishable: true, isSoldOut: false },
+      { id: "herb-chives", name: "Fresh Chives", category: "fresh-herbs", price: 800, unit: "per bunch", stock: 30, isPerishable: true, isSoldOut: false },
+      { id: "herb-thyme", name: "Fresh Thyme", category: "fresh-herbs", price: 800, unit: "per bunch", stock: 35, isPerishable: true, isSoldOut: false },
+      { id: "herb-leek", name: "Fresh Leek", category: "fresh-herbs", price: 800, unit: "per bunch", stock: 30, isPerishable: true, isSoldOut: false },
+      { id: "herb-lemongrass", name: "Fresh Lemongrass", category: "fresh-herbs", price: 800, unit: "per bunch", stock: 35, isPerishable: true, isSoldOut: false },
+      { id: "herb-cilantro", name: "Fresh Cilantro", category: "fresh-herbs", price: 700, unit: "per bunch", stock: 35, isPerishable: true, isSoldOut: false },
+      { id: "spice-figs", name: "Dried Figs", category: "dried-spices", price: 3000, unit: "per 100g", stock: 0, isPerishable: false, isSoldOut: true },
+      { id: "spice-cumin", name: "Cumin Seeds", category: "dried-spices", price: 2000, unit: "per 100g", stock: 60, isPerishable: false, isSoldOut: false },
+      { id: "spice-garlic", name: "Dried Garlic", category: "dried-spices", price: 2000, unit: "per 100g", stock: 55, isPerishable: false, isSoldOut: false },
+      { id: "spice-ginger", name: "Dried Ginger", category: "dried-spices", price: 2000, unit: "per 100g", stock: 55, isPerishable: false, isSoldOut: false },
+      { id: "spice-ginseng", name: "Pure Ginseng", category: "dried-spices", price: 4000, unit: "per 100g", stock: 30, isPerishable: false, isSoldOut: false },
+      { id: "spice-turmeric", name: "Powdered Turmeric", category: "dried-spices", price: 2500, unit: "per 100g", stock: 0, isPerishable: false, isSoldOut: true },
+      { id: "spice-cinnamon-pwd", name: "Ground Cinnamon", category: "dried-spices", price: 3500, unit: "per 100g", stock: 45, isPerishable: false, isSoldOut: false },
+      { id: "spice-cardamom", name: "Green Cardamom", category: "dried-spices", price: 6000, unit: "per 100g", stock: 30, isPerishable: false, isSoldOut: false },
+      { id: "spice-chia", name: "Chia Seeds", category: "dried-spices", price: 2000, unit: "per 100g", stock: 50, isPerishable: false, isSoldOut: false },
+      { id: "spice-chebe", name: "Authentic Chebe Powder", category: "dried-spices", price: 2000, unit: "per 100g", stock: 40, isPerishable: false, isSoldOut: false },
+      { id: "spice-moringa-pwd", name: "Moringa Powder", category: "dried-spices", price: 2000, unit: "per 100g", stock: 50, isPerishable: false, isSoldOut: false },
+      { id: "oil-coconut", name: "Virgin Coconut Oil", category: "oils", price: 15000, unit: "per liter", stock: 25, isPerishable: false, isSoldOut: false },
+      { id: "oil-neem", name: "Raw Neem Oil", category: "oils", price: 10000, unit: "per liter", stock: 25, isPerishable: false, isSoldOut: false },
+      { id: "oil-black-seed", name: "Pure Black Seed Oil", category: "oils", price: 20000, unit: "per liter", stock: 20, isPerishable: false, isSoldOut: false },
+      { id: "oil-fenugreek", name: "Fenugreek Oil", category: "oils", price: 0, unit: "Price TBC", stock: 20, isPerishable: false, isSoldOut: false }
+    ];
+
+    let inventory = [];
+    try {
+      const stored = localStorage.getItem('ddmaigona_master_catalog');
+      inventory = stored ? JSON.parse(stored) : DEFAULT_PRODUCTS;
+    } catch(e) {
+      inventory = DEFAULT_PRODUCTS;
+    }
+
+    function saveInventory() {
+      localStorage.setItem('ddmaigona_master_catalog', JSON.stringify(inventory));
+    }
+
+    // Orders Database (Jays Bistro Pipeline)
+    let orders = [
+      {
+        id: "DDM-801",
+        customer: "Amina Bello",
+        phone: "08034455112",
+        zone: "Abuja",
+        stage: "deposit_pending",
+        depositStatus: "pending",
+        grossTotal: 21000,
+        depositAmount: 6300,
+        balanceDue: 14700,
+        items: [
+          { name: "Fresh Strawberries (Regular)", qty: 2, price: 7000 },
+          { name: "Fresh Mint", qty: 5, price: 700 },
+          { name: "Fresh Rosemary", qty: 5, price: 700 }
+        ]
+      },
+      {
+        id: "DDM-802",
+        customer: "Dr. Farouk K.",
+        phone: "08129988771",
+        zone: "Abuja",
+        stage: "harvest_queued",
+        depositStatus: "verified",
+        grossTotal: 28000,
+        depositAmount: 8400,
+        balanceDue: 19600,
+        items: [
+          { name: "Fresh Mint", qty: 8, price: 700 },
+          { name: "Fresh Sweet Basil", qty: 4, price: 700 },
+          { name: "Virgin Coconut Oil", qty: 1, price: 15000 },
+          { name: "Cumin Seeds", qty: 2, price: 2000 }
+        ]
+      },
+      {
+        id: "DDM-803",
+        customer: "Ngozi Obi",
+        phone: "08051122334",
+        zone: "Nationwide",
+        stage: "harvested_packed",
+        depositStatus: "verified",
+        grossTotal: 26000,
+        depositAmount: 7800,
+        balanceDue: 18200,
+        items: [
+          { name: "Pure Black Seed Oil", qty: 1, price: 20000 },
+          { name: "Green Cardamom", qty: 1, price: 6000 }
+        ]
+      },
+      {
+        id: "DDM-804",
+        customer: "Kano Agro Store",
+        phone: "08170011223",
+        zone: "Kaduna",
+        stage: "out_for_delivery",
+        depositStatus: "verified",
+        grossTotal: 157000,
+        depositAmount: 47100,
+        balanceDue: 109900,
+        items: [
+          { name: "Farm Irish Potatoes (Full Bag)", qty: 1, price: 150000 },
+          { name: "Fresh Strawberries (Organic)", qty: 1, price: 7000 }
+        ]
+      }
+    ];
+
+    const formatNaira = (val) => '₦' + Math.ceil(val).toLocaleString('en-NG');
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-view').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.className = "tab-btn px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-stone-600 hover:bg-stone-100 flex items-center gap-1.5";
+      });
+      document.getElementById(`view-${tabId}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`tabBtn-${tabId}`);
+      activeBtn.className = "tab-btn px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-brand-soil text-white flex items-center gap-1.5";
+      
+      if (tabId === 'inventory') renderImsTable();
+      if (tabId === 'pipeline') renderPipeline();
+      if (tabId === 'orders') renderOrdersTable();
+      lucide.createIcons();
+    }
+
+    // Render Jays Bistro Kanban Board
+    function renderPipeline() {
+      const stages = ['deposit_pending', 'harvest_queued', 'harvested_packed', 'out_for_delivery', 'completed'];
+      stages.forEach(stage => {
+        const stageOrders = orders.filter(o => o.stage === stage);
+        document.getElementById(`badge-stage-${stage}`).textContent = stageOrders.length;
+        const container = document.getElementById(`cards-stage-${stage}`);
+
+        container.innerHTML = stageOrders.map(order => `
+          <div class="bg-white p-3 rounded-xl border border-stone-200 shadow-sm space-y-2 text-xs">
+            <div class="flex items-start justify-between gap-1">
+              <div>
+                <span class="font-extrabold text-stone-900 block">${order.id}</span>
+                <span class="text-stone-500 text-[11px]">${order.customer}</span>
+              </div>
+              <span class="text-[9px] font-bold px-1.5 py-0.5 rounded ${
+                order.zone === 'Nationwide' ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'
+              }">${order.zone}</span>
+            </div>
+
+            <div class="text-[11px] text-stone-600 space-y-0.5 border-y border-stone-100 py-1">
+              ${order.items.map(it => `<div>• ${it.qty}x ${it.name}</div>`).join('')}
+            </div>
+
+            <div class="flex items-center justify-between text-[11px] font-bold">
+              <span class="text-stone-500">Deposit:</span>
+              <span class="${order.depositStatus === 'verified' ? 'text-emerald-600' : 'text-amber-600'}">
+                ${formatNaira(order.depositAmount)} (${order.depositStatus})
+              </span>
+            </div>
+
+            <div class="pt-1 flex gap-1">
+              ${renderPipelineActions(order)}
+            </div>
+          </div>
+        `).join('');
+      });
+
+      // Update KPI
+      document.getElementById('kpi-active-orders').textContent = orders.filter(o => o.stage !== 'completed').length;
+      lucide.createIcons();
+    }
+
+    function renderPipelineActions(order) {
+      if (order.stage === 'deposit_pending') {
+        return `
+          <button onclick="verifyDeposit('${order.id}')" class="w-full py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-[10px]">
+            ✓ Confirm 30% Deposit
+          </button>
+        `;
+      }
+      if (order.stage === 'harvest_queued') {
+        return `
+          <button onclick="advanceStage('${order.id}', 'harvested_packed')" class="w-full py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold text-[10px]">
+            Pack for Dispatch →
+          </button>
+        `;
+      }
+      if (order.stage === 'harvested_packed') {
+        return `
+          <button onclick="advanceStage('${order.id}', 'out_for_delivery')" class="w-full py-1 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-bold text-[10px]">
+            Hand to Rider →
+          </button>
+        `;
+      }
+      if (order.stage === 'out_for_delivery') {
+        return `
+          <button onclick="advanceStage('${order.id}', 'completed')" class="w-full py-1 bg-brand-soil hover:bg-brand-orange text-white rounded-lg font-bold text-[10px]">
+            Collect Balance &amp; Settle
+          </button>
+        `;
+      }
+      return `<span class="text-[10px] text-stone-400">Order Completed</span>`;
+    }
+
+    function verifyDeposit(orderId) {
+      const ord = orders.find(o => o.id === orderId);
+      if (ord) {
+        ord.depositStatus = 'verified';
+        ord.stage = 'harvest_queued';
+        renderPipeline();
+      }
+    }
+
+    function advanceStage(orderId, nextStage) {
+      const ord = orders.find(o => o.id === orderId);
+      if (ord) {
+        ord.stage = nextStage;
+        renderPipeline();
+      }
+    }
+
+    // Render Spotlex IMS Table
+    function renderImsTable() {
+      const query = (document.getElementById('imsSearchInput')?.value || '').toLowerCase();
+      const cat = document.getElementById('imsCategoryFilter')?.value || 'All';
+      const tbody = document.getElementById('imsTableBody');
+
+      const filtered = inventory.filter(item => {
+        const matchCat = cat === 'All' || item.category === cat;
+        const matchQ = item.name.toLowerCase().includes(query);
+        return matchCat && matchQ;
+      });
+
+      tbody.innerHTML = filtered.map(item => `
+        <tr class="hover:bg-stone-50 transition-colors">
+          <td class="px-4 py-2.5 font-bold text-stone-900">${item.name}</td>
+          <td class="px-3 py-2.5 text-stone-500">${item.category}</td>
+          <td class="px-3 py-2.5 font-bold text-brand-orange">
+            <input type="number" value="${item.price}" onchange="updateProductPrice('${item.id}', this.value)" class="w-20 px-1.5 py-0.5 border border-stone-200 rounded text-xs font-bold text-stone-900"/>
+          </td>
+          <td class="px-3 py-2.5 text-stone-500">${item.unit}</td>
+          <td class="px-3 py-2.5">
+            <span class="text-[10px] font-bold px-1.5 py-0.5 rounded ${item.isPerishable ? 'bg-emerald-50 text-emerald-800' : 'bg-stone-100 text-stone-700'}">
+              ${item.isPerishable ? 'Abj/Kad' : 'Nationwide'}
+            </span>
+          </td>
+          <td class="px-3 py-2.5">
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${item.isSoldOut ? 'bg-rose-100 text-rose-800' : 'bg-emerald-100 text-emerald-800'}">
+              ${item.isSoldOut ? 'Sold Out' : 'In Stock'}
+            </span>
+          </td>
+          <td class="px-4 py-2.5 text-right">
+            <button onclick="toggleStockStatus('${item.id}')" class="text-[10px] font-bold px-2.5 py-1 rounded-lg border ${
+              item.isSoldOut ? 'border-emerald-300 text-emerald-700 hover:bg-emerald-50' : 'border-rose-300 text-rose-700 hover:bg-rose-50'
+            }">
+              ${item.isSoldOut ? 'Mark In Stock' : 'Mark Sold Out'}
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function toggleStockStatus(productId) {
+      const item = inventory.find(p => p.id === productId);
+      if (item) {
+        item.isSoldOut = !item.isSoldOut;
+        saveInventory();
+        renderImsTable();
+      }
+    }
+
+    function updateProductPrice(productId, newPrice) {
+      const item = inventory.find(p => p.id === productId);
+      if (item) {
+        item.price = Number(newPrice);
+        saveInventory();
+      }
+    }
+
+    // Spotlex Inflation / Scarcity Markup Tool
+    function openInflationModal() {
+      document.getElementById('inflationModal').classList.remove('hidden');
+      document.getElementById('inflationModal').classList.add('flex');
+    }
+    function closeInflationModal() {
+      document.getElementById('inflationModal').classList.add('hidden');
+      document.getElementById('inflationModal').classList.remove('flex');
+    }
+    function applyBatchMarkup(percent) {
+      const cat = document.getElementById('markupCategorySelect').value;
+      inventory.forEach(item => {
+        if (cat === 'all' || item.category === cat) {
+          item.price = Math.ceil(item.price * (1 + (percent / 100)));
+        }
+      });
+      saveInventory();
+      closeInflationModal();
+      renderImsTable();
+    }
+
+    // Jays Bistro Kitchen / Harvest Picking Sheet Generator
+    function openHarvestPickingSheetModal() {
+      const modal = document.getElementById('harvestSheetModal');
+      const container = document.getElementById('harvestPickingTally');
+      
+      // Tally only verified harvest queued items
+      const herbTally = {};
+      orders.filter(o => o.depositStatus === 'verified' && (o.stage === 'harvest_queued' || o.stage === 'harvested_packed')).forEach(o => {
+        o.items.forEach(it => {
+          herbTally[it.name] = (herbTally[it.name] || 0) + it.qty;
+        });
+      });
+
+      container.innerHTML = Object.entries(herbTally).map(([name, qty]) => `
+        <div class="flex items-center justify-between p-2.5 rounded-xl bg-stone-50 border border-stone-200">
+          <span class="font-bold text-xs text-stone-900">${name}</span>
+          <span class="font-extrabold text-xs text-brand-green bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+            Cut ${qty} Units
+          </span>
+        </div>
+      `).join('');
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      lucide.createIcons();
+    }
+    function closeHarvestPickingSheetModal() {
+      document.getElementById('harvestSheetModal').classList.add('hidden');
+      document.getElementById('harvestSheetModal').classList.remove('flex');
+    }
+
+    // Orders Table
+    function renderOrdersTable() {
+      const tbody = document.getElementById('ordersTableBody');
+      tbody.innerHTML = orders.map(o => `
+        <tr class="hover:bg-stone-50 transition-colors">
+          <td class="px-4 py-2.5 font-bold text-stone-900">${o.id}</td>
+          <td class="px-3 py-2.5">${o.customer} <br><span class="text-stone-400 text-[10px]">${o.phone}</span></td>
+          <td class="px-3 py-2.5">${o.zone}</td>
+          <td class="px-3 py-2.5">${o.items.length} lines</td>
+          <td class="px-3 py-2.5 font-bold">${formatNaira(o.grossTotal)}</td>
+          <td class="px-3 py-2.5">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold ${o.depositStatus === 'verified' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+              ${o.depositStatus.toUpperCase()}
+            </span>
+          </td>
+          <td class="px-3 py-2.5 font-bold text-brand-orange">${formatNaira(o.balanceDue)}</td>
+          <td class="px-4 py-2.5 text-right">
+            <a href="https://wa.me/234${o.phone.slice(1)}" target="_blank" class="px-2 py-1 rounded bg-emerald-600 text-white font-bold text-[10px]">WhatsApp</a>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function createNewSimulatedOrder() {
+      const newId = `DDM-${Math.floor(800 + Math.random() * 90)}`;
+      orders.unshift({
+        id: newId,
+        customer: "New Customer",
+        phone: "08170099887",
+        zone: "Abuja",
+        stage: "deposit_pending",
+        depositStatus: "pending",
+        grossTotal: 14000,
+        depositAmount: 4200,
+        balanceDue: 9800,
+        items: [{ name: "Fresh Strawberries (Regular)", qty: 2, price: 7000 }]
+      });
+      renderPipeline();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderPipeline();
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

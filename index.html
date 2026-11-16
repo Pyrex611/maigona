@@ -32,15 +32,6 @@
               soil: '#1C1917',
               parchment: '#FAF7F2',
             }
-          },
-          animation: {
-            'marquee': 'marquee 28s linear infinite',
-          },
-          keyframes: {
-            marquee: {
-              '0%': { transform: 'translateX(0%)' },
-              '100%': { transform: 'translateX(-50%)' },
-            }
           }
         }
       }
@@ -72,7 +63,7 @@
       <div class="hidden md:flex items-center justify-between h-8 text-stone-200">
         <div class="flex items-center gap-2">
           <span class="bg-brand-orange text-white font-extrabold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider">Abuja Farm</span>
-          <span><strong>30% Deposit</strong> confirms harvest • Minimal stock for pure freshness</span>
+          <span>Harvested fresh on order • Minimal stock for peak quality</span>
         </div>
         <div class="flex items-center gap-4 text-stone-300">
           <span>Perishables: <strong class="text-white">Abuja &amp; Kaduna</strong></span>
@@ -80,8 +71,6 @@
           <span>Spices &amp; Oils: <strong class="text-white">Nationwide Shipping</strong></span>
           <span class="text-stone-600">•</span>
           <a href="https://wa.me/2348170951100" target="_blank" class="text-emerald-400 hover:text-white font-bold transition-colors">08170951100</a>
-          <span class="text-stone-600">•</span>
-          <a href="admin.html" class="text-brand-amber hover:underline font-bold">Merchant Portal →</a>
         </div>
       </div>
       <!-- Mobile Single-Line Rotator -->
@@ -129,7 +118,6 @@
         <a href="#harvestPillars" class="hover:text-brand-orange transition-colors">Categories</a>
         <a href="#catalogSection" class="hover:text-brand-orange transition-colors">Catalog (53)</a>
         <a href="#orderPolicies" class="hover:text-brand-orange transition-colors">Ordering Rules</a>
-        <a href="admin.html" class="hover:text-brand-orange text-brand-green font-bold">Admin Portal</a>
       </nav>
 
       <div class="flex items-center gap-2">
@@ -157,14 +145,12 @@
         <a href="#heroBillboard" onclick="toggleMobileMenu()" class="hover:text-brand-orange">Featured Specials</a>
         <a href="#harvestPillars" onclick="toggleMobileMenu()" class="hover:text-brand-orange">What We Harvest</a>
         <a href="#catalogSection" onclick="toggleMobileMenu()" class="hover:text-brand-orange">All 53 Products</a>
-        <a href="#orderPolicies" onclick="toggleMobileMenu()" class="hover:text-brand-orange">Pre-Order &amp; Deposit Guidelines</a>
-        <a href="admin.html" class="text-brand-green font-bold">Merchant IMS Portal →</a>
+        <a href="#orderPolicies" onclick="toggleMobileMenu()" class="hover:text-brand-orange">Pre-Order Guidelines</a>
       </div>
     </div>
   </header>
 
   <!-- ================= STATIC HERO BILLBOARD ================= -->
-  <!-- Fully Static: Auto-rotation timer eliminated. Clean manual switcher. -->
   <section id="heroBillboard" class="relative pt-3 pb-4 sm:pt-4 sm:pb-6 px-4 sm:px-6 md:px-12 max-w-7xl mx-auto overflow-hidden">
     <div class="relative w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-xl bg-stone-950 h-[300px] sm:h-[330px] md:h-[350px] lg:h-[370px]">
       
@@ -326,9 +312,68 @@
     </div>
   </section>
 
-  <!-- ================= COMPACT TRUST MARQUEE ================= -->
-  <section class="py-2.5 bg-white border-y border-stone-200/80 overflow-hidden relative">
-    <div class="flex w-max animate-marquee hover:[animation-play-state:paused] gap-4" id="marqueeTrack"></div>
+  <!-- ================= STATIC TRUST CARDS (CHANGE 1: NO ROTATION, ALL CARDS IN VIEW, HORIZONTAL SCROLL ON MOBILE) ================= -->
+  <section class="py-3 bg-white border-y border-stone-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+      <div class="flex overflow-x-auto hide-scrollbar md:grid md:grid-cols-4 lg:grid-cols-5 gap-3 snap-x">
+        
+        <!-- Card 1 -->
+        <div class="shrink-0 w-[240px] sm:w-[260px] md:w-auto snap-start bg-[#FAF7F2] p-3 rounded-xl border border-stone-200/80 flex items-center gap-2.5">
+          <div class="w-8 h-8 bg-brand-green-light text-brand-green rounded-lg flex items-center justify-center shrink-0">
+            <i data-lucide="map-pin" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-stone-900">Abuja &amp; Kaduna Fresh</h4>
+            <p class="text-stone-500 text-[10px] leading-tight">Strawberries, potatoes &amp; herbs cut on order.</p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="shrink-0 w-[240px] sm:w-[260px] md:w-auto snap-start bg-[#FAF7F2] p-3 rounded-xl border border-stone-200/80 flex items-center gap-2.5">
+          <div class="w-8 h-8 bg-brand-green-light text-brand-green rounded-lg flex items-center justify-center shrink-0">
+            <i data-lucide="sprout" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-stone-900">Zero Stale Storage</h4>
+            <p class="text-stone-500 text-[10px] leading-tight">Harvested and bottled strictly on customer request.</p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="shrink-0 w-[240px] sm:w-[260px] md:w-auto snap-start bg-[#FAF7F2] p-3 rounded-xl border border-stone-200/80 flex items-center gap-2.5">
+          <div class="w-8 h-8 bg-brand-green-light text-brand-green rounded-lg flex items-center justify-center shrink-0">
+            <i data-lucide="check-circle" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-stone-900">53 Pure Botanicals</h4>
+            <p class="text-stone-500 text-[10px] leading-tight">Unadulterated Nigerian agro harvests.</p>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="shrink-0 w-[240px] sm:w-[260px] md:w-auto snap-start bg-[#FAF7F2] p-3 rounded-xl border border-stone-200/80 flex items-center gap-2.5">
+          <div class="w-8 h-8 bg-brand-green-light text-brand-green rounded-lg flex items-center justify-center shrink-0">
+            <i data-lucide="globe" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-stone-900">Nationwide Courier</h4>
+            <p class="text-stone-500 text-[10px] leading-tight">35+ dried spices &amp; pure oils shipped across Nigeria.</p>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="shrink-0 w-[240px] sm:w-[260px] md:w-auto snap-start bg-[#FAF7F2] p-3 rounded-xl border border-stone-200/80 flex items-center gap-2.5">
+          <div class="w-8 h-8 bg-brand-green-light text-brand-green rounded-lg flex items-center justify-center shrink-0">
+            <i data-lucide="credit-card" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-stone-900">Direct Checkout</h4>
+            <p class="text-stone-500 text-[10px] leading-tight">Transparent full payment with quick dispatch.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </section>
 
   <!-- ================= FOUR HARVEST PILLARS ================= -->
@@ -404,7 +449,7 @@
           <div class="relative flex-1 lg:w-60">
             <i data-lucide="search" class="w-3.5 h-3.5 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
             <input id="catalogSearchInput" type="text" placeholder="Search rosemary, chia, neem..." oninput="handleSearch(this.value)" class="w-full pl-8 pr-7 py-1.5 bg-white border border-stone-200 rounded-full text-xs text-stone-800 placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-brand-green"/>
-            <button id="clearSearchBtn" onclick="handleSearch('')" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700"><i data-lucide="x" class="w-3 h-3"></i></button>
+            <button id="clearSearchBtn" onclick="handleSearch('')" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700"><i data-lucide="x" class="w-3 3"></i></button>
           </div>
           <div class="relative shrink-0">
             <select id="sortDropdown" onchange="handleSort(this.value)" class="appearance-none pl-3 pr-7 py-1.5 bg-white border border-stone-200 rounded-full text-xs font-bold text-stone-700 outline-none cursor-pointer">
@@ -433,7 +478,7 @@
     </div>
   </main>
 
-  <!-- ================= POLICIES & FOOTER ================= -->
+  <!-- ================= ORDER POLICIES ================= -->
   <section id="orderPolicies" class="py-10 bg-brand-soil text-stone-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
@@ -449,8 +494,8 @@
         </div>
         <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div class="bg-stone-800/80 border border-stone-700/80 p-4 rounded-xl">
-            <h3 class="font-bold text-xs text-brand-orange mb-1 flex items-center gap-1.5"><i data-lucide="shield-check" class="w-4 h-4"></i> 30% Advance Deposit</h3>
-            <p class="text-stone-300 text-[11px] leading-relaxed">Locks your custom harvest batch. Balance is payable upon dispatch or delivery.</p>
+            <h3 class="font-bold text-xs text-brand-orange mb-1 flex items-center gap-1.5"><i data-lucide="credit-card" class="w-4 h-4"></i> Direct Full Payment</h3>
+            <p class="text-stone-300 text-[11px] leading-relaxed">Standard e-commerce checkout. Pay completely on order for immediate dispatch queue.</p>
           </div>
           <div class="bg-stone-800/80 border border-stone-700/80 p-4 rounded-xl">
             <h3 class="font-bold text-xs text-emerald-400 mb-1 flex items-center gap-1.5"><i data-lucide="clock" class="w-4 h-4"></i> 72hr &amp; 2–7 Day Fulfillment</h3>
@@ -462,13 +507,14 @@
           </div>
           <div class="bg-stone-800/80 border border-stone-700/80 p-4 rounded-xl">
             <h3 class="font-bold text-xs text-stone-200 mb-1 flex items-center gap-1.5"><i data-lucide="trending-up" class="w-4 h-4"></i> Seasonal Market Pricing</h3>
-            <p class="text-stone-300 text-[11px] leading-relaxed">Rates reflect Nigerian seasonal scarcity. Advance deposits lock in your quoted price.</p>
+            <p class="text-stone-300 text-[11px] leading-relaxed">Rates reflect Nigerian seasonal scarcity. Completed payments lock in your item prices.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ================= FOOTER ================= -->
   <footer class="bg-white border-t border-stone-200 pt-8 pb-6">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
       <div class="flex flex-col lg:flex-row gap-6 lg:gap-12 mb-8">
@@ -498,15 +544,16 @@
             <ul class="space-y-1.5">
               <li>Abuja &amp; Kaduna (Fresh)</li>
               <li>Nationwide (Spices &amp; Oils)</li>
-              <li>30% Harvest Deposit</li>
+              <li>Standard Full Payment</li>
               <li>Pre-Order Lead Times</li>
             </ul>
           </div>
           <div>
-            <h4 class="font-bold text-stone-900 mb-2 uppercase text-[10px] tracking-wider">Merchant Portal</h4>
+            <h4 class="font-bold text-stone-900 mb-2 uppercase text-[10px] tracking-wider">Follow Us</h4>
             <ul class="space-y-1.5">
-              <li><a href="admin.html" class="text-brand-orange font-bold hover:underline">IMS &amp; Admin Dashboard →</a></li>
-              <li><a href="https://wa.me/2348170951100" target="_blank" class="hover:text-brand-green">Order Desk</a></li>
+              <li><a href="https://instagram.com/ddmaigona.ng" target="_blank" class="hover:text-brand-orange flex items-center gap-1"><i data-lucide="instagram" class="w-3 h-3"></i> @ddmaigona.ng</a></li>
+              <li><a href="https://twitter.com/ddmaigona.ng" target="_blank" class="hover:text-brand-orange flex items-center gap-1"><i data-lucide="twitter" class="w-3 h-3"></i> @ddmaigona.ng</a></li>
+              <li><a href="https://wa.me/2348170951100" target="_blank" class="hover:text-brand-green flex items-center gap-1"><i data-lucide="message-circle" class="w-3 h-3"></i> WhatsApp Order</a></li>
             </ul>
           </div>
         </div>
@@ -518,14 +565,14 @@
     </div>
   </footer>
 
-  <!-- MOBILE FLOATING BASKET -->
+  <!-- ================= MOBILE FLOATING BASKET ================= -->
   <div id="floatingBasketBar" class="fixed bottom-3 left-3 right-3 z-30 md:hidden hidden">
     <button onclick="toggleCart(true)" class="w-full bg-brand-soil text-white p-3.5 rounded-2xl shadow-xl border border-stone-700 flex items-center justify-between">
       <div class="flex items-center gap-2.5">
         <span id="floatingCountBadge" class="bg-brand-orange text-white text-xs font-extrabold w-6 h-6 rounded-full flex items-center justify-center">0</span>
         <div class="text-left">
           <span class="text-xs font-bold block">Open Harvest Bag</span>
-          <span id="floatingDepositSub" class="text-[10px] text-brand-amber block leading-tight">30% Deposit Calculated</span>
+          <span class="text-[10px] text-brand-amber block leading-tight">Direct Checkout</span>
         </div>
       </div>
       <div class="flex items-center gap-1.5">
@@ -535,13 +582,13 @@
     </button>
   </div>
 
-  <!-- PRODUCT DETAIL MODAL -->
+  <!-- ================= PRODUCT DETAIL MODAL ================= -->
   <div id="productDetailModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
     <div onclick="closeProductModal()" class="absolute inset-0 bg-stone-950/60 backdrop-blur-sm"></div>
     <div id="productDetailContent" class="relative bg-white rounded-3xl shadow-2xl max-w-2xl w-full overflow-hidden border border-stone-100 z-10 max-h-[90vh] flex flex-col md:flex-row"></div>
   </div>
 
-  <!-- SLIDE-OVER BASKET DRAWER -->
+  <!-- ================= SLIDE-OVER BASKET DRAWER (CHANGE 2: ONLY FULL PAYMENT STANDARD) ================= -->
   <div id="cartDrawerBackdrop" class="fixed inset-0 z-50 hidden">
     <div onclick="toggleCart(false)" class="absolute inset-0 bg-stone-950/50 backdrop-blur-sm transition-opacity"></div>
     <aside class="fixed top-0 right-0 h-[100dvh] w-full max-w-md bg-white shadow-2xl z-10 flex flex-col">
@@ -550,7 +597,7 @@
           <h2 class="text-sm sm:text-base font-extrabold text-stone-900 flex items-center gap-1.5">
             <i data-lucide="shopping-bag" class="w-4 h-4 text-brand-orange"></i> Your Harvest Bag
           </h2>
-          <p class="text-[10px] text-stone-500">30% advance deposit locks your order</p>
+          <p class="text-[10px] text-stone-500">Prepared fresh upon order</p>
         </div>
         <button onclick="toggleCart(false)" class="p-1.5 text-stone-400 hover:text-stone-900 rounded-full hover:bg-stone-100"><i data-lucide="x" class="w-4 h-4"></i></button>
       </div>
@@ -582,28 +629,18 @@
           <strong>⚠️ Regional Notice:</strong> Fresh berries and herbs only deliver to <strong>Abuja &amp; Kaduna</strong>.
         </div>
 
-        <div class="bg-white p-2.5 rounded-xl border border-stone-200 space-y-1.5">
-          <div class="flex justify-between items-center text-xs text-stone-500">
-            <span>Order Subtotal:</span>
-            <span id="cartGrossTotalText" class="font-bold text-stone-900">₦0</span>
+        <!-- 100% Full Payment Standard Summary -->
+        <div class="bg-white p-3 rounded-xl border border-stone-200 space-y-1">
+          <div class="flex justify-between items-center text-xs">
+            <span class="text-stone-600 font-medium">Total Amount Payable:</span>
+            <span id="cartGrossTotalText" class="font-extrabold text-sm text-stone-900">₦0</span>
           </div>
-
-          <div class="grid grid-cols-2 gap-2">
-            <button type="button" onclick="setPaymentMode('deposit')" id="payModeDepositBtn" class="p-2 rounded-xl border-2 border-brand-orange bg-brand-orange-light text-left transition-all">
-              <span class="text-[9px] font-extrabold uppercase text-brand-orange block">30% Deposit</span>
-              <span id="depositSumText" class="text-xs sm:text-sm font-extrabold text-stone-900">₦0</span>
-            </button>
-            <button type="button" onclick="setPaymentMode('full')" id="payModeFullBtn" class="p-2 rounded-xl border border-stone-200 bg-white text-left transition-all opacity-70">
-              <span class="text-[9px] font-bold uppercase text-stone-500 block">100% Full Pay</span>
-              <span id="fullSumText" class="text-xs sm:text-sm font-extrabold text-stone-900">₦0</span>
-            </button>
-          </div>
-          <p id="balanceNoteText" class="text-[10px] text-stone-400">Balance due upon harvest dispatch.</p>
+          <p class="text-[10px] text-stone-400">Standard direct payment • Verified before harvest dispatch.</p>
         </div>
 
         <button id="whatsappSubmitBtn" onclick="handleWhatsAppCheckout()" class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-stone-950 py-3 rounded-xl font-extrabold text-xs sm:text-sm shadow flex items-center justify-center gap-2 transition-all">
           <i data-lucide="message-circle" class="w-4 h-4"></i>
-          <span>Confirm on WhatsApp (08170951100)</span>
+          <span>Checkout via WhatsApp (08170951100)</span>
         </button>
       </div>
     </aside>
@@ -611,7 +648,7 @@
 
   <div id="toastStack" class="fixed top-14 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-  <!-- APPLICATION ENGINE -->
+  <!-- ================= SCRIPT ENGINE ================= -->
   <script>
     function handleImgError(img, title) {
       img.onerror = null;
@@ -619,7 +656,7 @@
     }
 
     const MOBILE_NOTICES = [
-      "🌿 30% Deposit Locks Order • Farm Fresh Harvest",
+      "🌿 Farm-Fresh Harvest • Zero Stale Storage",
       "🍓 Perishables: Abuja & Kaduna Express Delivery",
       "📦 Dried Spices & Oils: Nationwide Shipping",
       "📞 WhatsApp Direct Concierge: 08170951100"
@@ -690,22 +727,13 @@
       PRODUCTS = DEFAULT_PRODUCTS;
     }
 
-    const TRUST_CARDS = [
-      { icon: "map-pin", title: "Abuja & Kaduna Fresh", desc: "Strawberries, potatoes & herbs cut on order." },
-      { icon: "globe", title: "Nationwide Courier", desc: "35+ dried spices & pure oils shipped across Nigeria." },
-      { icon: "shield-check", title: "30% Advance Deposit", desc: "Locks in harvest schedule & farm pricing." },
-      { icon: "sprout", title: "Zero Stale Storage", desc: "Harvested and bottled strictly on customer request." },
-      { icon: "check-circle", title: "53 Pure Botanicals", desc: "Unadulterated Nigerian agro harvests." }
-    ];
-
     const state = {
       cart: [],
       activeCategory: 'All',
       searchQuery: '',
       sortBy: 'featured',
       heroIdx: 0,
-      mobileTickerIdx: 0,
-      paymentMode: 'deposit'
+      mobileTickerIdx: 0
     };
 
     function loadSavedCart() {
@@ -758,29 +786,8 @@
       });
     }
 
-    function nextHeroSlide() {
-      setHeroSlide((state.heroIdx + 1) % 4);
-    }
-
-    function prevHeroSlide() {
-      setHeroSlide((state.heroIdx - 1 + 4) % 4);
-    }
-
-    function initMarquee() {
-      const track = document.getElementById('marqueeTrack');
-      const doubled = [...TRUST_CARDS, ...TRUST_CARDS, ...TRUST_CARDS];
-      track.innerHTML = doubled.map(c => `
-        <div class="w-[260px] sm:w-[300px] bg-white p-2.5 sm:p-3 rounded-xl border border-stone-200/80 flex items-center gap-2.5 shadow-sm shrink-0">
-          <div class="w-8 h-8 bg-brand-green-light text-brand-green rounded-lg flex items-center justify-center shrink-0">
-            <i data-lucide="${c.icon}" class="w-4 h-4"></i>
-          </div>
-          <div>
-            <h4 class="text-xs font-bold text-stone-900">${c.title}</h4>
-            <p class="text-stone-500 text-[10px] leading-tight">${c.desc}</p>
-          </div>
-        </div>
-      `).join('');
-    }
+    function nextHeroSlide() { setHeroSlide((state.heroIdx + 1) % 4); }
+    function prevHeroSlide() { setHeroSlide((state.heroIdx - 1 + 4) % 4); }
 
     function filterByCategory(cat) {
       state.activeCategory = cat;
@@ -987,11 +994,7 @@
       updateCartUI();
     }
 
-    function setPaymentMode(mode) {
-      state.paymentMode = mode;
-      updateCartUI();
-    }
-
+    // 100% Full Payment Standard Calculation
     function calculateCartTotals() {
       let subtotal = 0, herbsTotal = 0, totalQty = 0, hasPerishables = false, hasTbc = false;
       state.cart.forEach(item => {
@@ -1002,13 +1005,11 @@
         if (item.isPerishable) hasPerishables = true;
       });
 
-      const deposit30 = Math.ceil(subtotal * 0.30);
-      const balance = subtotal - deposit30;
       const zone = document.getElementById('cartDeliveryZone')?.value || 'Abuja';
       const violatesPerishable = hasPerishables && zone === 'Nationwide';
       const violatesHerbMin = herbsTotal > 0 && herbsTotal < 5000;
 
-      return { subtotal, deposit30, balance, totalQty, herbsTotal, hasPerishables, hasTbc, violatesPerishable, violatesHerbMin, zone };
+      return { subtotal, totalQty, herbsTotal, hasPerishables, hasTbc, violatesPerishable, violatesHerbMin, zone };
     }
 
     function updateCartUI() {
@@ -1016,7 +1017,6 @@
       document.getElementById('navCartBadge').textContent = metrics.totalQty;
       document.getElementById('floatingCountBadge').textContent = metrics.totalQty;
       document.getElementById('floatingSubtotal').textContent = `${formatNaira(metrics.subtotal)}${metrics.hasTbc ? ' + TBC' : ''}`;
-      document.getElementById('floatingDepositSub').textContent = `30% Deposit: ${formatNaira(metrics.deposit30)}`;
       document.getElementById('floatingBasketBar').classList.toggle('hidden', metrics.totalQty === 0);
 
       const herbBanner = document.getElementById('herbThresholdBanner');
@@ -1069,22 +1069,8 @@
         `).join('');
       }
 
+      // Display Single 100% Total
       document.getElementById('cartGrossTotalText').textContent = `${formatNaira(metrics.subtotal)}${metrics.hasTbc ? ' + TBC' : ''}`;
-      document.getElementById('depositSumText').textContent = formatNaira(metrics.deposit30);
-      document.getElementById('fullSumText').textContent = formatNaira(metrics.subtotal);
-
-      const depBtn = document.getElementById('payModeDepositBtn');
-      const fullBtn = document.getElementById('payModeFullBtn');
-      if (state.paymentMode === 'deposit') {
-        depBtn.className = "p-2 rounded-xl border-2 border-brand-orange bg-brand-orange-light text-left transition-all cursor-pointer";
-        fullBtn.className = "p-2 rounded-xl border border-stone-200 bg-white text-left transition-all cursor-pointer opacity-70";
-        document.getElementById('balanceNoteText').textContent = `Balance of ${formatNaira(metrics.balance)} due upon harvest dispatch.`;
-      } else {
-        fullBtn.className = "p-2 rounded-xl border-2 border-brand-green bg-emerald-50 text-left transition-all cursor-pointer";
-        depBtn.className = "p-2 rounded-xl border border-stone-200 bg-white text-left transition-all cursor-pointer opacity-70";
-        document.getElementById('balanceNoteText').textContent = `Full payment selected. Zero balance due on delivery.`;
-      }
-
       document.getElementById('whatsappSubmitBtn').classList.toggle('opacity-50', metrics.violatesPerishable);
       lucide.createIcons();
     }
@@ -1172,7 +1158,7 @@
       let msg = `*NEW HARVEST ORDER — DD MAIGONA* 🧑🏾‍🌾🙏🏾\n`;
       msg += `---------------------------------------\n`;
       msg += `*Delivery Destination:* ${metrics.zone}\n`;
-      msg += `*Payment:* ${state.paymentMode === 'deposit' ? '30% Advance Deposit' : '100% Full Payment'}\n`;
+      msg += `*Payment:* Full Direct Payment\n`;
       msg += `---------------------------------------\n\n*ORDER ITEMS:*\n`;
 
       state.cart.forEach(item => {
@@ -1181,17 +1167,12 @@
         msg += `• ${item.quantity}x ${item.name}${variantText} — ${lineVal}\n`;
       });
 
-      msg += `\n---------------------------------------\n*Subtotal:* ${formatNaira(metrics.subtotal)}${metrics.hasTbc ? ' (+ TBC items)' : ''}\n`;
-      if (state.paymentMode === 'deposit') {
-        msg += `*30% Confirmation Deposit:* ${formatNaira(metrics.deposit30)}\n*Balance on Dispatch:* ${formatNaira(metrics.balance)}\n`;
-      } else {
-        msg += `*Full Amount Payable:* ${formatNaira(metrics.subtotal)}\n`;
-      }
+      msg += `\n---------------------------------------\n*Total Amount Payable:* ${formatNaira(metrics.subtotal)}${metrics.hasTbc ? ' (+ TBC items)' : ''}\n`;
       msg += `---------------------------------------\n`;
       if (metrics.herbsTotal > 0 && metrics.herbsTotal < 5000) {
         msg += `\n*(Note: Fresh herbs total ${formatNaira(metrics.herbsTotal)}; below ₦5,000 threshold.)*\n`;
       }
-      msg += `\n_Please send official account details to confirm deposit._`;
+      msg += `\n_Please send official account details to complete order._`;
       window.open(`https://wa.me/2348170951100?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
@@ -1212,7 +1193,6 @@
       document.getElementById('yearEl').textContent = new Date().getFullYear();
       loadSavedCart();
       initMobileTicker();
-      initMarquee();
       renderCatalog();
       updateCartUI();
       lucide.createIcons();

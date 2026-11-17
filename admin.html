@@ -3,13 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DD MAIGONA | Merchant Console & Harvest IMS</title>
+  <title>DD MAIGONA | Command Center — Merchant IMS &amp; Harvest Operations</title>
   
+  <!-- Google Fonts: Fraunces & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <script>
@@ -30,582 +34,967 @@
               'green-light': '#EBF5EE',
               amber: '#F59E0B',
               soil: '#1C1917',
-              parchment: '#FAF7F2',
+              surface: '#FFFFFF',
+              canvas: '#F7F5EE',
             }
           }
         }
       }
     };
   </script>
+
   <style>
-    body { background-color: #F6F4EE; color: #1C1917; }
-    .kanban-col { min-height: 520px; }
+    body { background-color: #F7F5EE; color: #1C1917; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #F7F5EE; }
+    ::-webkit-scrollbar-thumb { background: #D6D3D1; border-radius: 3px; }
+    .kds-card { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+    .kds-card:hover { transform: translateY(-2px); }
   </style>
 </head>
 <body class="font-sans antialiased text-stone-900 selection:bg-brand-orange selection:text-white">
 
-  <!-- ================= TOP ADMIN NAVIGATION ================= -->
-  <header class="bg-brand-soil text-white px-4 sm:px-8 py-3.5 border-b border-stone-800 sticky top-0 z-40">
+  <!-- ================= TOP COMMAND HEADER ================= -->
+  <header class="bg-brand-soil text-white px-4 sm:px-8 py-3.5 border-b border-stone-800 sticky top-0 z-40 shadow-sm">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- Brand & Hub Status -->
       <div class="flex items-center gap-3">
-        <a href="index.html" class="flex items-center gap-2 group">
-          <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center p-0.5">
-            <span class="text-brand-orange font-extrabold text-xs">DD</span>
+        <a href="index.html" class="flex items-center gap-2.5 group">
+          <div class="w-9 h-9 rounded-full bg-white flex items-center justify-center p-0.5 shadow">
+            <span class="text-brand-orange font-extrabold text-sm">DD</span>
           </div>
           <div>
-            <span class="font-serif font-bold text-base tracking-tight text-white">DD <span class="text-emerald-400">MAIGONA</span></span>
-            <span class="block text-[9px] uppercase tracking-widest text-brand-amber -mt-0.5 font-bold">Merchant IMS &amp; Harvest Portal</span>
+            <div class="flex items-center gap-1 leading-none">
+              <span class="font-serif font-bold text-lg text-white">DD</span>
+              <span class="font-serif font-bold text-lg text-emerald-400">MAIGONA</span>
+            </div>
+            <span class="block text-[9px] uppercase tracking-widest text-brand-amber font-extrabold mt-0.5">
+              Command Center • Spotlex × Jays Bistro
+            </span>
           </div>
         </a>
       </div>
 
-      <!-- Quick Operational Indicators -->
-      <div class="flex items-center gap-3 text-xs">
-        <span class="hidden sm:inline-flex items-center gap-1.5 bg-stone-800 px-3 py-1 rounded-full text-stone-300 border border-stone-700">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Abuja Hub Online
+      <!-- Quick Action Controls -->
+      <div class="flex items-center gap-2.5 sm:gap-3 text-xs">
+        <span class="hidden md:inline-flex items-center gap-1.5 bg-stone-800/90 px-3 py-1.5 rounded-full text-stone-300 border border-stone-700 text-[11px]">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Abuja Agro-Hub Online
         </span>
-        <button onclick="openHarvestPickingSheetModal()" class="bg-brand-green hover:bg-emerald-600 text-white font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 text-xs shadow transition-all">
-          <i data-lucide="clipboard-list" class="w-4 h-4"></i>
-          <span class="hidden sm:inline">Harvest Picking Sheet</span>
+
+        <button onclick="switchTab('harvest-sheet')" class="bg-brand-green hover:bg-emerald-600 text-white font-bold px-3.5 py-1.5 rounded-xl flex items-center gap-1.5 text-xs shadow transition-all">
+          <i data-lucide="clipboard-check" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Field Picklist</span>
+          <span id="quickHerbBadge" class="bg-white text-brand-green text-[10px] font-extrabold px-1.5 rounded-full">0</span>
         </button>
-        <a href="index.html" class="text-stone-300 hover:text-white underline text-xs">Storefront ↗</a>
+
+        <a href="index.html" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-3 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1 border border-white/10">
+          <span>Storefront</span>
+          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+        </a>
       </div>
+
     </div>
   </header>
 
-  <!-- ================= SUB-NAV BAR (TABS) ================= -->
-  <div class="bg-white border-b border-stone-200 px-4 sm:px-8 py-2 sticky top-[57px] z-30">
-    <div class="max-w-7xl mx-auto flex items-center justify-between overflow-x-auto gap-4">
+  <!-- ================= MASTER NAVIGATION BAR (TABS) ================= -->
+  <nav class="bg-white border-b border-stone-200 px-4 sm:px-8 py-2 sticky top-[57px] z-30 shadow-xs">
+    <div class="max-w-7xl mx-auto flex items-center justify-between overflow-x-auto gap-3 hide-scrollbar">
       <div class="flex items-center gap-1.5">
-        <button onclick="switchTab('pipeline')" id="tabBtn-pipeline" class="tab-btn px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-brand-soil text-white flex items-center gap-1.5">
-          <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> Harvest Pipeline (Jays Bistro)
+        <button onclick="switchTab('analytics')" id="tabBtn-analytics" class="tab-btn px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-brand-soil text-white flex items-center gap-1.5">
+          <i data-lucide="line-chart" class="w-3.5 h-3.5 text-brand-amber"></i> Analytics &amp; Performance
         </button>
-        <button onclick="switchTab('inventory')" id="tabBtn-inventory" class="tab-btn px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-stone-600 hover:bg-stone-100 flex items-center gap-1.5">
-          <i data-lucide="package" class="w-3.5 h-3.5"></i> Catalog IMS (Spotlex)
+        <button onclick="switchTab('pipeline')" id="tabBtn-pipeline" class="tab-btn px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-stone-600 hover:bg-stone-100 flex items-center gap-1.5">
+          <i data-lucide="chef-hat" class="w-3.5 h-3.5 text-brand-green"></i> Harvest KDS &amp; Pipeline
         </button>
-        <button onclick="switchTab('orders')" id="tabBtn-orders" class="tab-btn px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-stone-600 hover:bg-stone-100 flex items-center gap-1.5">
-          <i data-lucide="receipt" class="w-3.5 h-3.5"></i> Orders &amp; Deposits
+        <button onclick="switchTab('inventory')" id="tabBtn-inventory" class="tab-btn px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-stone-600 hover:bg-stone-100 flex items-center gap-1.5">
+          <i data-lucide="package" class="w-3.5 h-3.5 text-brand-orange"></i> Catalog IMS &amp; Margins
+        </button>
+        <button onclick="switchTab('harvest-sheet')" id="tabBtn-harvest-sheet" class="tab-btn px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-stone-600 hover:bg-stone-100 flex items-center gap-1.5">
+          <i data-lucide="sprout" class="w-3.5 h-3.5 text-emerald-600"></i> Field Harvest Picklist
+        </button>
+        <button onclick="switchTab('orders')" id="tabBtn-orders" class="tab-btn px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-stone-600 hover:bg-stone-100 flex items-center gap-1.5">
+          <i data-lucide="receipt" class="w-3.5 h-3.5 text-purple-600"></i> Order Book &amp; CRM
         </button>
       </div>
 
-      <!-- Quick Bulk Repricing Tool (Spotlex Inflation Multiplier) -->
+      <!-- Quick Inflation / Scarcity Repricing Tool -->
       <div class="flex items-center gap-2 shrink-0">
-        <button onclick="openInflationModal()" class="text-[11px] font-bold text-brand-orange bg-orange-50 border border-orange-200 hover:bg-orange-100 px-3 py-1 rounded-lg flex items-center gap-1 transition-all">
-          <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> Market Price Adjuster
+        <button onclick="openInflationModal()" class="text-xs font-extrabold text-brand-orange bg-orange-50 border border-orange-200 hover:bg-orange-100 px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-all">
+          <i data-lucide="trending-up" class="w-3.5 h-3.5"></i>
+          <span>Market Scarcity Repricer</span>
         </button>
       </div>
     </div>
-  </div>
+  </nav>
 
+  <!-- ================= MAIN DASHBOARD CANVAS ================= -->
   <main class="max-w-7xl mx-auto px-4 sm:px-8 py-6 space-y-6">
 
-    <!-- ================= METRIC KPI CARDS ================= -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-4">
-      <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm">
-        <span class="text-[10px] font-bold uppercase tracking-wider text-stone-400">Total Harvest Queue</span>
+    <!-- ================= EXECUTIVE SUMMARY STATS ================= -->
+    <section class="grid grid-cols-2 lg:grid-cols-5 gap-3.5">
+      <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-xs">
+        <span class="text-[10px] font-extrabold uppercase tracking-wider text-stone-400 block">Gross Sales (This Month)</span>
         <div class="flex items-baseline justify-between mt-1">
-          <span class="font-serif text-2xl font-bold text-stone-900" id="kpi-active-orders">6</span>
-          <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Active</span>
+          <span class="font-serif text-2xl font-bold text-stone-900" id="stat-gross-sales">₦842,500</span>
+          <span class="text-[10px] font-extrabold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">+18.4%</span>
         </div>
-        <p class="text-[11px] text-stone-500 mt-1">4 awaiting Abuja cut</p>
+        <p class="text-[11px] text-stone-500 mt-1">38 confirmed farm dispatches</p>
       </div>
 
-      <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm">
-        <span class="text-[10px] font-bold uppercase tracking-wider text-stone-400">30% Deposit Escrow</span>
+      <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-xs">
+        <span class="text-[10px] font-extrabold uppercase tracking-wider text-stone-400 block">Average Order Value (AOV)</span>
         <div class="flex items-baseline justify-between mt-1">
-          <span class="font-serif text-2xl font-bold text-brand-orange" id="kpi-deposit-escrow">₦64,800</span>
-          <span class="text-[10px] font-bold text-stone-600 bg-stone-100 px-1.5 py-0.5 rounded">Secured</span>
+          <span class="font-serif text-2xl font-bold text-brand-orange" id="stat-aov">₦22,170</span>
+          <span class="text-[10px] font-extrabold text-stone-700 bg-stone-100 px-1.5 py-0.5 rounded">Indexed</span>
         </div>
-        <p class="text-[11px] text-stone-500 mt-1">₦151,200 due on dispatch</p>
+        <p class="text-[11px] text-stone-500 mt-1">High basket: Strawberries + Oils</p>
       </div>
 
-      <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm">
-        <span class="text-[10px] font-bold uppercase tracking-wider text-stone-400">Herbs Needed Today</span>
+      <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-xs">
+        <span class="text-[10px] font-extrabold uppercase tracking-wider text-stone-400 block">Average Gross Margin</span>
         <div class="flex items-baseline justify-between mt-1">
-          <span class="font-serif text-2xl font-bold text-brand-green" id="kpi-herbs-today">26</span>
-          <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">Bunches</span>
+          <span class="font-serif text-2xl font-bold text-brand-green" id="stat-gross-margin">58.4%</span>
+          <span class="text-[10px] font-extrabold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">High Purity</span>
         </div>
-        <p class="text-[11px] text-stone-500 mt-1">Mint (14), Rosemary (8), Basil (4)</p>
+        <p class="text-[11px] text-stone-500 mt-1">Fresh Herbs peak at 71.4%</p>
       </div>
 
-      <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm">
-        <span class="text-[10px] font-bold uppercase tracking-wider text-stone-400">Catalog Health</span>
+      <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-xs">
+        <span class="text-[10px] font-extrabold uppercase tracking-wider text-stone-400 block">Active Harvest Queue</span>
         <div class="flex items-baseline justify-between mt-1">
-          <span class="font-serif text-2xl font-bold text-stone-900" id="kpi-catalog-count">53</span>
-          <span class="text-[10px] font-bold text-rose-600 bg-rose-50 px-1.5 py-0.5 rounded" id="kpi-sold-out-count">2 Sold Out</span>
+          <span class="font-serif text-2xl font-bold text-purple-700" id="stat-active-queue">7 Orders</span>
+          <span class="text-[10px] font-extrabold text-purple-700 bg-purple-50 px-1.5 py-0.5 rounded">In Pipeline</span>
         </div>
-        <p class="text-[11px] text-stone-500 mt-1">Figs &amp; Turmeric need restocking</p>
-      </div>
-    </div>
-
-    <!-- ================= TAB 1: JAYS BISTRO HARVEST PIPELINE (KANBAN) ================= -->
-    <div id="view-pipeline" class="tab-view space-y-4">
-      <div class="flex items-center justify-between">
-        <div>
-          <h2 class="font-serif text-xl font-bold text-stone-900">Harvest &amp; Fulfillment Kanban</h2>
-          <p class="text-xs text-stone-500">Orders flow strictly through 30% verification before farm harvesting starts.</p>
-        </div>
-        <button onclick="createNewSimulatedOrder()" class="text-xs font-bold bg-stone-900 hover:bg-brand-orange text-white px-3 py-1.5 rounded-xl transition-colors">
-          + New Mock Order
-        </button>
+        <p class="text-[11px] text-stone-500 mt-1">3 require 72h cut today</p>
       </div>
 
-      <!-- 5-Stage Kanban Board -->
-      <div class="grid grid-cols-1 md:grid-cols-5 gap-3.5 overflow-x-auto pb-4">
+      <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-xs col-span-2 lg:col-span-1">
+        <span class="text-[10px] font-extrabold uppercase tracking-wider text-stone-400 block">Catalog Out-of-Stock</span>
+        <div class="flex items-baseline justify-between mt-1">
+          <span class="font-serif text-2xl font-bold text-rose-600" id="stat-out-of-stock">2 / 53</span>
+          <span class="text-[10px] font-extrabold text-rose-700 bg-rose-50 px-1.5 py-0.5 rounded">Restock Alert</span>
+        </div>
+        <p class="text-[11px] text-stone-500 mt-1">Dried Figs &amp; Powdered Turmeric</p>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 1: ANALYTICS & PERFORMANCE (JAYS BISTRO × SPOTLEX) ================= -->
+    <section id="view-analytics" class="tab-view space-y-6">
+      
+      <!-- Charts Row 1: Revenue Timeline + Category Contribution Mix -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        <!-- STAGE 1: Deposit Pending -->
-        <div class="kanban-col bg-stone-100/90 rounded-2xl p-3 border border-stone-200 flex flex-col">
-          <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-stone-200">
-            <span class="text-xs font-bold text-stone-700 flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-amber-500"></span> 1. Deposit Pending
-            </span>
-            <span id="badge-stage-deposit_pending" class="text-[10px] font-bold bg-white px-2 py-0.5 rounded-full text-stone-600 shadow-sm">0</span>
+        <!-- Left: Revenue & Orders Timeline Chart (Jays Bistro Daily Trajectory) -->
+        <div class="lg:col-span-8 bg-white p-5 rounded-3xl border border-stone-200 shadow-xs space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-100 pb-3">
+            <div>
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-brand-orange">Sales &amp; Dispatch Trajectory</span>
+              <h3 class="font-serif text-lg font-bold text-stone-900">Weekly Harvest Revenue &amp; Order Volume</h3>
+            </div>
+            <div class="flex items-center gap-1.5 text-xs">
+              <span class="inline-flex items-center gap-1 text-[11px] font-bold text-stone-500 mr-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-brand-orange"></span> Sales (₦)
+              </span>
+              <span class="inline-flex items-center gap-1 text-[11px] font-bold text-stone-500">
+                <span class="w-2.5 h-2.5 rounded-full bg-brand-green"></span> Orders
+              </span>
+            </div>
           </div>
-          <div id="cards-stage-deposit_pending" class="space-y-2.5 flex-1 overflow-y-auto"></div>
+
+          <!-- Pure SVG Interactive Responsive Bar & Line Chart -->
+          <div class="relative h-60 w-full pt-4">
+            <svg viewBox="0 0 700 200" class="w-full h-full overflow-visible">
+              <!-- Grid lines -->
+              <line x1="40" y1="20" x2="680" y2="20" stroke="#E7E5E4" stroke-dasharray="4" />
+              <line x1="40" y1="70" x2="680" y2="70" stroke="#E7E5E4" stroke-dasharray="4" />
+              <line x1="40" y1="120" x2="680" y2="120" stroke="#E7E5E4" stroke-dasharray="4" />
+              <line x1="40" y1="170" x2="680" y2="170" stroke="#D6D3D1" stroke-width="1.5" />
+
+              <!-- Y Axis labels -->
+              <text x="32" y="24" font-size="9" font-family="sans-serif" fill="#A8A29E" text-anchor="end">₦250k</text>
+              <text x="32" y="74" font-size="9" font-family="sans-serif" fill="#A8A29E" text-anchor="end">₦150k</text>
+              <text x="32" y="124" font-size="9" font-family="sans-serif" fill="#A8A29E" text-anchor="end">₦80k</text>
+              <text x="32" y="174" font-size="9" font-family="sans-serif" fill="#A8A29E" text-anchor="end">₦0</text>
+
+              <!-- Day 1: Mon -->
+              <rect x="75" y="110" width="36" height="60" rx="6" fill="#FEE2E2" />
+              <rect x="75" y="125" width="36" height="45" rx="6" fill="#E13D16" />
+              <text x="93" y="188" font-size="10" font-family="sans-serif" font-weight="bold" fill="#78716C" text-anchor="middle">Mon</text>
+
+              <!-- Day 2: Tue -->
+              <rect x="165" y="85" width="36" height="85" rx="6" fill="#FEE2E2" />
+              <rect x="165" y="100" width="36" height="70" rx="6" fill="#E13D16" />
+              <text x="183" y="188" font-size="10" font-family="sans-serif" font-weight="bold" fill="#78716C" text-anchor="middle">Tue</text>
+
+              <!-- Day 3: Wed -->
+              <rect x="255" y="95" width="36" height="75" rx="6" fill="#FEE2E2" />
+              <rect x="255" y="115" width="36" height="55" rx="6" fill="#E13D16" />
+              <text x="273" y="188" font-size="10" font-family="sans-serif" font-weight="bold" fill="#78716C" text-anchor="middle">Wed</text>
+
+              <!-- Day 4: Thu (Peak harvest delivery) -->
+              <rect x="345" y="45" width="36" height="125" rx="6" fill="#FEE2E2" />
+              <rect x="345" y="60" width="36" height="110" rx="6" fill="#E13D16" />
+              <text x="363" y="188" font-size="10" font-family="sans-serif" font-weight="bold" fill="#78716C" text-anchor="middle">Thu</text>
+
+              <!-- Day 5: Fri (Weekend replenishment) -->
+              <rect x="435" y="30" width="36" height="140" rx="6" fill="#FEE2E2" />
+              <rect x="435" y="42" width="36" height="128" rx="6" fill="#E13D16" />
+              <text x="453" y="188" font-size="10" font-family="sans-serif" font-weight="bold" fill="#78716C" text-anchor="middle">Fri</text>
+
+              <!-- Day 6: Sat -->
+              <rect x="525" y="65" width="36" height="105" rx="6" fill="#FEE2E2" />
+              <rect x="525" y="80" width="36" height="90" rx="6" fill="#E13D16" />
+              <text x="543" y="188" font-size="10" font-family="sans-serif" font-weight="bold" fill="#78716C" text-anchor="middle">Sat</text>
+
+              <!-- Day 7: Sun -->
+              <rect x="615" y="130" width="36" height="40" rx="6" fill="#FEE2E2" />
+              <rect x="615" y="145" width="36" height="25" rx="6" fill="#E13D16" />
+              <text x="633" y="188" font-size="10" font-family="sans-serif" font-weight="bold" fill="#78716C" text-anchor="middle">Sun</text>
+
+              <!-- Trend overlay curve (Order counts) -->
+              <path d="M 93 130 Q 183 100, 273 118 T 363 65 T 453 45 T 543 85 T 633 148" fill="none" stroke="#2D8636" stroke-width="3" stroke-linecap="round" />
+              <circle cx="93" cy="130" r="4" fill="#FFFFFF" stroke="#2D8636" stroke-width="2.5" />
+              <circle cx="183" cy="100" r="4" fill="#FFFFFF" stroke="#2D8636" stroke-width="2.5" />
+              <circle cx="273" cy="118" r="4" fill="#FFFFFF" stroke="#2D8636" stroke-width="2.5" />
+              <circle cx="363" cy="65" r="4" fill="#FFFFFF" stroke="#2D8636" stroke-width="2.5" />
+              <circle cx="453" cy="45" r="4" fill="#FFFFFF" stroke="#2D8636" stroke-width="2.5" />
+              <circle cx="543" cy="85" r="4" fill="#FFFFFF" stroke="#2D8636" stroke-width="2.5" />
+              <circle cx="633" cy="148" r="4" fill="#FFFFFF" stroke="#2D8636" stroke-width="2.5" />
+            </svg>
+          </div>
+          <p class="text-[11px] text-stone-500 italic text-center">Peak harvest dispatches occur Thursday and Friday for weekend culinary preparation.</p>
         </div>
 
-        <!-- STAGE 2: Harvest Queued -->
-        <div class="kanban-col bg-stone-100/90 rounded-2xl p-3 border border-stone-200 flex flex-col">
-          <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-stone-200">
-            <span class="text-xs font-bold text-emerald-800 flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-emerald-600"></span> 2. Harvest Queued
-            </span>
-            <span id="badge-stage-harvest_queued" class="text-[10px] font-bold bg-white px-2 py-0.5 rounded-full text-stone-600 shadow-sm">0</span>
+        <!-- Right: Category Contribution Mix (Jays Bistro Menu Analysis) -->
+        <div class="lg:col-span-4 bg-white p-5 rounded-3xl border border-stone-200 shadow-xs space-y-4 flex flex-col justify-between">
+          <div class="border-b border-stone-100 pb-3">
+            <span class="text-[10px] font-extrabold uppercase tracking-wider text-brand-green">Portfolio Mix</span>
+            <h3 class="font-serif text-lg font-bold text-stone-900">Revenue Contribution by Pillar</h3>
           </div>
-          <div id="cards-stage-harvest_queued" class="space-y-2.5 flex-1 overflow-y-auto"></div>
-        </div>
 
-        <!-- STAGE 3: Harvested & Packed -->
-        <div class="kanban-col bg-stone-100/90 rounded-2xl p-3 border border-stone-200 flex flex-col">
-          <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-stone-200">
-            <span class="text-xs font-bold text-blue-800 flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-blue-600"></span> 3. Packed / Cold Chain
-            </span>
-            <span id="badge-stage-harvested_packed" class="text-[10px] font-bold bg-white px-2 py-0.5 rounded-full text-stone-600 shadow-sm">0</span>
+          <!-- SVG Donut Representation -->
+          <div class="relative flex items-center justify-center py-2">
+            <svg class="w-44 h-44 transform -rotate-90" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="38" fill="none" stroke="#F5F5F4" stroke-width="14" />
+              <!-- Produce 38% -->
+              <circle cx="50" cy="50" r="38" fill="none" stroke="#E13D16" stroke-width="14" stroke-dasharray="90.7 238.7" stroke-dashoffset="0" />
+              <!-- Spices 28% -->
+              <circle cx="50" cy="50" r="38" fill="none" stroke="#F59E0B" stroke-width="14" stroke-dasharray="66.8 238.7" stroke-dashoffset="-90.7" />
+              <!-- Oils 20% -->
+              <circle cx="50" cy="50" r="38" fill="none" stroke="#2D8636" stroke-width="14" stroke-dasharray="47.7 238.7" stroke-dashoffset="-157.5" />
+              <!-- Fresh Herbs 14% -->
+              <circle cx="50" cy="50" r="38" fill="none" stroke="#10B981" stroke-width="14" stroke-dasharray="33.4 238.7" stroke-dashoffset="-205.2" />
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+              <span class="font-serif text-2xl font-bold text-stone-900 leading-none">53</span>
+              <span class="text-[9px] uppercase tracking-wider text-stone-400 font-bold mt-0.5">Live Items</span>
+            </div>
           </div>
-          <div id="cards-stage-harvested_packed" class="space-y-2.5 flex-1 overflow-y-auto"></div>
-        </div>
 
-        <!-- STAGE 4: Out for Delivery -->
-        <div class="kanban-col bg-stone-100/90 rounded-2xl p-3 border border-stone-200 flex flex-col">
-          <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-stone-200">
-            <span class="text-xs font-bold text-purple-800 flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-purple-600"></span> 4. In Transit
-            </span>
-            <span id="badge-stage-out_for_delivery" class="text-[10px] font-bold bg-white px-2 py-0.5 rounded-full text-stone-600 shadow-sm">0</span>
+          <!-- Legend & Breakdown -->
+          <div class="space-y-2 text-xs">
+            <div class="flex items-center justify-between">
+              <span class="flex items-center gap-1.5 font-semibold text-stone-700">
+                <span class="w-2.5 h-2.5 rounded-full bg-brand-orange"></span> Strawberries &amp; Tubers
+              </span>
+              <span class="font-bold text-stone-900">38% (₦320k)</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="flex items-center gap-1.5 font-semibold text-stone-700">
+                <span class="w-2.5 h-2.5 rounded-full bg-brand-amber"></span> 35 Dried Spices
+              </span>
+              <span class="font-bold text-stone-900">28% (₦235k)</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="flex items-center gap-1.5 font-semibold text-stone-700">
+                <span class="w-2.5 h-2.5 rounded-full bg-brand-green"></span> Pure Botanical Oils
+              </span>
+              <span class="font-bold text-stone-900">20% (₦168k)</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="flex items-center gap-1.5 font-semibold text-stone-700">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> 11 Cut-To-Order Herbs
+              </span>
+              <span class="font-bold text-stone-900">14% (₦119k)</span>
+            </div>
           </div>
-          <div id="cards-stage-out_for_delivery" class="space-y-2.5 flex-1 overflow-y-auto"></div>
-        </div>
-
-        <!-- STAGE 5: Completed -->
-        <div class="kanban-col bg-stone-100/90 rounded-2xl p-3 border border-stone-200 flex flex-col">
-          <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-stone-200">
-            <span class="text-xs font-bold text-stone-700 flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-stone-500"></span> 5. Settled &amp; Done
-            </span>
-            <span id="badge-stage-completed" class="text-[10px] font-bold bg-white px-2 py-0.5 rounded-full text-stone-600 shadow-sm">0</span>
-          </div>
-          <div id="cards-stage-completed" class="space-y-2.5 flex-1 overflow-y-auto"></div>
         </div>
 
       </div>
-    </div>
 
-    <!-- ================= TAB 2: SPOTLEX CATALOG IMS ================= -->
-    <div id="view-inventory" class="tab-view hidden space-y-4">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-stone-200">
+      <!-- Charts Row 2: Hourly Demand Heatmap (Jays Bistro) & Profit Margin Breakdown (Spotlex) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left: Hourly Ordering Heatmap (When Abuja & Kaduna Shop) -->
+        <div class="lg:col-span-6 bg-white p-5 rounded-3xl border border-stone-200 shadow-xs space-y-3">
+          <div class="flex items-center justify-between border-b border-stone-100 pb-3">
+            <div>
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-purple-600">Jays Bistro Kitchen Telemetry</span>
+              <h3 class="font-serif text-lg font-bold text-stone-900">Hourly Ordering Pattern</h3>
+            </div>
+            <span class="text-[10px] font-bold bg-purple-50 text-purple-700 px-2.5 py-1 rounded-full">Peak: 9AM &amp; 7PM</span>
+          </div>
+
+          <p class="text-xs text-stone-500">Guides dispatch staffing and morning harvest cutting schedules.</p>
+
+          <div class="space-y-2 pt-2">
+            <div>
+              <div class="flex justify-between text-[11px] font-semibold text-stone-700 mb-1">
+                <span>Morning Rush (07:00 – 11:00) • Chefs &amp; Home Restock</span>
+                <span class="font-bold text-brand-orange">42% of Orders</span>
+              </div>
+              <div class="w-full bg-stone-100 h-2 rounded-full overflow-hidden">
+                <div class="bg-brand-orange h-full rounded-full" style="width: 42%"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-[11px] font-semibold text-stone-700 mb-1">
+                <span>Midday Slump (11:00 – 15:00) • Courier Dispatch Window</span>
+                <span class="font-bold text-stone-600">15% of Orders</span>
+              </div>
+              <div class="w-full bg-stone-100 h-2 rounded-full overflow-hidden">
+                <div class="bg-stone-400 h-full rounded-full" style="width: 15%"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-[11px] font-semibold text-stone-700 mb-1">
+                <span>Evening Orders (17:00 – 21:00) • Next-Day Herb Pre-Orders</span>
+                <span class="font-bold text-emerald-600">35% of Orders</span>
+              </div>
+              <div class="w-full bg-stone-100 h-2 rounded-full overflow-hidden">
+                <div class="bg-brand-green h-full rounded-full" style="width: 35%"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-[11px] font-semibold text-stone-700 mb-1">
+                <span>Late Night (21:00 – 07:00)</span>
+                <span class="font-bold text-stone-400">8% of Orders</span>
+              </div>
+              <div class="w-full bg-stone-100 h-2 rounded-full overflow-hidden">
+                <div class="bg-stone-300 h-full rounded-full" style="width: 8%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Unit Margins vs. Spoilage Vulnerability (Spotlex × Bistro) -->
+        <div class="lg:col-span-6 bg-white p-5 rounded-3xl border border-stone-200 shadow-xs space-y-3">
+          <div class="flex items-center justify-between border-b border-stone-100 pb-3">
+            <div>
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-700">Margin &amp; Spoilage Telemetry</span>
+              <h3 class="font-serif text-lg font-bold text-stone-900">Profitability vs. Perishability</h3>
+            </div>
+            <span class="text-[10px] font-bold bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-full">Zero Spoilage Model</span>
+          </div>
+
+          <p class="text-xs text-stone-500">DD MAIGONA eliminates fresh inventory write-offs by cutting strictly on confirmed order.</p>
+
+          <div class="grid grid-cols-2 gap-3 pt-2">
+            <div class="bg-stone-50 p-3 rounded-2xl border border-stone-200/80">
+              <span class="text-[10px] font-extrabold uppercase text-stone-400 block">Fresh Herb Bunches</span>
+              <span class="font-serif text-xl font-bold text-emerald-700 block mt-0.5">71.4% Margin</span>
+              <p class="text-[10px] text-stone-500 mt-0.5">₦200 farm cost → ₦700 retail</p>
+            </div>
+
+            <div class="bg-stone-50 p-3 rounded-2xl border border-stone-200/80">
+              <span class="text-[10px] font-extrabold uppercase text-stone-400 block">Cold-Pressed Oils</span>
+              <span class="font-serif text-xl font-bold text-stone-900 block mt-0.5">60.0% Margin</span>
+              <p class="text-[10px] text-stone-500 mt-0.5">₦8k expeller cost → ₦20k/L</p>
+            </div>
+
+            <div class="bg-stone-50 p-3 rounded-2xl border border-stone-200/80">
+              <span class="text-[10px] font-extrabold uppercase text-stone-400 block">Organic Strawberries</span>
+              <span class="font-serif text-xl font-bold text-brand-orange block mt-0.5">57.1% Margin</span>
+              <p class="text-[10px] text-stone-500 mt-0.5">₦3k bed cost → ₦7k/kg</p>
+            </div>
+
+            <div class="bg-stone-50 p-3 rounded-2xl border border-stone-200/80">
+              <span class="text-[10px] font-extrabold uppercase text-stone-400 block">Irish Potato Sacks</span>
+              <span class="font-serif text-xl font-bold text-amber-700 block mt-0.5">26.6% Margin</span>
+              <p class="text-[10px] text-stone-500 mt-0.5">₦110k wholesale → ₦150k bag</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= VIEW 2: HARVEST KDS & PIPELINE (JAYS BISTRO KITCHEN KANBAN) ================= -->
+    <section id="view-pipeline" class="tab-view hidden space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-stone-200 shadow-xs">
         <div>
-          <h2 class="font-serif text-xl font-bold text-stone-900">Inventory &amp; Market Price Management</h2>
-          <p class="text-xs text-stone-500">Live pricing and stock toggles for all 53 DD MAIGONA items.</p>
+          <span class="text-[10px] font-extrabold uppercase tracking-wider text-brand-green">Jays Bistro Kitchen Display System (KDS)</span>
+          <h2 class="font-serif text-xl font-bold text-stone-900">Live Harvest &amp; Dispatch Pipeline</h2>
+          <p class="text-xs text-stone-500">Real-time order stage routing with 72-hour fresh herb SLA countdown timers.</p>
         </div>
         <div class="flex items-center gap-2">
-          <input id="imsSearchInput" type="text" placeholder="Search catalog..." oninput="renderImsTable()" class="px-3 py-1.5 bg-stone-50 border border-stone-200 rounded-lg text-xs outline-none focus:ring-1 focus:ring-brand-green w-48"/>
-          <select id="imsCategoryFilter" onchange="renderImsTable()" class="px-3 py-1.5 bg-stone-50 border border-stone-200 rounded-lg text-xs font-semibold outline-none cursor-pointer">
-            <option value="All">All Categories</option>
-            <option value="fresh-produce">Fresh Produce</option>
-            <option value="fresh-herbs">Fresh Herbs</option>
-            <option value="dried-spices">Dried Spices</option>
-            <option value="oils">Pure Oils</option>
+          <button onclick="injectMockHarvestOrder()" class="px-3.5 py-2 bg-brand-soil hover:bg-brand-orange text-white text-xs font-bold rounded-xl transition-all shadow flex items-center gap-1.5">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i> Simulate Inbound Order
+          </button>
+        </div>
+      </div>
+
+      <!-- Jays Bistro 4-Stage KDS Board -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 overflow-x-auto pb-4">
+        
+        <!-- STAGE 1: Queued for Harvest -->
+        <div class="bg-stone-100/90 rounded-2xl p-3 border border-stone-200 flex flex-col min-h-[500px]">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-stone-200">
+            <span class="text-xs font-bold text-emerald-800 flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span> 1. Harvest Queued
+            </span>
+            <span id="badge-stage-harvest_queued" class="text-[10px] font-extrabold bg-white px-2 py-0.5 rounded-full text-stone-700 shadow-xs">0</span>
+          </div>
+          <div id="cards-stage-harvest_queued" class="space-y-3 flex-1 overflow-y-auto"></div>
+        </div>
+
+        <!-- STAGE 2: Harvested & Cold Packing -->
+        <div class="bg-stone-100/90 rounded-2xl p-3 border border-stone-200 flex flex-col min-h-[500px]">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-stone-200">
+            <span class="text-xs font-bold text-blue-800 flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span> 2. Cold-Chain Packing
+            </span>
+            <span id="badge-stage-harvested_packed" class="text-[10px] font-extrabold bg-white px-2 py-0.5 rounded-full text-stone-700 shadow-xs">0</span>
+          </div>
+          <div id="cards-stage-harvested_packed" class="space-y-3 flex-1 overflow-y-auto"></div>
+        </div>
+
+        <!-- STAGE 3: In Transit -->
+        <div class="bg-stone-100/90 rounded-2xl p-3 border border-stone-200 flex flex-col min-h-[500px]">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-stone-200">
+            <span class="text-xs font-bold text-purple-800 flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-purple-600"></span> 3. Out For Delivery
+            </span>
+            <span id="badge-stage-out_for_delivery" class="text-[10px] font-extrabold bg-white px-2 py-0.5 rounded-full text-stone-700 shadow-xs">0</span>
+          </div>
+          <div id="cards-stage-out_for_delivery" class="space-y-3 flex-1 overflow-y-auto"></div>
+        </div>
+
+        <!-- STAGE 4: Completed & Settled -->
+        <div class="bg-stone-100/90 rounded-2xl p-3 border border-stone-200 flex flex-col min-h-[500px]">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-stone-200">
+            <span class="text-xs font-bold text-stone-700 flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-stone-500"></span> 4. Settled &amp; Closed
+            </span>
+            <span id="badge-stage-completed" class="text-[10px] font-extrabold bg-white px-2 py-0.5 rounded-full text-stone-700 shadow-xs">0</span>
+          </div>
+          <div id="cards-stage-completed" class="space-y-3 flex-1 overflow-y-auto"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= VIEW 3: INVENTORY IMS & MARGIN MATRIX (SPOTLEX SAAS) ================= -->
+    <section id="view-inventory" class="tab-view hidden space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-stone-200 shadow-xs">
+        <div>
+          <span class="text-[10px] font-extrabold uppercase tracking-wider text-brand-orange">Spotlex Master Inventory Control</span>
+          <h2 class="font-serif text-xl font-bold text-stone-900">53-Product Catalog, COGS &amp; Stock Toggles</h2>
+          <p class="text-xs text-stone-500">Live prices auto-synchronize directly with the consumer storefront.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <input id="imsSearchInput" type="text" placeholder="Search 53 items..." oninput="renderImsTable()" class="px-3.5 py-2 bg-stone-50 border border-stone-200 rounded-xl text-xs outline-none focus:ring-1 focus:ring-brand-green w-48"/>
+          <select id="imsCategoryFilter" onchange="renderImsTable()" class="px-3 py-2 bg-stone-50 border border-stone-200 rounded-xl text-xs font-semibold outline-none cursor-pointer">
+            <option value="All">All Categories (53)</option>
+            <option value="fresh-produce">Strawberries &amp; Tubers</option>
+            <option value="fresh-herbs">Fresh Herbs (72h)</option>
+            <option value="dried-spices">Dried Spices (100g)</option>
+            <option value="oils">Pure Oils (1L)</option>
           </select>
         </div>
       </div>
 
-      <!-- Inventory Table -->
-      <div class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm">
+      <!-- Master Inventory Table -->
+      <div class="bg-white rounded-3xl border border-stone-200 overflow-hidden shadow-xs">
         <div class="overflow-x-auto">
           <table class="w-full text-left text-xs">
-            <thead class="bg-stone-50 text-stone-500 uppercase font-bold text-[10px] border-b border-stone-200 tracking-wider">
+            <thead class="bg-stone-50 text-stone-500 uppercase font-extrabold text-[10px] border-b border-stone-200 tracking-wider">
               <tr>
-                <th class="px-4 py-3">Product Name</th>
-                <th class="px-3 py-3">Category</th>
-                <th class="px-3 py-3">Current Price (₦)</th>
-                <th class="px-3 py-3">Unit</th>
-                <th class="px-3 py-3">Logistics</th>
-                <th class="px-3 py-3">Stock State</th>
-                <th class="px-4 py-3 text-right">Instant Action</th>
+                <th class="px-4 py-3.5">Product</th>
+                <th class="px-3 py-3.5">Category</th>
+                <th class="px-3 py-3.5">COGS Cost</th>
+                <th class="px-3 py-3.5">Retail Price (₦)</th>
+                <th class="px-3 py-3.5">Margin %</th>
+                <th class="px-3 py-3.5">Logistics</th>
+                <th class="px-3 py-3.5">Stock State</th>
+                <th class="px-4 py-3.5 text-right">Instant Toggle</th>
               </tr>
             </thead>
             <tbody id="imsTableBody" class="divide-y divide-stone-100"></tbody>
           </table>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- ================= TAB 3: ORDERS & DEPOSITS ================= -->
-    <div id="view-orders" class="tab-view hidden space-y-4">
-      <div class="bg-white p-4 rounded-2xl border border-stone-200">
-        <h2 class="font-serif text-xl font-bold text-stone-900">All Orders &amp; 30% Escrow Auditor</h2>
-        <p class="text-xs text-stone-500">Track balance payments upon dispatch and verify transfer references.</p>
+    <!-- ================= VIEW 4: FIELD HARVEST PICKLIST (JAYS BISTRO PREP SHEET) ================= -->
+    <section id="view-harvest-sheet" class="tab-view hidden space-y-4">
+      <div class="bg-white p-5 rounded-3xl border border-stone-200 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <span class="text-[10px] font-extrabold uppercase tracking-wider text-brand-green">Jays Bistro Kitchen Prep Sheet Adaptation</span>
+          <h2 class="font-serif text-xl font-bold text-stone-900">Today's Field Harvest Picking Sheet</h2>
+          <p class="text-xs text-stone-500">Live aggregate picking manifest calculated across all active harvest orders in Abuja beds.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="window.print()" class="px-4 py-2 bg-stone-100 hover:bg-stone-200 text-stone-800 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+            <i data-lucide="printer" class="w-4 h-4"></i> Print Manifest
+          </button>
+          <button onclick="shareHarvestSheetWhatsApp()" class="px-4 py-2 bg-[#25D366] hover:bg-[#20be5a] text-stone-950 rounded-xl text-xs font-extrabold transition flex items-center gap-1.5 shadow">
+            <i data-lucide="share-2" class="w-4 h-4"></i> Send to Farm Crew (WhatsApp)
+          </button>
+        </div>
       </div>
-      <div class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm">
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Picklist Items Container -->
+        <div class="md:col-span-2 bg-white p-5 rounded-3xl border border-stone-200 shadow-xs space-y-3">
+          <h3 class="font-serif text-base font-bold text-stone-900 border-b border-stone-100 pb-2">
+            Perishable Crops to Cut &amp; Package
+          </h3>
+          <div id="harvestPicklistContainer" class="space-y-2.5">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Packing & Cold-Chain Checklist -->
+        <div class="bg-stone-50 p-5 rounded-3xl border border-stone-200 space-y-4">
+          <h3 class="font-serif text-base font-bold text-stone-900 border-b border-stone-200 pb-2">
+            Cold-Chain Packing Checklist
+          </h3>
+          <ul class="text-xs text-stone-600 space-y-2.5">
+            <li class="flex items-start gap-2">
+              <i data-lucide="check-square" class="w-4 h-4 text-brand-green mt-0.5 shrink-0"></i>
+              <span><strong>Morning Dew Harvesting:</strong> Mint, Basil &amp; Rosemary cut between 6:30AM – 8:30AM to prevent thermal wilting.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i data-lucide="check-square" class="w-4 h-4 text-brand-green mt-0.5 shrink-0"></i>
+              <span><strong>Strawberry Cold Pack:</strong> Flash-frozen or ripe strawberries insulated with thermal foil and reusable cold gel packs.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i data-lucide="check-square" class="w-4 h-4 text-brand-green mt-0.5 shrink-0"></i>
+              <span><strong>Kaduna Express Dispatch:</strong> Transfer to interstate temperature-safe transport by 10:30AM latest.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 5: ORDER BOOK & CRM (SPOTLEX DIRECT DESK) ================= -->
+    <section id="view-orders" class="tab-view hidden space-y-4">
+      <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-xs flex items-center justify-between">
+        <div>
+          <span class="text-[10px] font-extrabold uppercase tracking-wider text-purple-600">Spotlex Client Book</span>
+          <h2 class="font-serif text-xl font-bold text-stone-900">Direct Customer Orders &amp; CRM</h2>
+        </div>
+        <span class="text-xs font-bold text-stone-500" id="orderCountPill">0 Total Orders</span>
+      </div>
+
+      <div class="bg-white rounded-3xl border border-stone-200 overflow-hidden shadow-xs">
         <div class="overflow-x-auto">
           <table class="w-full text-left text-xs">
-            <thead class="bg-stone-50 text-stone-500 uppercase font-bold text-[10px] border-b border-stone-200 tracking-wider">
+            <thead class="bg-stone-50 text-stone-500 uppercase font-extrabold text-[10px] border-b border-stone-200 tracking-wider">
               <tr>
-                <th class="px-4 py-3">Order ID</th>
-                <th class="px-3 py-3">Customer</th>
-                <th class="px-3 py-3">Zone</th>
-                <th class="px-3 py-3">Items</th>
-                <th class="px-3 py-3">Gross Total</th>
-                <th class="px-3 py-3">30% Deposit Status</th>
-                <th class="px-3 py-3">70% Balance Due</th>
-                <th class="px-4 py-3 text-right">Actions</th>
+                <th class="px-4 py-3.5">Order ID</th>
+                <th class="px-3 py-3.5">Customer / Contact</th>
+                <th class="px-3 py-3.5">Zone &amp; Address</th>
+                <th class="px-3 py-3.5">Items Ordered</th>
+                <th class="px-3 py-3.5">Total (₦)</th>
+                <th class="px-3 py-3.5">Payment</th>
+                <th class="px-3 py-3.5">Status</th>
+                <th class="px-4 py-3.5 text-right">Direct Client Action</th>
               </tr>
             </thead>
             <tbody id="ordersTableBody" class="divide-y divide-stone-100"></tbody>
           </table>
         </div>
       </div>
-    </div>
+    </section>
 
   </main>
 
-  <!-- ================= JAYS BISTRO HARVEST PICKING SHEET MODAL ================= -->
-  <div id="harvestSheetModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
-    <div onclick="closeHarvestPickingSheetModal()" class="absolute inset-0 bg-stone-950/60 backdrop-blur-sm"></div>
-    <div class="relative bg-white rounded-3xl shadow-2xl max-w-lg w-full p-6 z-10 border border-stone-200 max-h-[85vh] overflow-y-auto">
-      <div class="flex items-center justify-between mb-3 border-b border-stone-100 pb-3">
-        <div>
-          <span class="text-[10px] font-extrabold uppercase tracking-widest text-brand-green">Jays Bistro Kitchen / Harvest Manifest</span>
-          <h3 class="font-serif text-xl font-bold text-stone-900">Today's Harvest Picking Sheet</h3>
-        </div>
-        <button onclick="closeHarvestPickingSheetModal()" class="p-1 text-stone-400 hover:text-stone-900"><i data-lucide="x" class="w-5 h-5"></i></button>
-      </div>
-
-      <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-xs text-emerald-950 mb-4">
-        🌿 <strong>Harvest Security:</strong> Only orders with <strong>Verified 30% Advance Deposits</strong> are included in this batch picking tally.
-      </div>
-
-      <div id="harvestPickingTally" class="space-y-2 mb-6"></div>
-
-      <div class="flex gap-2">
-        <button onclick="window.print()" class="w-1/2 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-800 font-bold rounded-xl text-xs flex items-center justify-center gap-1.5">
-          <i data-lucide="printer" class="w-4 h-4"></i> Print Manifest
-        </button>
-        <button onclick="closeHarvestPickingSheetModal()" class="w-1/2 py-2.5 bg-brand-soil hover:bg-brand-orange text-white font-bold rounded-xl text-xs transition-colors">
-          Done
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ================= SPOTLEX INFLATION / VOLATILITY MODAL ================= -->
+  <!-- ================= INFLATION & SCARCITY PRICE OVERRIDE MODAL ================= -->
   <div id="inflationModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
     <div onclick="closeInflationModal()" class="absolute inset-0 bg-stone-950/60 backdrop-blur-sm"></div>
     <div class="relative bg-white rounded-3xl shadow-2xl max-w-sm w-full p-6 z-10 border border-stone-200 text-center">
-      <div class="w-10 h-10 rounded-xl bg-orange-100 text-brand-orange flex items-center justify-center mx-auto mb-2.5">
-        <i data-lucide="trending-up" class="w-5 h-5"></i>
+      <div class="w-11 h-11 rounded-2xl bg-orange-100 text-brand-orange flex items-center justify-center mx-auto mb-3">
+        <i data-lucide="trending-up" class="w-6 h-6"></i>
       </div>
-      <h3 class="font-serif text-lg font-bold text-stone-900">Batch Price Adjustment</h3>
-      <p class="text-xs text-stone-500 mb-4">Quickly adjust prices across categories to reflect market scarcity.</p>
+      <h3 class="font-serif text-lg font-bold text-stone-900">Market Price Adjuster</h3>
+      <p class="text-xs text-stone-500 mb-4">Batch markup product categories in real time to counteract farm inflation and seasonal scarcity.</p>
 
-      <div class="space-y-3 text-left mb-5">
+      <div class="space-y-3.5 text-left mb-6">
         <div>
-          <label class="block text-[10px] font-bold uppercase text-stone-500 mb-1">Target Category</label>
-          <select id="markupCategorySelect" class="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-xl text-xs font-semibold">
-            <option value="all">All 53 Items</option>
-            <option value="fresh-produce">Fresh Produce (Strawberries &amp; Veg)</option>
-            <option value="fresh-herbs">Fresh Herbs (72h)</option>
+          <label class="block text-[10px] font-extrabold uppercase text-stone-500 mb-1">Target Category</label>
+          <select id="markupCategorySelect" class="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-xl text-xs font-semibold outline-none">
+            <option value="all">All 53 Products</option>
+            <option value="fresh-produce">Strawberries &amp; Tubers</option>
+            <option value="fresh-herbs">Fresh Cut Herbs (72h)</option>
             <option value="dried-spices">Dried Spices (100g)</option>
             <option value="oils">Pure Oils (1L)</option>
           </select>
         </div>
+
         <div>
-          <label class="block text-[10px] font-bold uppercase text-stone-500 mb-1">Percentage Markup</label>
-          <div class="grid grid-cols-4 gap-1.5">
-            <button onclick="applyBatchMarkup(5)" class="py-1.5 bg-stone-100 hover:bg-brand-orange hover:text-white font-bold rounded-lg text-xs">+5%</button>
-            <button onclick="applyBatchMarkup(10)" class="py-1.5 bg-stone-100 hover:bg-brand-orange hover:text-white font-bold rounded-lg text-xs">+10%</button>
-            <button onclick="applyBatchMarkup(15)" class="py-1.5 bg-stone-100 hover:bg-brand-orange hover:text-white font-bold rounded-lg text-xs">+15%</button>
-            <button onclick="applyBatchMarkup(20)" class="py-1.5 bg-stone-100 hover:bg-brand-orange hover:text-white font-bold rounded-lg text-xs">+20%</button>
+          <label class="block text-[10px] font-extrabold uppercase text-stone-500 mb-1">Instant Percentage Markup</label>
+          <div class="grid grid-cols-4 gap-2">
+            <button onclick="applyBatchMarkup(5)" class="py-2 bg-stone-100 hover:bg-brand-orange hover:text-white font-extrabold rounded-xl text-xs transition">+5%</button>
+            <button onclick="applyBatchMarkup(10)" class="py-2 bg-stone-100 hover:bg-brand-orange hover:text-white font-extrabold rounded-xl text-xs transition">+10%</button>
+            <button onclick="applyBatchMarkup(15)" class="py-2 bg-stone-100 hover:bg-brand-orange hover:text-white font-extrabold rounded-xl text-xs transition">+15%</button>
+            <button onclick="applyBatchMarkup(20)" class="py-2 bg-stone-100 hover:bg-brand-orange hover:text-white font-extrabold rounded-xl text-xs transition">+20%</button>
           </div>
         </div>
       </div>
 
-      <button onclick="closeInflationModal()" class="text-xs text-stone-400 hover:text-stone-700 font-semibold">Cancel</button>
+      <button onclick="closeInflationModal()" class="w-full py-2 bg-stone-100 text-stone-600 font-bold rounded-xl text-xs hover:bg-stone-200 transition">
+        Cancel
+      </button>
     </div>
   </div>
 
-  <!-- APPLICATION LOGIC -->
+  <!-- ================= NOTIFICATION TOAST ================= -->
+  <div id="toastAlert" class="fixed top-16 right-5 z-50 hidden bg-brand-soil text-white px-4 py-3 rounded-2xl shadow-xl border border-stone-700 text-xs font-bold flex items-center gap-2.5 transition-all">
+    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+    <span id="toastMsg">Action confirmed</span>
+  </div>
+
+  <!-- ================= COMPREHENSIVE SCRIPT ENGINE ================= -->
   <script>
-    const DEFAULT_PRODUCTS = [
-      { id: "prod-strawberry-fresh", name: "Fresh Strawberries (Regular)", category: "fresh-produce", price: 7000, unit: "per kg", stock: 40, isPerishable: true, isSoldOut: false },
-      { id: "prod-strawberry-organic", name: "Fresh Strawberries (Organic)", category: "fresh-produce", price: 7000, unit: "per kg", stock: 35, isPerishable: true, isSoldOut: false },
-      { id: "prod-potatoes", name: "Farm Irish Potatoes (Full Bag)", category: "fresh-produce", price: 150000, unit: "full bag", stock: 15, isPerishable: true, isSoldOut: false },
-      { id: "herb-mint", name: "Fresh Mint", category: "fresh-herbs", price: 700, unit: "per bunch", stock: 45, isPerishable: true, isSoldOut: false },
-      { id: "herb-curry", name: "Fresh Curry Leaves", category: "fresh-herbs", price: 700, unit: "per bunch", stock: 40, isPerishable: true, isSoldOut: false },
-      { id: "herb-rosemary", name: "Fresh Rosemary", category: "fresh-herbs", price: 700, unit: "per bunch", stock: 40, isPerishable: true, isSoldOut: false },
-      { id: "herb-basil", name: "Fresh Sweet Basil", category: "fresh-herbs", price: 700, unit: "per bunch", stock: 40, isPerishable: true, isSoldOut: false },
-      { id: "herb-parsley", name: "Fresh Parsley", category: "fresh-herbs", price: 700, unit: "per bunch", stock: 40, isPerishable: true, isSoldOut: false },
-      { id: "herb-celery", name: "Fresh Celery", category: "fresh-herbs", price: 700, unit: "per bunch", stock: 35, isPerishable: true, isSoldOut: false },
-      { id: "herb-chives", name: "Fresh Chives", category: "fresh-herbs", price: 800, unit: "per bunch", stock: 30, isPerishable: true, isSoldOut: false },
-      { id: "herb-thyme", name: "Fresh Thyme", category: "fresh-herbs", price: 800, unit: "per bunch", stock: 35, isPerishable: true, isSoldOut: false },
-      { id: "herb-leek", name: "Fresh Leek", category: "fresh-herbs", price: 800, unit: "per bunch", stock: 30, isPerishable: true, isSoldOut: false },
-      { id: "herb-lemongrass", name: "Fresh Lemongrass", category: "fresh-herbs", price: 800, unit: "per bunch", stock: 35, isPerishable: true, isSoldOut: false },
-      { id: "herb-cilantro", name: "Fresh Cilantro", category: "fresh-herbs", price: 700, unit: "per bunch", stock: 35, isPerishable: true, isSoldOut: false },
-      { id: "spice-figs", name: "Dried Figs", category: "dried-spices", price: 3000, unit: "per 100g", stock: 0, isPerishable: false, isSoldOut: true },
-      { id: "spice-cumin", name: "Cumin Seeds", category: "dried-spices", price: 2000, unit: "per 100g", stock: 60, isPerishable: false, isSoldOut: false },
-      { id: "spice-garlic", name: "Dried Garlic", category: "dried-spices", price: 2000, unit: "per 100g", stock: 55, isPerishable: false, isSoldOut: false },
-      { id: "spice-ginger", name: "Dried Ginger", category: "dried-spices", price: 2000, unit: "per 100g", stock: 55, isPerishable: false, isSoldOut: false },
-      { id: "spice-ginseng", name: "Pure Ginseng", category: "dried-spices", price: 4000, unit: "per 100g", stock: 30, isPerishable: false, isSoldOut: false },
-      { id: "spice-turmeric", name: "Powdered Turmeric", category: "dried-spices", price: 2500, unit: "per 100g", stock: 0, isPerishable: false, isSoldOut: true },
-      { id: "spice-cinnamon-pwd", name: "Ground Cinnamon", category: "dried-spices", price: 3500, unit: "per 100g", stock: 45, isPerishable: false, isSoldOut: false },
-      { id: "spice-cardamom", name: "Green Cardamom", category: "dried-spices", price: 6000, unit: "per 100g", stock: 30, isPerishable: false, isSoldOut: false },
-      { id: "spice-chia", name: "Chia Seeds", category: "dried-spices", price: 2000, unit: "per 100g", stock: 50, isPerishable: false, isSoldOut: false },
-      { id: "spice-chebe", name: "Authentic Chebe Powder", category: "dried-spices", price: 2000, unit: "per 100g", stock: 40, isPerishable: false, isSoldOut: false },
-      { id: "spice-moringa-pwd", name: "Moringa Powder", category: "dried-spices", price: 2000, unit: "per 100g", stock: 50, isPerishable: false, isSoldOut: false },
-      { id: "oil-coconut", name: "Virgin Coconut Oil", category: "oils", price: 15000, unit: "per liter", stock: 25, isPerishable: false, isSoldOut: false },
-      { id: "oil-neem", name: "Raw Neem Oil", category: "oils", price: 10000, unit: "per liter", stock: 25, isPerishable: false, isSoldOut: false },
-      { id: "oil-black-seed", name: "Pure Black Seed Oil", category: "oils", price: 20000, unit: "per liter", stock: 20, isPerishable: false, isSoldOut: false },
-      { id: "oil-fenugreek", name: "Fenugreek Oil", category: "oils", price: 0, unit: "Price TBC", stock: 20, isPerishable: false, isSoldOut: false }
+    // 53-Product Master Catalog with Cost of Goods Sold (COGS) for Jays Bistro Margin Analysis
+    const MASTER_INVENTORY = [
+      // Fresh Produce
+      { id: "prod-strawberry-fresh", name: "Fresh Strawberries (Regular)", category: "fresh-produce", categoryLabel: "Berries", costPrice: 3000, price: 7000, unit: "per kg", stock: 40, isPerishable: true, leadTime: "On Request", isSoldOut: false },
+      { id: "prod-strawberry-organic", name: "Fresh Strawberries (Organic)", category: "fresh-produce", categoryLabel: "Berries", costPrice: 3200, price: 7000, unit: "per kg", stock: 35, isPerishable: true, leadTime: "On Request", isSoldOut: false },
+      { id: "prod-potatoes", name: "Farm Irish Potatoes (Full Bag)", category: "fresh-produce", categoryLabel: "Bulk Produce", costPrice: 110000, price: 150000, unit: "full bag", stock: 15, isPerishable: true, leadTime: "Pre-Order", isSoldOut: false },
+      
+      // Fresh Herbs (11) - 72h SLA
+      { id: "herb-mint", name: "Fresh Mint", category: "fresh-herbs", categoryLabel: "Fresh Herbs", costPrice: 200, price: 700, unit: "per bunch", stock: 45, isPerishable: true, leadTime: "72hrs", isSoldOut: false },
+      { id: "herb-curry", name: "Fresh Curry Leaves", category: "fresh-herbs", categoryLabel: "Fresh Herbs", costPrice: 200, price: 700, unit: "per bunch", stock: 40, isPerishable: true, leadTime: "72hrs", isSoldOut: false },
+      { id: "herb-rosemary", name: "Fresh Rosemary", category: "fresh-herbs", categoryLabel: "Fresh Herbs", costPrice: 200, price: 700, unit: "per bunch", stock: 40, isPerishable: true, leadTime: "72hrs", isSoldOut: false },
+      { id: "herb-basil", name: "Fresh Sweet Basil", category: "fresh-herbs", categoryLabel: "Fresh Herbs", costPrice: 200, price: 700, unit: "per bunch", stock: 40, isPerishable: true, leadTime: "72hrs", isSoldOut: false },
+      { id: "herb-parsley", name: "Fresh Parsley", category: "fresh-herbs", categoryLabel: "Fresh Herbs", costPrice: 200, price: 700, unit: "per bunch", stock: 40, isPerishable: true, leadTime: "72hrs", isSoldOut: false },
+      { id: "herb-celery", name: "Fresh Celery", category: "fresh-herbs", categoryLabel: "Fresh Herbs", costPrice: 200, price: 700, unit: "per bunch", stock: 35, isPerishable: true, leadTime: "72hrs", isSoldOut: false },
+      { id: "herb-chives", name: "Fresh Chives", category: "fresh-herbs", categoryLabel: "Fresh Herbs", costPrice: 250, price: 800, unit: "per bunch", stock: 30, isPerishable: true, leadTime: "72hrs", isSoldOut: false },
+      { id: "herb-thyme", name: "Fresh Thyme", category: "fresh-herbs", categoryLabel: "Fresh Herbs", costPrice: 250, price: 800, unit: "per bunch", stock: 35, isPerishable: true, leadTime: "72hrs", isSoldOut: false },
+      { id: "herb-leek", name: "Fresh Leek", category: "fresh-herbs", categoryLabel: "Fresh Herbs", costPrice: 250, price: 800, unit: "per bunch", stock: 30, isPerishable: true, leadTime: "72hrs", isSoldOut: false },
+      { id: "herb-lemongrass", name: "Fresh Lemongrass", category: "fresh-herbs", categoryLabel: "Fresh Herbs", costPrice: 250, price: 800, unit: "per bunch", stock: 35, isPerishable: true, leadTime: "72hrs", isSoldOut: false },
+      { id: "herb-cilantro", name: "Fresh Cilantro", category: "fresh-herbs", categoryLabel: "Fresh Herbs", costPrice: 200, price: 700, unit: "per bunch", stock: 35, isPerishable: true, leadTime: "72hrs", isSoldOut: false },
+
+      // Dried Spices (35)
+      { id: "spice-figs", name: "Dried Figs", category: "dried-spices", categoryLabel: "Dried Spices", costPrice: 1500, price: 3000, unit: "per 100g", stock: 0, isPerishable: false, leadTime: "Restocking", isSoldOut: true },
+      { id: "spice-cumin", name: "Cumin Seeds", category: "dried-spices", categoryLabel: "Dried Spices", costPrice: 800, price: 2000, unit: "per 100g", stock: 60, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-garlic", name: "Dried Garlic", category: "dried-spices", categoryLabel: "Dried Spices", costPrice: 700, price: 2000, unit: "per 100g", stock: 55, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-ginger", name: "Dried Ginger", category: "dried-spices", categoryLabel: "Dried Spices", costPrice: 600, price: 2000, unit: "per 100g", stock: 55, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-ginseng", name: "Pure Ginseng", category: "dried-spices", categoryLabel: "Botanicals", costPrice: 1800, price: 4000, unit: "per 100g", stock: 30, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-coriander", name: "Coriander Seeds", category: "dried-spices", categoryLabel: "Dried Spices", costPrice: 750, price: 2000, unit: "per 100g", stock: 50, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-turmeric", name: "Powdered Turmeric", category: "dried-spices", categoryLabel: "Dried Spices", costPrice: 900, price: 2500, unit: "per 100g", stock: 0, isPerishable: false, leadTime: "Restocking", isSoldOut: true },
+      { id: "spice-cinnamon-pwd", name: "Ground Cinnamon", category: "dried-spices", categoryLabel: "Dried Spices", costPrice: 1200, price: 3500, unit: "per 100g", stock: 45, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-cinnamon-sticks", name: "Cinnamon Sticks", category: "dried-spices", categoryLabel: "Dried Spices", costPrice: 1000, price: 3000, unit: "per 100g", stock: 45, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-black-pepper", name: "Black Pepper", category: "dried-spices", categoryLabel: "Dried Spices", costPrice: 1100, price: 3000, unit: "per 100g", stock: 50, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-black-seeds", name: "Black Seeds (Nigella)", category: "dried-spices", categoryLabel: "Seeds", costPrice: 500, price: 1500, unit: "per 100g", stock: 60, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-baobab", name: "Baobab Powder (200g)", category: "dried-spices", categoryLabel: "Superfoods", costPrice: 800, price: 2000, unit: "per 200g", stock: 40, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-fenugreek", name: "Fenugreek Seeds", category: "dried-spices", categoryLabel: "Seeds", costPrice: 600, price: 1500, unit: "per 100g", stock: 50, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-cardamom", name: "Green Cardamom", category: "dried-spices", categoryLabel: "Dried Spices", costPrice: 2800, price: 6000, unit: "per 100g", stock: 30, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-cayenne", name: "Cayenne Powder", category: "dried-spices", categoryLabel: "Dried Spices", costPrice: 700, price: 2000, unit: "per 100g", stock: 55, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-chamomile", name: "Dried Chamomile", category: "dried-spices", categoryLabel: "Teas", costPrice: 800, price: 2000, unit: "per 100g", stock: 35, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-chia", name: "Chia Seeds", category: "dried-spices", categoryLabel: "Superseeds", costPrice: 800, price: 2000, unit: "per 100g", stock: 50, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-chebe", name: "Chebe Powder", category: "dried-spices", categoryLabel: "Care", costPrice: 700, price: 2000, unit: "per 100g", stock: 40, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-dill", name: "Dill Seeds", category: "dried-spices", categoryLabel: "Dried Spices", costPrice: 700, price: 2000, unit: "per 100g", stock: 40, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-flax", name: "Flax Seeds", category: "dried-spices", categoryLabel: "Superseeds", costPrice: 800, price: 2000, unit: "per 100g", stock: 50, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-licorice", name: "Licorice Root", category: "dried-spices", categoryLabel: "Roots", costPrice: 800, price: 2000, unit: "per 100g", stock: 35, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-maca", name: "Maca Root", category: "dried-spices", categoryLabel: "Superfoods", costPrice: 2000, price: 4500, unit: "per 100g", stock: 30, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-minanas", name: "Minanas", category: "dried-spices", categoryLabel: "Teas", costPrice: 1200, price: 3000, unit: "per 100g", stock: 30, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-dried-mint", name: "Dried Mint Leaves", category: "dried-spices", categoryLabel: "Teas", costPrice: 350, price: 1000, unit: "per 100g", stock: 55, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-miracle-seeds", name: "Miracle Seeds", category: "dried-spices", categoryLabel: "Seeds", costPrice: 1100, price: 3000, unit: "per 100g", stock: 30, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-moringa-pwd", name: "Moringa Powder", category: "dried-spices", categoryLabel: "Superfoods", costPrice: 800, price: 2000, unit: "per 100g", stock: 50, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-moringa-seeds", name: "Moringa Seeds", category: "dried-spices", categoryLabel: "Seeds", costPrice: 750, price: 2000, unit: "per 100g", stock: 45, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-neem-pwd", name: "Neem Powder", category: "dried-spices", categoryLabel: "Care", costPrice: 400, price: 1000, unit: "per 100g", stock: 50, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-oregano", name: "Dried Oregano", category: "dried-spices", categoryLabel: "Dried Spices", costPrice: 1000, price: 2500, unit: "per 100g", stock: 45, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-sage", name: "Dried Sage", category: "dried-spices", categoryLabel: "Dried Spices", costPrice: 1000, price: 2500, unit: "per 100g", stock: 40, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-sesame", name: "Sesame Seeds", category: "dried-spices", categoryLabel: "Seeds", costPrice: 800, price: 2000, unit: "per 100g", stock: 55, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-star-anise", name: "Whole Star Anise", category: "dried-spices", categoryLabel: "Dried Spices", costPrice: 1200, price: 3000, unit: "per 100g", stock: 40, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-cloves", name: "Whole Cloves", category: "dried-spices", categoryLabel: "Dried Spices", costPrice: 2000, price: 4500, unit: "per 100g", stock: 45, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-fennel", name: "Fennel Seeds", category: "dried-spices", categoryLabel: "Dried Spices", costPrice: 750, price: 2000, unit: "per 100g", stock: 45, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "spice-date-powder", name: "Date Powder (Debino)", category: "dried-spices", categoryLabel: "Sweeteners", costPrice: 600, price: 1500, unit: "per 100g", stock: 60, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+
+      // Pure Oils (4)
+      { id: "oil-coconut", name: "Virgin Coconut Oil", category: "oils", categoryLabel: "Pure Oils", costPrice: 6000, price: 15000, unit: "per liter", stock: 25, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "oil-neem", name: "Raw Neem Oil", category: "oils", categoryLabel: "Pure Oils", costPrice: 4000, price: 10000, unit: "per liter", stock: 25, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "oil-black-seed", name: "Pure Black Seed Oil", category: "oils", categoryLabel: "Pure Oils", costPrice: 8000, price: 20000, unit: "per liter", stock: 20, isPerishable: false, leadTime: "Nationwide", isSoldOut: false },
+      { id: "oil-fenugreek", name: "Fenugreek Oil", category: "oils", categoryLabel: "Pure Oils", costPrice: 0, price: 0, unit: "Price TBC", stock: 20, isPerishable: false, leadTime: "Ask Quote", isSoldOut: false }
     ];
 
     let inventory = [];
     try {
       const stored = localStorage.getItem('ddmaigona_master_catalog');
-      inventory = stored ? JSON.parse(stored) : DEFAULT_PRODUCTS;
+      inventory = stored ? JSON.parse(stored) : MASTER_INVENTORY;
     } catch(e) {
-      inventory = DEFAULT_PRODUCTS;
+      inventory = MASTER_INVENTORY;
     }
 
     function saveInventory() {
       localStorage.setItem('ddmaigona_master_catalog', JSON.stringify(inventory));
     }
 
-    // Orders Database (Jays Bistro Pipeline)
+    // Orders Database with Timestamps for 72hr SLA Countdown
     let orders = [
       {
-        id: "DDM-801",
-        customer: "Amina Bello",
+        id: "DDM-901",
+        customer: "Hadiza Mohammed",
         phone: "08034455112",
         zone: "Abuja",
-        stage: "deposit_pending",
-        depositStatus: "pending",
+        address: "Maitama District, Abuja",
+        stage: "harvest_queued",
+        orderTime: new Date(Date.now() - 32 * 3600000).toISOString(), // 32 hrs elapsed
         grossTotal: 21000,
-        depositAmount: 6300,
-        balanceDue: 14700,
+        paymentStatus: "paid",
+        paymentRef: "PAY-ABJ-8912",
         items: [
-          { name: "Fresh Strawberries (Regular)", qty: 2, price: 7000 },
-          { name: "Fresh Mint", qty: 5, price: 700 },
-          { name: "Fresh Rosemary", qty: 5, price: 700 }
-        ]
+          { id: "prod-strawberry-fresh", name: "Fresh Strawberries (Regular)", qty: 2, unit: "kg", price: 7000, isPerishable: true },
+          { id: "herb-mint", name: "Fresh Mint", qty: 5, unit: "bunch", price: 700, isPerishable: true },
+          { id: "herb-rosemary", name: "Fresh Rosemary", qty: 5, unit: "bunch", price: 700, isPerishable: true }
+        ],
+        customerNotes: "Please deliver before 3PM."
       },
       {
-        id: "DDM-802",
-        customer: "Dr. Farouk K.",
+        id: "DDM-902",
+        customer: "Chef Alex (Bistro Abuja)",
         phone: "08129988771",
         zone: "Abuja",
+        address: "Wuse II, Abuja",
         stage: "harvest_queued",
-        depositStatus: "verified",
+        orderTime: new Date(Date.now() - 58 * 3600000).toISOString(), // 58 hrs elapsed (Urgent!)
         grossTotal: 28000,
-        depositAmount: 8400,
-        balanceDue: 19600,
+        paymentStatus: "paid",
+        paymentRef: "PAY-WSE-3341",
         items: [
-          { name: "Fresh Mint", qty: 8, price: 700 },
-          { name: "Fresh Sweet Basil", qty: 4, price: 700 },
-          { name: "Virgin Coconut Oil", qty: 1, price: 15000 },
-          { name: "Cumin Seeds", qty: 2, price: 2000 }
-        ]
+          { id: "herb-mint", name: "Fresh Mint", qty: 10, unit: "bunch", price: 700, isPerishable: true },
+          { id: "herb-basil", name: "Fresh Sweet Basil", qty: 6, unit: "bunch", price: 700, isPerishable: true },
+          { id: "herb-thyme", name: "Fresh Thyme", qty: 4, unit: "bunch", price: 800, isPerishable: true },
+          { id: "oil-coconut", name: "Virgin Coconut Oil", qty: 1, unit: "liter", price: 15000, isPerishable: false }
+        ],
+        customerNotes: "Fresh herbs needed for dinner menu prep."
       },
       {
-        id: "DDM-803",
-        customer: "Ngozi Obi",
+        id: "DDM-903",
+        customer: "Emeka Okonkwo",
         phone: "08051122334",
         zone: "Nationwide",
+        address: "Lekki Phase 1, Lagos",
         stage: "harvested_packed",
-        depositStatus: "verified",
+        orderTime: new Date(Date.now() - 24 * 3600000).toISOString(),
         grossTotal: 26000,
-        depositAmount: 7800,
-        balanceDue: 18200,
+        paymentStatus: "paid",
+        paymentRef: "PAY-LOS-5520",
         items: [
-          { name: "Pure Black Seed Oil", qty: 1, price: 20000 },
-          { name: "Green Cardamom", qty: 1, price: 6000 }
+          { id: "oil-black-seed", name: "Pure Black Seed Oil", qty: 1, unit: "liter", price: 20000, isPerishable: false },
+          { id: "spice-cardamom", name: "Green Cardamom", qty: 1, unit: "100g", price: 6000, isPerishable: false }
         ]
       },
       {
-        id: "DDM-804",
+        id: "DDM-904",
         customer: "Kano Agro Store",
         phone: "08170011223",
         zone: "Kaduna",
+        address: "Ungwan Rimi, Kaduna",
         stage: "out_for_delivery",
-        depositStatus: "verified",
+        orderTime: new Date(Date.now() - 40 * 3600000).toISOString(),
         grossTotal: 157000,
-        depositAmount: 47100,
-        balanceDue: 109900,
+        paymentStatus: "paid",
+        paymentRef: "PAY-KAD-9912",
         items: [
-          { name: "Farm Irish Potatoes (Full Bag)", qty: 1, price: 150000 },
-          { name: "Fresh Strawberries (Organic)", qty: 1, price: 7000 }
+          { id: "prod-potatoes", name: "Farm Irish Potatoes (Full Bag)", qty: 1, unit: "full bag", price: 150000, isPerishable: true },
+          { id: "prod-strawberry-organic", name: "Fresh Strawberries (Organic)", qty: 1, unit: "kg", price: 7000, isPerishable: true }
         ]
       }
     ];
 
     const formatNaira = (val) => '₦' + Math.ceil(val).toLocaleString('en-NG');
 
+    // Tab Switcher
     function switchTab(tabId) {
       document.querySelectorAll('.tab-view').forEach(el => el.classList.add('hidden'));
       document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.className = "tab-btn px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-stone-600 hover:bg-stone-100 flex items-center gap-1.5";
+        btn.className = "tab-btn px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-stone-600 hover:bg-stone-100 flex items-center gap-1.5";
       });
       document.getElementById(`view-${tabId}`).classList.remove('hidden');
-      const activeBtn = document.getElementById(`tabBtn-${tabId}`);
-      activeBtn.className = "tab-btn px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-brand-soil text-white flex items-center gap-1.5";
-      
-      if (tabId === 'inventory') renderImsTable();
+      const active = document.getElementById(`tabBtn-${tabId}`);
+      active.className = "tab-btn px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-brand-soil text-white flex items-center gap-1.5";
+
       if (tabId === 'pipeline') renderPipeline();
+      if (tabId === 'inventory') renderImsTable();
+      if (tabId === 'harvest-sheet') renderHarvestPicklist();
       if (tabId === 'orders') renderOrdersTable();
       lucide.createIcons();
     }
 
-    // Render Jays Bistro Kanban Board
+    // SLA Timer Calculator for Jays Bistro Operations
+    function getSlaTelemetry(order) {
+      const elapsedHours = (Date.now() - new Date(order.orderTime).getTime()) / 3600000;
+      const remainingHours = Math.max(0, Math.round(72 - elapsedHours));
+      
+      let badgeColor = "bg-emerald-50 text-emerald-800 border-emerald-200";
+      let statusText = `${remainingHours}h remaining`;
+
+      if (elapsedHours > 72) {
+        badgeColor = "bg-rose-100 text-rose-800 border-rose-300 animate-pulse";
+        statusText = `OVERDUE (${Math.round(elapsedHours)}h)`;
+      } else if (remainingHours <= 24) {
+        badgeColor = "bg-amber-100 text-amber-800 border-amber-300";
+        statusText = `URGENT: ${remainingHours}h left`;
+      }
+      return { elapsedHours, remainingHours, badgeColor, statusText };
+    }
+
+    // Render Jays Bistro Kitchen Kanban
     function renderPipeline() {
-      const stages = ['deposit_pending', 'harvest_queued', 'harvested_packed', 'out_for_delivery', 'completed'];
+      const stages = ['harvest_queued', 'harvested_packed', 'out_for_delivery', 'completed'];
       stages.forEach(stage => {
         const stageOrders = orders.filter(o => o.stage === stage);
         document.getElementById(`badge-stage-${stage}`).textContent = stageOrders.length;
-        const container = document.getElementById(`cards-stage-${stage}`);
+        const col = document.getElementById(`cards-stage-${stage}`);
 
-        container.innerHTML = stageOrders.map(order => `
-          <div class="bg-white p-3 rounded-xl border border-stone-200 shadow-sm space-y-2 text-xs">
-            <div class="flex items-start justify-between gap-1">
-              <div>
-                <span class="font-extrabold text-stone-900 block">${order.id}</span>
-                <span class="text-stone-500 text-[11px]">${order.customer}</span>
+        col.innerHTML = stageOrders.map(order => {
+          const sla = getSlaTelemetry(order);
+          const hasFresh = order.items.some(i => i.isPerishable);
+
+          return `
+            <div class="kds-card bg-white p-3.5 rounded-2xl border border-stone-200/90 shadow-xs space-y-2.5 text-xs">
+              <div class="flex items-start justify-between gap-1">
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="font-extrabold text-stone-900">${order.id}</span>
+                    ${hasFresh ? `<span class="border text-[9px] font-extrabold px-1.5 py-0.2 rounded-full ${sla.badgeColor}">${sla.statusText}</span>` : ''}
+                  </div>
+                  <span class="text-stone-500 text-[11px] font-semibold">${order.customer}</span>
+                </div>
+                <span class="text-[9px] font-bold px-2 py-0.5 rounded-full ${
+                  order.zone === 'Nationwide' ? 'bg-amber-50 text-amber-800' : 'bg-emerald-50 text-emerald-800'
+                }">${order.zone}</span>
               </div>
-              <span class="text-[9px] font-bold px-1.5 py-0.5 rounded ${
-                order.zone === 'Nationwide' ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'
-              }">${order.zone}</span>
-            </div>
 
-            <div class="text-[11px] text-stone-600 space-y-0.5 border-y border-stone-100 py-1">
-              ${order.items.map(it => `<div>• ${it.qty}x ${it.name}</div>`).join('')}
-            </div>
+              <!-- Item ticket lines -->
+              <div class="bg-stone-50 p-2 rounded-xl border border-stone-100 space-y-1 text-[11px] text-stone-700">
+                ${order.items.map(it => `
+                  <div class="flex justify-between">
+                    <span><strong>${it.qty}x</strong> ${it.name}</span>
+                    <span class="text-stone-400">${it.unit}</span>
+                  </div>
+                `).join('')}
+              </div>
 
-            <div class="flex items-center justify-between text-[11px] font-bold">
-              <span class="text-stone-500">Deposit:</span>
-              <span class="${order.depositStatus === 'verified' ? 'text-emerald-600' : 'text-amber-600'}">
-                ${formatNaira(order.depositAmount)} (${order.depositStatus})
-              </span>
-            </div>
+              ${order.customerNotes ? `<p class="text-[10px] text-stone-400 italic">"${order.customerNotes}"</p>` : ''}
 
-            <div class="pt-1 flex gap-1">
-              ${renderPipelineActions(order)}
+              <div class="flex items-center justify-between text-[11px] font-bold pt-1 border-t border-stone-100">
+                <span class="text-stone-500">Gross Total:</span>
+                <span class="text-stone-900">${formatNaira(order.grossTotal)}</span>
+              </div>
+
+              <!-- Pipeline Action Stepper -->
+              <div class="pt-1">
+                ${renderStageActionBtn(order)}
+              </div>
             </div>
-          </div>
-        `).join('');
+          `;
+        }).join('');
       });
-
-      // Update KPI
-      document.getElementById('kpi-active-orders').textContent = orders.filter(o => o.stage !== 'completed').length;
       lucide.createIcons();
     }
 
-    function renderPipelineActions(order) {
-      if (order.stage === 'deposit_pending') {
-        return `
-          <button onclick="verifyDeposit('${order.id}')" class="w-full py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-[10px]">
-            ✓ Confirm 30% Deposit
-          </button>
-        `;
-      }
+    function renderStageActionBtn(order) {
       if (order.stage === 'harvest_queued') {
         return `
-          <button onclick="advanceStage('${order.id}', 'harvested_packed')" class="w-full py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold text-[10px]">
-            Pack for Dispatch →
+          <button onclick="advanceStage('${order.id}', 'harvested_packed')" class="w-full py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-[11px] flex items-center justify-center gap-1 transition shadow-xs">
+            <i data-lucide="package-check" class="w-3.5 h-3.5"></i> Mark Harvested &amp; Cold-Packed →
           </button>
         `;
       }
       if (order.stage === 'harvested_packed') {
         return `
-          <button onclick="advanceStage('${order.id}', 'out_for_delivery')" class="w-full py-1 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-bold text-[10px]">
-            Hand to Rider →
+          <button onclick="advanceStage('${order.id}', 'out_for_delivery')" class="w-full py-1.5 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-bold text-[11px] flex items-center justify-center gap-1 transition shadow-xs">
+            <i data-lucide="bike" class="w-3.5 h-3.5"></i> Hand to Dispatch Rider →
           </button>
         `;
       }
       if (order.stage === 'out_for_delivery') {
         return `
-          <button onclick="advanceStage('${order.id}', 'completed')" class="w-full py-1 bg-brand-soil hover:bg-brand-orange text-white rounded-lg font-bold text-[10px]">
-            Collect Balance &amp; Settle
+          <button onclick="advanceStage('${order.id}', 'completed')" class="w-full py-1.5 bg-brand-soil hover:bg-brand-orange text-white rounded-xl font-bold text-[11px] flex items-center justify-center gap-1 transition shadow-xs">
+            <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Confirm Delivered &amp; Closed
           </button>
         `;
       }
-      return `<span class="text-[10px] text-stone-400">Order Completed</span>`;
-    }
-
-    function verifyDeposit(orderId) {
-      const ord = orders.find(o => o.id === orderId);
-      if (ord) {
-        ord.depositStatus = 'verified';
-        ord.stage = 'harvest_queued';
-        renderPipeline();
-      }
+      return `<div class="text-center text-[10px] text-stone-400 font-semibold py-1">Order Fulfilled ✓</div>`;
     }
 
     function advanceStage(orderId, nextStage) {
-      const ord = orders.find(o => o.id === orderId);
-      if (ord) {
-        ord.stage = nextStage;
+      const o = orders.find(x => x.id === orderId);
+      if (o) {
+        o.stage = nextStage;
         renderPipeline();
+        renderHarvestPicklist();
+        renderOrdersTable();
+        showAdminToast(`Order ${orderId} advanced to ${nextStage.replace('_', ' ').toUpperCase()}`);
       }
     }
 
-    // Render Spotlex IMS Table
+    // Spotlex Master Catalog IMS Table
     function renderImsTable() {
-      const query = (document.getElementById('imsSearchInput')?.value || '').toLowerCase();
+      const q = (document.getElementById('imsSearchInput')?.value || '').toLowerCase();
       const cat = document.getElementById('imsCategoryFilter')?.value || 'All';
       const tbody = document.getElementById('imsTableBody');
 
       const filtered = inventory.filter(item => {
         const matchCat = cat === 'All' || item.category === cat;
-        const matchQ = item.name.toLowerCase().includes(query);
+        const matchQ = item.name.toLowerCase().includes(q);
         return matchCat && matchQ;
       });
 
-      tbody.innerHTML = filtered.map(item => `
-        <tr class="hover:bg-stone-50 transition-colors">
-          <td class="px-4 py-2.5 font-bold text-stone-900">${item.name}</td>
-          <td class="px-3 py-2.5 text-stone-500">${item.category}</td>
-          <td class="px-3 py-2.5 font-bold text-brand-orange">
-            <input type="number" value="${item.price}" onchange="updateProductPrice('${item.id}', this.value)" class="w-20 px-1.5 py-0.5 border border-stone-200 rounded text-xs font-bold text-stone-900"/>
-          </td>
-          <td class="px-3 py-2.5 text-stone-500">${item.unit}</td>
-          <td class="px-3 py-2.5">
-            <span class="text-[10px] font-bold px-1.5 py-0.5 rounded ${item.isPerishable ? 'bg-emerald-50 text-emerald-800' : 'bg-stone-100 text-stone-700'}">
-              ${item.isPerishable ? 'Abj/Kad' : 'Nationwide'}
-            </span>
-          </td>
-          <td class="px-3 py-2.5">
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${item.isSoldOut ? 'bg-rose-100 text-rose-800' : 'bg-emerald-100 text-emerald-800'}">
-              ${item.isSoldOut ? 'Sold Out' : 'In Stock'}
-            </span>
-          </td>
-          <td class="px-4 py-2.5 text-right">
-            <button onclick="toggleStockStatus('${item.id}')" class="text-[10px] font-bold px-2.5 py-1 rounded-lg border ${
-              item.isSoldOut ? 'border-emerald-300 text-emerald-700 hover:bg-emerald-50' : 'border-rose-300 text-rose-700 hover:bg-rose-50'
-            }">
-              ${item.isSoldOut ? 'Mark In Stock' : 'Mark Sold Out'}
-            </button>
-          </td>
-        </tr>
-      `).join('');
+      tbody.innerHTML = filtered.map(item => {
+        const marginPct = (item.price > 0 && item.costPrice > 0)
+          ? Math.round(((item.price - item.costPrice) / item.price) * 100) + '%'
+          : 'TBC';
+
+        return `
+          <tr class="hover:bg-stone-50 transition-colors">
+            <td class="px-4 py-2.5 font-bold text-stone-900">${item.name}</td>
+            <td class="px-3 py-2.5 text-stone-500 font-medium">${item.categoryLabel}</td>
+            <td class="px-3 py-2.5 text-stone-500 font-semibold">${item.costPrice > 0 ? formatNaira(item.costPrice) : 'TBC'}</td>
+            <td class="px-3 py-2.5 font-bold text-brand-orange">
+              <input 
+                type="number" 
+                value="${item.price}" 
+                onchange="updateProductPrice('${item.id}', this.value)" 
+                class="w-20 px-2 py-0.5 border border-stone-200 rounded-lg text-xs font-bold text-stone-900 bg-white"
+              />
+            </td>
+            <td class="px-3 py-2.5 font-bold ${marginPct.includes('TBC') ? 'text-stone-400' : 'text-brand-green'}">
+              ${marginPct}
+            </td>
+            <td class="px-3 py-2.5">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${item.isPerishable ? 'bg-emerald-50 text-emerald-800' : 'bg-stone-100 text-stone-700'}">
+                ${item.isPerishable ? 'Abj / Kad' : 'Nationwide'}
+              </span>
+            </td>
+            <td class="px-3 py-2.5">
+              <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full ${item.isSoldOut ? 'bg-rose-100 text-rose-800' : 'bg-emerald-100 text-emerald-800'}">
+                ${item.isSoldOut ? 'Sold Out' : 'In Stock'}
+              </span>
+            </td>
+            <td class="px-4 py-2.5 text-right">
+              <button onclick="toggleStockStatus('${item.id}')" class="text-[10px] font-bold px-2.5 py-1 rounded-lg border transition ${
+                item.isSoldOut ? 'border-emerald-300 text-emerald-700 hover:bg-emerald-50' : 'border-rose-300 text-rose-700 hover:bg-rose-50'
+              }">
+                ${item.isSoldOut ? 'Mark In Stock' : 'Mark Sold Out'}
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
     }
 
     function toggleStockStatus(productId) {
@@ -614,6 +1003,7 @@
         item.isSoldOut = !item.isSoldOut;
         saveInventory();
         renderImsTable();
+        showAdminToast(`${item.name} is now ${item.isSoldOut ? 'SOLD OUT' : 'IN STOCK'}`);
       }
     }
 
@@ -622,10 +1012,11 @@
       if (item) {
         item.price = Number(newPrice);
         saveInventory();
+        showAdminToast(`Updated ${item.name} price to ${formatNaira(item.price)}`);
       }
     }
 
-    // Spotlex Inflation / Scarcity Markup Tool
+    // Spotlex Inflation / Scarcity Batch Repricer
     function openInflationModal() {
       document.getElementById('inflationModal').classList.remove('hidden');
       document.getElementById('inflationModal').classList.add('flex');
@@ -636,89 +1027,169 @@
     }
     function applyBatchMarkup(percent) {
       const cat = document.getElementById('markupCategorySelect').value;
+      let count = 0;
       inventory.forEach(item => {
         if (cat === 'all' || item.category === cat) {
-          item.price = Math.ceil(item.price * (1 + (percent / 100)));
+          if (item.price > 0) {
+            item.price = Math.ceil((item.price * (1 + (percent / 100))) / 100) * 100; // Round to nearest ₦100
+            count++;
+          }
         }
       });
       saveInventory();
       closeInflationModal();
       renderImsTable();
+      showAdminToast(`Applied +${percent}% scarcity markup to ${count} items.`);
     }
 
-    // Jays Bistro Kitchen / Harvest Picking Sheet Generator
-    function openHarvestPickingSheetModal() {
-      const modal = document.getElementById('harvestSheetModal');
-      const container = document.getElementById('harvestPickingTally');
-      
-      // Tally only verified harvest queued items
-      const herbTally = {};
-      orders.filter(o => o.depositStatus === 'verified' && (o.stage === 'harvest_queued' || o.stage === 'harvested_packed')).forEach(o => {
+    // Jays Bistro Field Harvest Picking Sheet Generator
+    function renderHarvestPicklist() {
+      const container = document.getElementById('harvestPicklistContainer');
+      const pickTally = {};
+      let totalHerbBunches = 0;
+
+      // Filter only active orders in harvest_queued stage
+      const queuedOrders = orders.filter(o => o.stage === 'harvest_queued');
+
+      queuedOrders.forEach(o => {
         o.items.forEach(it => {
-          herbTally[it.name] = (herbTally[it.name] || 0) + it.qty;
+          if (it.isPerishable) {
+            if (!pickTally[it.name]) {
+              pickTally[it.name] = { qty: 0, unit: it.unit, orders: [] };
+            }
+            pickTally[it.name].qty += it.qty;
+            pickTally[it.name].orders.push(o.id);
+            if (it.unit === 'bunch') totalHerbBunches += it.qty;
+          }
         });
       });
 
-      container.innerHTML = Object.entries(herbTally).map(([name, qty]) => `
-        <div class="flex items-center justify-between p-2.5 rounded-xl bg-stone-50 border border-stone-200">
-          <span class="font-bold text-xs text-stone-900">${name}</span>
-          <span class="font-extrabold text-xs text-brand-green bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-            Cut ${qty} Units
-          </span>
+      document.getElementById('quickHerbBadge').textContent = totalHerbBunches;
+      document.getElementById('kpi-herbs-today').textContent = totalHerbBunches;
+
+      if (Object.keys(pickTally).length === 0) {
+        container.innerHTML = `
+          <div class="py-8 text-center text-stone-400 text-xs">
+            No crops queued for cutting right now. All active orders have been picked!
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = Object.entries(pickTally).map(([name, data]) => `
+        <div class="flex items-center justify-between p-3 rounded-2xl bg-stone-50 border border-stone-200/90">
+          <div>
+            <h4 class="font-bold text-xs text-stone-900">${name}</h4>
+            <span class="text-[10px] text-stone-400">For Orders: ${data.orders.join(', ')}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="font-serif font-extrabold text-sm text-brand-green bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-xl">
+              Harvest ${data.qty} ${data.unit}
+            </span>
+          </div>
         </div>
       `).join('');
 
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
       lucide.createIcons();
     }
-    function closeHarvestPickingSheetModal() {
-      document.getElementById('harvestSheetModal').classList.add('hidden');
-      document.getElementById('harvestSheetModal').classList.remove('flex');
+
+    function shareHarvestSheetWhatsApp() {
+      const queuedOrders = orders.filter(o => o.stage === 'harvest_queued');
+      const pickTally = {};
+      queuedOrders.forEach(o => {
+        o.items.forEach(it => {
+          if (it.isPerishable) {
+            pickTally[it.name] = (pickTally[it.name] || 0) + it.qty;
+          }
+        });
+      });
+
+      let msg = `*DD MAIGONA — MORNING HARVEST PICKLIST* 🧑🏾‍🌾🌿\n`;
+      msg += `*Date:* ${new Date().toLocaleDateString('en-GB')}\n`;
+      msg += `----------------------------------------\n`;
+      Object.entries(pickTally).forEach(([name, qty]) => {
+        msg += `• ${name}: *${qty} units*\n`;
+      });
+      msg += `----------------------------------------\n`;
+      msg += `_Please snip during morning dew (6:30AM - 8:30AM) for maximum aroma!_`;
+
+      window.open(`https://wa.me/2348170951100?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
-    // Orders Table
+    // Spotlex Order Book & CRM Table
     function renderOrdersTable() {
       const tbody = document.getElementById('ordersTableBody');
+      document.getElementById('orderCountPill').textContent = `${orders.length} Records`;
+
       tbody.innerHTML = orders.map(o => `
         <tr class="hover:bg-stone-50 transition-colors">
           <td class="px-4 py-2.5 font-bold text-stone-900">${o.id}</td>
-          <td class="px-3 py-2.5">${o.customer} <br><span class="text-stone-400 text-[10px]">${o.phone}</span></td>
-          <td class="px-3 py-2.5">${o.zone}</td>
-          <td class="px-3 py-2.5">${o.items.length} lines</td>
-          <td class="px-3 py-2.5 font-bold">${formatNaira(o.grossTotal)}</td>
           <td class="px-3 py-2.5">
-            <span class="px-2 py-0.5 rounded text-[10px] font-bold ${o.depositStatus === 'verified' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
-              ${o.depositStatus.toUpperCase()}
+            <span class="font-bold text-stone-900">${o.customer}</span>
+            <span class="text-stone-400 text-[10px] block">${o.phone}</span>
+          </td>
+          <td class="px-3 py-2.5">
+            <span class="font-semibold text-stone-800">${o.zone}</span>
+            <span class="text-stone-400 text-[10px] block truncate max-w-[120px]">${o.address}</span>
+          </td>
+          <td class="px-3 py-2.5 text-stone-600">
+            ${o.items.map(it => `${it.qty}x ${it.name}`).join(', ')}
+          </td>
+          <td class="px-3 py-2.5 font-bold text-stone-900">${formatNaira(o.grossTotal)}</td>
+          <td class="px-3 py-2.5">
+            <span class="px-2 py-0.5 rounded text-[10px] font-extrabold bg-emerald-100 text-emerald-800">
+              PAID DIRECT
             </span>
           </td>
-          <td class="px-3 py-2.5 font-bold text-brand-orange">${formatNaira(o.balanceDue)}</td>
+          <td class="px-3 py-2.5">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-stone-100 text-stone-700">
+              ${o.stage.replace('_', ' ')}
+            </span>
+          </td>
           <td class="px-4 py-2.5 text-right">
-            <a href="https://wa.me/234${o.phone.slice(1)}" target="_blank" class="px-2 py-1 rounded bg-emerald-600 text-white font-bold text-[10px]">WhatsApp</a>
+            <a href="https://wa.me/234${o.phone.slice(1)}?text=${encodeURIComponent(`Hello ${o.customer}, this is DD MAIGONA Abuja regarding your harvest order ${o.id}.`)}" target="_blank" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[10px] inline-flex items-center gap-1">
+              <i data-lucide="message-circle" class="w-3 h-3"></i> WhatsApp
+            </a>
           </td>
         </tr>
       `).join('');
     }
 
-    function createNewSimulatedOrder() {
-      const newId = `DDM-${Math.floor(800 + Math.random() * 90)}`;
+    function injectMockHarvestOrder() {
+      const newId = `DDM-${Math.floor(910 + Math.random() * 80)}`;
       orders.unshift({
         id: newId,
-        customer: "New Customer",
-        phone: "08170099887",
+        customer: "Dr. Fatima Aliyu",
+        phone: "08039988221",
         zone: "Abuja",
-        stage: "deposit_pending",
-        depositStatus: "pending",
-        grossTotal: 14000,
-        depositAmount: 4200,
-        balanceDue: 9800,
-        items: [{ name: "Fresh Strawberries (Regular)", qty: 2, price: 7000 }]
+        address: "Gwarinpa Estate, Abuja",
+        stage: "harvest_queued",
+        orderTime: new Date().toISOString(),
+        grossTotal: 16100,
+        paymentStatus: "paid",
+        paymentRef: `PAY-${Date.now().toString().slice(-4)}`,
+        items: [
+          { id: "prod-strawberry-fresh", name: "Fresh Strawberries (Regular)", qty: 2, unit: "kg", price: 7000, isPerishable: true },
+          { id: "herb-mint", name: "Fresh Mint", qty: 3, unit: "bunch", price: 700, isPerishable: true }
+        ],
+        customerNotes: "Please include cold packs."
       });
       renderPipeline();
+      renderHarvestPicklist();
+      renderOrdersTable();
+      showAdminToast(`New order ${newId} received & routed to KDS!`);
+    }
+
+    function showAdminToast(msg) {
+      const toast = document.getElementById('toastAlert');
+      document.getElementById('toastMsg').textContent = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 2800);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       renderPipeline();
+      renderHarvestPicklist();
       lucide.createIcons();
     });
   </script>
